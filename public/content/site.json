@@ -39,52 +39,86 @@
     {
       "id": "prato",
       "name": "Dr. Martín Prato",
-      "photo": "/team/martin-prato.svg",
+      "photo": "/media/team/Prato.jpeg",
       "role": {
-        "es": "Director clínico y arquitecto de sonrisas",
-        "en": "Clinical director and smile architect"
+        "es": "Odontólogo  y especialista en Rehabilitación Oral Socio fundador de Smile Architecs Madrid",
+        "en": "Dentist and oral rehabilitation specialist, co-founder of Smile Architecs Madrid"
       },
       "credentials": {
-        "es": "Odontólogo y rehabilitador oral",
-        "en": "Dentist and oral rehabilitator"
+        "es": "Odontólogo y especialista en Rehabilitación Oral",
+        "en": "Dentist and oral rehabilitation specialist"
       },
       "bio": {
-        "es": "Fundador de Luxury Smile Architects. Lidera cada diseño con mirada clínica y obsesión por el detalle. Para él una sonrisa no se copia de un catálogo: se construye contigo.",
-        "en": "Founder of Luxury Smile Architects. He leads every design with a clinical eye and obsession for detail. For him a smile is never copied from a catalogue: it is built with you."
+        "es": "Cuenta con más de 20 años de experiencia en odontología estética y rehabilitación oral. A lo largo de su trayectoria ha diseñado sonrisas para reconocidos artistas y pacientes nacionales e internacionales, consolidando sus clínicas en Bogotá, Miami, Tijuana, Mexico D.F. y en Madrid  como una referencia en estética dental a nivel global .",
+        "en": "With over 20 years of experience in aesthetic dentistry and oral rehabilitation. Throughout his career, he has designed smiles for renowned national and international artists and patients, consolidating his clinics in Bogotá, Miami, Tijuana, Mexico D.F. and in Madrid as a global reference in dental aesthetics."
       }
     },
     {
-      "id": "amaya",
-      "name": "Dr. Gonzalo Amaya",
-      "photo": "/team/gonzalo-amaya.svg",
+      "id": "alvaro",
+      "name": "Dr. Álvaro José Escudero Muñoz",
+      "photo": "/media/team/Alvaro.jpeg",
       "role": {
-        "es": "Rehabilitación oral",
-        "en": "Oral rehabilitation"
+        "es": "Director Clínico",
+        "en": "Clinical Director"
       },
       "credentials": {
-        "es": "Profesor titular en rehabilitación oral",
-        "en": "Associate professor in oral rehabilitation"
+        "es": "Odontólogo con máster en Endodoncia y trauma dentoalveolar",
+        "en": "Dentist with a master's degree in Endodontics and dentoalveolar trauma"
       },
       "bio": {
-        "es": "Aporta el rigor y la precisión que sostienen los casos más complejos, con años de experiencia clínica y docente.",
-        "en": "Brings the rigour and precision that support the most complex cases, with years of clinical and teaching experience."
+        "es": "Cuenta con mas de 15 años de experiencia en el manejo de dolor agudo y patologías dentales, odontologia estetica y rehabilitación oral y funcional.",
+        "en": "With over 15 years of experience in the management of acute pain and dental pathologies, aesthetic dentistry and functional oral rehabilitation."
       }
     },
     {
-      "id": "angarita",
-      "name": "Dra. Maira Alejandra Angarita",
-      "photo": "/team/maira-angarita.svg",
+      "id": "ludmilla",
+      "name": "Ludmila Maldonado",
+      "photo": "/media/team/Ludmilla.jpeg",
       "role": {
-        "es": "Estética dental y diseño de sonrisa",
-        "en": "Dental aesthetics and smile design"
+        "es": "Directora General y Comercial",
+        "en": "General and Commercial Director"
       },
       "credentials": {
-        "es": "Estética dental",
-        "en": "Dental aesthetics"
+        "es": "Abogada",
+        "en": "Lawyer"
       },
       "bio": {
-        "es": "Combina arte y técnica para lograr resultados naturales que respetan los rasgos de cada paciente.",
-        "en": "Blends art and technique to achieve natural results that respect each patient's features."
+        "es": "Con amplia experiencia en la gestión estratégica y operativa de clínicas odontológicas, orientado al crecimiento sostenible del negocio, la excelencia en la atención al paciente y el desarrollo de equipos de alto rendimiento. Especializado en liderazgo organizacional, planificación comercial, captación y fidelización de pacientes.",
+        "en": "With extensive experience in the strategic and operational management of dental clinics, focused on sustainable business growth, excellence in patient care, and the development of high-performance teams. Specialized in organizational leadership, commercial planning, patient acquisition, and retention."
+      }
+    },
+    {
+      "id": "adriana",
+      "name": "Dra. Adriana Rojas",
+      "photo": "/media/team/Adriana.jpeg",
+      "role": {
+        "es": "Odontóloga",
+        "en": "Dentist"
+      },
+      "credentials": {
+        "es": "Odontóloga con especialización en Ortodoncia y Ortopedia Maxilar",
+        "en": "Dentist with a specialization in Orthodontics and Maxillofacial Orthopedics"
+      },
+      "bio": {
+        "es": "Con amplia experiencia en la atención integral de pacientes mediante el desarrollo de tratamientos preventivos, interceptivos y correctivos. Así mismo en ortodoncia invisible, diseño digital con Exocad y odontología estética,  rehabilitación estética, operatoria dental, prótesis adhesiva, cirugía oral, manejo de patologías perirradiculares, ortopedia maxilar y ortodoncia.",
+        "en": "With extensive experience in the comprehensive care of patients through the development of preventive, interceptive, and corrective treatments. Also in invisible orthodontics, digital design with Exocad and aesthetic dentistry, aesthetic rehabilitation, dental operative dentistry, adhesive prosthetics, oral surgery, management of periradicular pathologies, maxillofacial orthopedics, and orthodontics."
+      }
+    },
+    {
+      "id": "maria",
+      "name": "Dra. María Fernanda Rocha Serpa",
+      "photo": "/media/team/Maria.jpeg",
+      "role": {
+        "es": "Médica Estética Facial",
+        "en": "Medical Facial Aesthetician"
+      },
+      "credentials": {
+        "es": "Médico Master en Medicina Estética, Regenerativa y Antienvejecimiento, Especialista en cirugía oral, maxilofacial y en estética facial",
+        "en": "Medical Master in Aesthetic, Regenerative and Anti-aging Medicine, Specialist in oral and maxillofacial surgery and facial aesthetics"
+      },
+      "bio": {
+        "es": "Experta en tratamientos como Neuromoduladores, Bruxismo, Sonrisa Gingival, Laser Fotona, Apnea del Sueño entre muchos otros con mas de 10 años de experiencia.",
+        "en": "Expert in treatments such as Neuromodulators, Bruxism, Gingival Smile, Fotona Laser, Sleep Apnea among many others with more than 10 years of experience."
       }
     }
   ],
