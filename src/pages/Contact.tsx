@@ -19,6 +19,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { SectionReveal } from "@/components/SectionReveal";
 import { GoogleReviews } from "@/components/GoogleReviews";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { buildContactSchema } from "@/lib/validation";
 import { sanitizeLine, sanitizeBlock } from "@/lib/sanitize";
 import { useContent, pick } from "@/lib/content";
@@ -31,6 +38,7 @@ const EMPTY = {
   phone: "",
   email: "",
   treatment: "",
+  source: "",
   message: "",
   consent: false,
   company: "",
@@ -54,6 +62,7 @@ export default function Contact() {
   const [values, setValues] = useState({ ...EMPTY });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [privacyOpen, setPrivacyOpen] = useState(false);
 
   const set = (key: keyof typeof EMPTY, value: string | boolean) =>
     setValues((v) => ({ ...v, [key]: value }));
@@ -72,6 +81,7 @@ export default function Contact() {
       phone: sanitizeLine(values.phone, 20),
       email: sanitizeLine(values.email, 120),
       treatment: sanitizeLine(values.treatment, 60),
+      source: sanitizeLine(values.source, 60),
       message: sanitizeBlock(values.message, 2000),
       consent: values.consent,
       company: sanitizeLine(values.company, 0),
@@ -100,6 +110,7 @@ export default function Contact() {
         `${t("contact.form.phone")}: ${d.phone}`,
         `${t("contact.form.email")}: ${d.email}`,
         `${t("contact.form.treatment")}: ${d.treatment}`,
+        `${t("contact.form.source")}: ${d.source}`,
         d.message ? `${t("contact.form.message")}: ${d.message}` : "",
       ]
         .filter(Boolean)
@@ -248,6 +259,30 @@ export default function Contact() {
                   </select>
                 </Field>
 
+                <Field id="source" label={t("contact.form.source")} error={errors.source}>
+                  <select
+                    id="source"
+                    value={values.source}
+                    aria-invalid={!!errors.source}
+                    onChange={(e) => set("source", e.target.value)}
+                    className={cn(
+                      "h-11 w-full rounded-none border-0 border-b border-border bg-transparent px-0 font-sans text-base text-foreground transition-colors",
+                      "focus-visible:border-gold focus-visible:outline-none focus-visible:ring-0",
+                      "aria-[invalid=true]:border-red-400/70",
+                      !values.source && "text-muted/70",
+                    )}
+                  >
+                    <option value="" disabled className="bg-surface text-muted">
+                      {t("contact.form.sourcePlaceholder")}
+                    </option>
+                    {Object.entries(t("contact.form.sources", { returnObjects: true }) as Record<string, string>).map(([key, label]) => (
+                      <option key={key} value={label} className="bg-surface text-foreground">
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+
                 <Field id="message" label={t("contact.form.message")} error={errors.message}>
                   <Textarea id="message" value={values.message} placeholder={t("contact.form.messagePlaceholder")} onChange={(e) => set("message", e.target.value)} />
                 </Field>
@@ -258,17 +293,60 @@ export default function Contact() {
                   <input id="company" type="text" tabIndex={-1} autoComplete="off" value={values.company} onChange={(e) => set("company", e.target.value)} />
                 </div>
 
-                <label className="flex items-start gap-3 font-sans text-xs font-light text-muted">
-                  <input type="checkbox" checked={values.consent} onChange={(e) => set("consent", e.target.checked)} aria-invalid={!!errors.consent} className="mt-0.5 h-4 w-4 shrink-0 accent-gold" />
-                  <span>
-                    {t("contact.form.consent")}
-                    {errors.consent && (
-                      <span className="mt-1 block text-red-400" role="alert">
-                        {errors.consent}
-                      </span>
-                    )}
-                  </span>
-                </label>
+                <div className="flex flex-col items-start gap-1">
+                  <label className="flex items-center gap-3 font-sans text-xs font-light text-muted">
+                    <input 
+                      type="checkbox" 
+                      checked={values.consent} 
+                      readOnly
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (!values.consent) setPrivacyOpen(true);
+                      }}
+                      aria-invalid={!!errors.consent} 
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-gold cursor-pointer" 
+                    />
+                    <span>
+                      <button type="button" onClick={() => setPrivacyOpen(true)} className="underline hover:text-gold transition-colors text-left">
+                        {t("contact.form.consent")}
+                      </button>
+                    </span>
+                  </label>
+                  {errors.consent && (
+                    <span className="block text-red-400 font-sans text-xs" role="alert">
+                      {errors.consent}
+                    </span>
+                  )}
+                </div>
+
+                <Dialog open={privacyOpen} onOpenChange={setPrivacyOpen}>
+                  <DialogContent className="max-w-2xl p-8 sm:p-12">
+                    <DialogTitle className="text-2xl sm:text-3xl mb-6 text-foreground font-medium">
+                      {t("contact.privacy.title")}
+                    </DialogTitle>
+                    <DialogDescription className="text-sm sm:text-base leading-relaxed whitespace-pre-line mb-10 !text-foreground">
+                      {t("contact.privacy.content")}
+                    </DialogDescription>
+                    <div className="flex justify-end gap-4">
+                      <DialogClose asChild>
+                        <Button variant="outline" type="button">
+                          {lang === "en" ? "Cancel" : "Cancelar"}
+                        </Button>
+                      </DialogClose>
+                      <Button
+                        type="button"
+                        variant="primary"
+                        onClick={() => {
+                          set("consent", true);
+                          setPrivacyOpen(false);
+                          setErrors(prev => ({ ...prev, consent: undefined }));
+                        }}
+                      >
+                        {t("contact.privacy.accept")}
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
 
                 {status === "error" && (
                   <p className="border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300" role="alert">
@@ -288,43 +366,62 @@ export default function Contact() {
       {/* ---------- MAP + DIRECTIONS ---------- */}
       <section className="section border-t border-border">
         <div className="mx-auto max-w-[1400px]">
-          <SectionReveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <span className="eyebrow">{t("contact.map.kicker")}</span>
-              <h2 className="display mt-5 text-[clamp(1.8rem,4vw,3rem)]">
-                {t("contact.map.title")}
-              </h2>
-              <p className="mt-4 font-sans text-sm text-muted">
-                {t("contact.clinic.address")}, {t("contact.clinic.area")}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild variant="primary" size="sm">
-                <a href={mapsDirUrl} target="_blank" rel="noopener noreferrer">
-                  <Navigation className="h-4 w-4" />
-                  {t("contact.map.maps")}
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="sm">
-                <a href={wazeUrl} target="_blank" rel="noopener noreferrer">
-                  {t("contact.map.waze")}
-                </a>
-              </Button>
-            </div>
-          </SectionReveal>
+          <div className="grid gap-10 lg:grid-cols-[300px_1fr] xl:grid-cols-[360px_1fr]">
+            <SectionReveal>
+              <div className="rounded-[1.75rem] border border-gold/60 bg-base p-1.5 shadow-[0_12px_34px_-20px_rgba(0,0,0,0.4)]">
+                <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.4rem] bg-foreground/5">
+                  <video
+                    src="/media/video/reel-01.mp4"
+                    className="absolute inset-0 h-full w-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </div>
+              </div>
+            </SectionReveal>
 
-          <SectionReveal delay={0.1} className="mt-10">
-            <div className="overflow-hidden rounded-[3px] border border-border">
-              <iframe
-                title={t("contact.map.title")}
-                src={mapEmbedUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-[320px] w-full sm:h-[440px]"
-                style={{ border: 0, filter: "grayscale(0.2)" }}
-              />
+            <div className="flex flex-col justify-between">
+              <SectionReveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <span className="eyebrow">{t("contact.map.kicker")}</span>
+                  <h2 className="display mt-5 text-[clamp(1.8rem,4vw,3rem)]">
+                    {t("contact.map.title")}
+                  </h2>
+                  <p className="mt-4 font-sans text-sm text-muted">
+                    {t("contact.clinic.address")}, {t("contact.clinic.area")}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild variant="primary" size="sm">
+                    <a href={mapsDirUrl} target="_blank" rel="noopener noreferrer">
+                      <Navigation className="h-4 w-4" />
+                      {t("contact.map.maps")}
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <a href={wazeUrl} target="_blank" rel="noopener noreferrer">
+                      {t("contact.map.waze")}
+                    </a>
+                  </Button>
+                </div>
+              </SectionReveal>
+
+              <SectionReveal delay={0.1} className="mt-10 h-full">
+                <div className="h-full overflow-hidden rounded-[3px] border border-border">
+                  <iframe
+                    title={t("contact.map.title")}
+                    src={mapEmbedUrl}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="min-h-[320px] w-full sm:h-full lg:min-h-[440px]"
+                    style={{ border: 0, filter: "grayscale(0.2)" }}
+                  />
+                </div>
+              </SectionReveal>
             </div>
-          </SectionReveal>
+          </div>
         </div>
       </section>
 

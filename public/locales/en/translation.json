@@ -137,6 +137,17 @@
       "submit": "Request appointment",
       "submitting": "Sending",
       "otherTreatment": "Other or not sure",
+      "source": "How did you hear about us?",
+      "sourcePlaceholder": "Select an option",
+      "sources": {
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "facebook": "Facebook",
+        "google": "Google / Web search",
+        "friend": "Friend's recommendation",
+        "ads": "Advertising",
+        "other": "Other"
+      },
       "consent": "I have read and accept the privacy policy.",
       "required": "Required field",
       "invalidEmail": "Enter a valid email",
@@ -146,6 +157,11 @@
       "success": "We've prepared your request in your email client. We'll be in touch very soon.",
       "errorTitle": "Something went wrong",
       "error": "We couldn't process the request. Please try again or email us directly."
+    },
+    "privacy": {
+      "title": "Privacy Policy (GDPR)",
+      "content": "In accordance with the provisions of Regulation (EU) 2016/679 (GDPR), we inform you that the personal data you provide by filling out this form will be processed by Luxury Smile Architects.\n\nThe purpose of the collection and processing of this data is to manage the contact request and send you information related to your interest. Legitimization is carried out through your express consent.\n\nYou can exercise your rights of access, rectification, limitation, and deletion of data by writing to our email, as well as the right to file a claim with a supervisory authority.",
+      "accept": "I accept the privacy policy"
     },
     "clinic": {
       "label": "The clinic",

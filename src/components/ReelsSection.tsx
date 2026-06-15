@@ -64,7 +64,7 @@ export function ReelsSection() {
   if (videos.length === 0) return null;
 
   return (
-    <section className="section relative overflow-hidden">
+    <section className="section relative overflow-hidden pt-8 sm:pt-12 lg:pt-16">
       <div className="mx-auto max-w-[1400px]">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-xl">

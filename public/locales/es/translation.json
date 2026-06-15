@@ -137,6 +137,17 @@
       "submit": "Solicitar cita",
       "submitting": "Enviando",
       "otherTreatment": "Otro o no estoy seguro",
+      "source": "¿Cómo nos conociste?",
+      "sourcePlaceholder": "Selecciona una opción",
+      "sources": {
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "facebook": "Facebook",
+        "google": "Google / Búsqueda web",
+        "friend": "Recomendación de un amigo",
+        "ads": "Publicidad",
+        "other": "Otro"
+      },
       "consent": "He leído y acepto la política de privacidad.",
       "required": "Campo obligatorio",
       "invalidEmail": "Introduce un email válido",
@@ -146,6 +157,11 @@
       "success": "Hemos preparado tu solicitud en tu correo. Te contactaremos muy pronto.",
       "errorTitle": "Algo salió mal",
       "error": "No se pudo procesar la solicitud. Inténtalo de nuevo o escríbenos directamente."
+    },
+    "privacy": {
+      "title": "Política de Privacidad (GDPR)",
+      "content": "De conformidad con lo dispuesto en el Reglamento (UE) 2016/679 (GDPR), te informamos que los datos de carácter personal que nos proporciones rellenando este formulario serán tratados por Luxury Smile Architects.\n\nLa finalidad de la recogida y tratamiento de estos datos es gestionar la solicitud de contacto y enviarte información relacionada con tu interés. La legitimación se realiza a través de tu consentimiento expreso.\n\nPodrás ejercer tus derechos de acceso, rectificación, limitación y suprimir los datos escribiéndonos a nuestro correo, así como el derecho a presentar una reclamación ante una autoridad de control.",
+      "accept": "Acepto la política de privacidad"
     },
     "clinic": {
       "label": "La clínica",

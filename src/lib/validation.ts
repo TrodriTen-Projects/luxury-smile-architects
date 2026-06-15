@@ -28,6 +28,7 @@ export function buildContactSchema(t: (key: string) => string) {
       .email(t("contact.form.invalidEmail"))
       .max(120),
     treatment: z.string().trim().min(1, t("contact.form.required")).max(60),
+    source: z.string().trim().min(1, t("contact.form.required")).max(60),
     message: z.string().trim().max(2000).optional().or(z.literal("")),
     consent: z.literal(true, {
       errorMap: () => ({ message: t("contact.form.consentRequired") }),

@@ -204,7 +204,7 @@ export default function Home() {
       </section>
 
       {/* ---------- PATIENTS carousel (autoplay) ---------- */}
-      <section className="section border-t border-border">
+      <section className="section border-t border-border pb-8 sm:pb-12 lg:pb-16">
         <div className="mx-auto max-w-[1400px]">
           <SectionReveal className="flex items-end justify-between">
             <div>
