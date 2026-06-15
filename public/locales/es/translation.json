@@ -1,0 +1,251 @@
+{
+  "nav": {
+    "treatments": "Tratamientos",
+    "results": "Resultados",
+    "team": "Equipo",
+    "contact": "Contacto",
+    "book": "Reservar",
+    "menu": "Menú",
+    "close": "Cerrar"
+  },
+  "lang": {
+    "switch": "Idioma",
+    "es": "ES",
+    "en": "EN"
+  },
+  "common": {
+    "bookCta": "Reservar cita",
+    "discover": "Descubrir",
+    "allTreatments": "Ver todos los tratamientos",
+    "viewTreatment": "Ver tratamiento",
+    "moreInfo": "Más información",
+    "back": "Volver",
+    "viewResults": "Ver resultados",
+    "talkToUs": "Hablar con nosotros",
+    "followUs": "Síguenos en Instagram"
+  },
+  "hero": {
+    "kicker": "Odontología estética en Madrid",
+    "title": "La sonrisa",
+    "titleAccent": "de tu vida",
+    "subtitle": "Diseñamos la sonrisa que habla el mismo idioma que tus metas. Hecha contigo, en nuestro laboratorio propio.",
+    "ctaPrimary": "Reservar cita",
+    "ctaSecondary": "Ver resultados",
+    "scroll": "Descubrir"
+  },
+  "home": {
+    "introKicker": "Quiénes somos",
+    "introTitle": "Arquitectos de tu confianza",
+    "introText": "No hacemos sonrisas de catálogo. Co-creamos contigo una sonrisa que se siente tuya, con arte, ciencia y laboratorio propio.",
+    "treatmentsKicker": "Qué hacemos",
+    "treatmentsTitle": "Tratamientos",
+    "resultsKicker": "Pacientes",
+    "resultsTitle": "Pacientes felices",
+    "ctaTitle": "¿Lista para tu nueva sonrisa?",
+    "ctaText": "No es solo un tratamiento, es una conversación donde juntos diseñamos tu sonrisa en 3D, la pruebas antes y la esculpimos a mano. En menos de dos semanas, tu sonrisa soñada estará en tu rostro para siempre."
+  },
+  "treatments": {
+    "kicker": "Tratamientos",
+    "title": "Todo lo que tu sonrisa necesita",
+    "subtitle": "Toca un tratamiento para ver el detalle.",
+    "waMessage": "Hola, me gustaría más información sobre {{name}}.",
+    "items": [
+      {
+        "id": "estetica",
+        "name": "Estética Dental",
+        "tagline": "Sonrisa transformadora",
+        "summary": "Carillas, diseño de sonrisa y más para mejorar la armonía de tu sonrisa con un resultado natural que potencia tu confianza.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/estetica-dental/"
+      },
+      {
+        "id": "rehabilitacion",
+        "name": "Rehabilitación Oral",
+        "tagline": "Función recuperada",
+        "summary": "Restauramos la función y la estética de tu boca con prótesis de precisión, para una sonrisa armónica y duradera.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/rehabilitacion-oral/"
+      },
+      {
+        "id": "digital",
+        "name": "Rehabilitación Oral Digital",
+        "tagline": "Diseño digital",
+        "summary": "Escaneamos tu boca y diseñamos tu sonrisa con tecnología digital, para un tratamiento más cómodo y exacto. Ves el resultado antes de empezar.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/"
+      },
+      {
+        "id": "endodoncia",
+        "name": "Endodoncia",
+        "tagline": "Salva tu diente",
+        "summary": "Tratamiento del interior del diente para eliminar el dolor de una infección profunda y conservar la pieza.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/endodoncia/"
+      },
+      {
+        "id": "periodoncia",
+        "name": "Periodoncia",
+        "tagline": "Encías sanas",
+        "summary": "Prevención y tratamiento de las enfermedades de las encías y el hueso para evitar la pérdida de dientes.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/periodoncia/"
+      },
+      {
+        "id": "blanqueamiento",
+        "name": "Blanqueamiento Dental",
+        "tagline": "Luz natural",
+        "summary": "Aclaramos el tono de tus dientes de forma segura y supervisada, eliminando manchas para una sonrisa más luminosa.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/blanqueamiento-dental/"
+      },
+      {
+        "id": "exodoncia",
+        "name": "Exodoncia",
+        "tagline": "Extracción cuidadosa",
+        "summary": "Extracción de piezas dañadas con la técnica más cuidadosa para minimizar molestias y proteger tu salud bucal.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/exodoncia/"
+      },
+      {
+        "id": "cirugia",
+        "name": "Cirugía Oral",
+        "tagline": "Salud sin complicaciones",
+        "summary": "Procedimientos quirúrgicos seguros para tratar piezas, lesiones y quistes, restaurando tu salud bucal.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/cirugia-oral/"
+      },
+      {
+        "id": "implantes",
+        "name": "Implantes Dentales",
+        "tagline": "Raíces que perduran",
+        "summary": "Sustituimos la raíz del diente perdido con implantes biocompatibles que se integran al hueso y lo preservan.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/implantes-dentales/"
+      }
+    ]
+  },
+  "results": {
+    "kicker": "Resultados",
+    "title": "El cambio habla solo",
+    "subtitle": "Casos reales de la clínica. Arrastra para comparar.",
+    "before": "Antes",
+    "after": "Después",
+    "hint": "Arrastra",
+    "boxes": [
+      {
+        "title": "Diseño en porcelana",
+        "caption": "Sector anterior"
+      },
+      {
+        "title": "Diseño en resina",
+        "caption": "Bordes y proporción"
+      },
+      {
+        "title": "Blanqueamiento",
+        "caption": "Tono más luminoso"
+      },
+      {
+        "title": "Rehabilitación completa",
+        "caption": "Implante y corona"
+      },
+      {
+        "title": "Cierre de diastemas",
+        "caption": "Espacios corregidos"
+      }
+    ],
+    "ctaTitle": "El próximo caso eres tú",
+    "cta": "Reserva tu valoración"
+  },
+  "reels": {
+    "kicker": "En redes",
+    "title": "Sonrisas que hablan",
+    "subtitle": "Casos, proceso y el día a día de la clínica.",
+    "cta": "Ver más en Instagram",
+    "unmute": "Activar sonido",
+    "mute": "Silenciar"
+  },
+  "team": {
+    "kicker": "Equipo",
+    "title": "Manos expertas detrás de cada sonrisa",
+    "subtitle": "Toca un perfil para conocerlo. Un equipo reducido para una atención muy personal."
+  },
+  "why": {
+    "kicker": "Por qué elegirnos",
+    "title": "La diferencia está en el detalle",
+    "items": [
+      {
+        "id": "lab",
+        "title": "Laboratorio propio",
+        "description": "Fabricamos tu sonrisa aquí, sin intermediarios. Control total y tiempos reducidos."
+      },
+      {
+        "id": "dsd",
+        "title": "Ves tu sonrisa antes",
+        "description": "Diseño digital: visualizas el resultado antes de empezar."
+      },
+      {
+        "id": "boutique",
+        "title": "Experiencia boutique",
+        "description": "Cupo limitado. Cada caso recibe el tiempo que merece."
+      },
+      {
+        "id": "location",
+        "title": "En el corazón de Madrid",
+        "description": "Barrio de Salamanca, Calle de Recoletos 20."
+      }
+    ]
+  },
+  "contact": {
+    "kicker": "Contacto",
+    "title": "Reserva tu valoración",
+    "subtitle": "Cuéntanos qué quieres mejorar. Te respondemos en menos de 24 horas.",
+    "form": {
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "phone": "Teléfono",
+      "email": "Email",
+      "treatment": "Tratamiento de interés",
+      "treatmentPlaceholder": "Selecciona un tratamiento",
+      "message": "Mensaje (opcional)",
+      "messagePlaceholder": "Cuéntanos qué te gustaría mejorar de tu sonrisa",
+      "submit": "Solicitar cita",
+      "submitting": "Enviando",
+      "otherTreatment": "Otro o no estoy seguro",
+      "consent": "He leído y acepto la política de privacidad.",
+      "required": "Campo obligatorio",
+      "invalidEmail": "Introduce un email válido",
+      "invalidPhone": "Introduce un teléfono válido",
+      "consentRequired": "Debes aceptar la política de privacidad",
+      "successTitle": "Gracias",
+      "success": "Hemos preparado tu solicitud en tu correo. Te contactaremos muy pronto.",
+      "errorTitle": "Algo salió mal",
+      "error": "No se pudo procesar la solicitud. Inténtalo de nuevo o escríbenos directamente."
+    },
+    "clinic": {
+      "label": "La clínica",
+      "addressLabel": "Dirección",
+      "address": "Calle de Recoletos 20",
+      "area": "Barrio de Salamanca, 28001 Madrid",
+      "phoneLabel": "Teléfono",
+      "phone": "+34 910 000 000",
+      "whatsappLabel": "WhatsApp",
+      "whatsapp": "+34 689 440 906",
+      "emailLabel": "Email",
+      "email": "hola@luxurysmile.es",
+      "hoursLabel": "Horario",
+      "hours": "Lunes a viernes, 9:00 a 20:00",
+      "directions": "Cómo llegar"
+    },
+    "map": {
+      "kicker": "Dónde estamos",
+      "title": "En el corazón de Madrid",
+      "directions": "Cómo llegar",
+      "maps": "Google Maps",
+      "waze": "Waze"
+    },
+    "reviews": {
+      "kicker": "Reseñas",
+      "title": "Lo que dicen nuestros pacientes",
+      "cta": "Ver reseñas en Google",
+      "empty": "Lee nuestras opiniones verificadas en Google."
+    }
+  },
+  "footer": {
+    "tagline": "Arquitectura de sonrisas en Madrid",
+    "cta": "Reserva tu cita",
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Política de privacidad",
+    "legal": "Aviso legal"
+  }
+}

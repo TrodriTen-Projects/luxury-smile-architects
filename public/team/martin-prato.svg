@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" role="img" aria-label="Dr. Martín Prato placeholder">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FAF8F4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="1250" fill="url(#pbg)"/>
+  <g fill="none" stroke="#E8E0D2" stroke-width="2">
+    <circle cx="500" cy="470" r="160"/>
+    <path d="M250 1050 q250 -360 500 0" stroke="#E8E0D2"/>
+  </g>
+  <text x="500" y="540" text-anchor="middle" font-family="Georgia, serif" font-size="150" fill="#91712C" fill-opacity="0.85">MP</text>
+</svg>

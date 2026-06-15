@@ -1,0 +1,251 @@
+{
+  "nav": {
+    "treatments": "Treatments",
+    "results": "Results",
+    "team": "Team",
+    "contact": "Contact",
+    "book": "Book",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "lang": {
+    "switch": "Language",
+    "es": "ES",
+    "en": "EN"
+  },
+  "common": {
+    "bookCta": "Book a visit",
+    "discover": "Discover",
+    "allTreatments": "View all treatments",
+    "viewTreatment": "View treatment",
+    "moreInfo": "More information",
+    "back": "Back",
+    "viewResults": "View results",
+    "talkToUs": "Talk to us",
+    "followUs": "Follow us on Instagram"
+  },
+  "hero": {
+    "kicker": "Aesthetic dentistry in Madrid",
+    "title": "The smile",
+    "titleAccent": "of your life",
+    "subtitle": "We design the smile that speaks the same language as your goals. Made with you, in our own lab.",
+    "ctaPrimary": "Book a visit",
+    "ctaSecondary": "View results",
+    "scroll": "Discover"
+  },
+  "home": {
+    "introKicker": "Who we are",
+    "introTitle": "Architects of your confidence",
+    "introText": "We don't make catalogue smiles. We co-create a smile that feels yours, with art, science and our own lab.",
+    "treatmentsKicker": "What we do",
+    "treatmentsTitle": "Treatments",
+    "resultsKicker": "Patients",
+    "resultsTitle": "Happy Patients",
+    "ctaTitle": "Ready for your new smile?",
+    "ctaText": "Not just a treatment, it's a conversation where we design your smile in 3D together, you try it before we touch anything, and we sculpt it by hand. In less than two weeks, the smile from the screen will be on your face forever."
+  },
+  "treatments": {
+    "kicker": "Treatments",
+    "title": "Everything your smile needs",
+    "subtitle": "Tap a treatment to see the detail.",
+    "waMessage": "Hi, I'd like more information about {{name}}.",
+    "items": [
+      {
+        "id": "estetica",
+        "name": "Dental Aesthetics",
+        "tagline": "A transformed smile",
+        "summary": "Veneers, smile design and more to improve your smile's harmony with a natural result that boosts your confidence.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/estetica-dental/"
+      },
+      {
+        "id": "rehabilitacion",
+        "name": "Oral Rehabilitation",
+        "tagline": "Function restored",
+        "summary": "We restore the function and aesthetics of your mouth with precision prosthetics, for a harmonious, lasting smile.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/rehabilitacion-oral/"
+      },
+      {
+        "id": "digital",
+        "name": "Digital Oral Rehabilitation",
+        "tagline": "Digital design",
+        "summary": "We scan your mouth and design your smile digitally, for a more comfortable, exact treatment. You see the result before we start.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/"
+      },
+      {
+        "id": "endodoncia",
+        "name": "Endodontics",
+        "tagline": "Save your tooth",
+        "summary": "Treatment of the inside of the tooth to remove the pain of a deep infection and preserve the piece.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/endodoncia/"
+      },
+      {
+        "id": "periodoncia",
+        "name": "Periodontics",
+        "tagline": "Healthy gums",
+        "summary": "Prevention and treatment of gum and bone disease to avoid tooth loss.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/periodoncia/"
+      },
+      {
+        "id": "blanqueamiento",
+        "name": "Teeth Whitening",
+        "tagline": "Natural light",
+        "summary": "We lighten the shade of your teeth safely and under supervision, removing stains for a brighter smile.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/blanqueamiento-dental/"
+      },
+      {
+        "id": "exodoncia",
+        "name": "Tooth Extraction",
+        "tagline": "Careful extraction",
+        "summary": "Removal of damaged teeth with the most careful technique to minimise discomfort and protect your oral health.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/exodoncia/"
+      },
+      {
+        "id": "cirugia",
+        "name": "Oral Surgery",
+        "tagline": "Health without complications",
+        "summary": "Safe surgical procedures to treat teeth, lesions and cysts, restoring your oral health.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/cirugia-oral/"
+      },
+      {
+        "id": "implantes",
+        "name": "Dental Implants",
+        "tagline": "Roots that last",
+        "summary": "We replace the root of a lost tooth with biocompatible implants that integrate with the bone and preserve it.",
+        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/implantes-dentales/"
+      }
+    ]
+  },
+  "results": {
+    "kicker": "Results",
+    "title": "The change speaks for itself",
+    "subtitle": "Real cases from the clinic. Drag to compare.",
+    "before": "Before",
+    "after": "After",
+    "hint": "Drag",
+    "boxes": [
+      {
+        "title": "Porcelain design",
+        "caption": "Anterior sector"
+      },
+      {
+        "title": "Resin design",
+        "caption": "Edges and proportion"
+      },
+      {
+        "title": "Whitening",
+        "caption": "A brighter shade"
+      },
+      {
+        "title": "Full rehabilitation",
+        "caption": "Implant and crown"
+      },
+      {
+        "title": "Diastema closure",
+        "caption": "Spaces corrected"
+      }
+    ],
+    "ctaTitle": "The next case is you",
+    "cta": "Book your assessment"
+  },
+  "reels": {
+    "kicker": "On social",
+    "title": "Smiles that speak",
+    "subtitle": "Cases, process and the day to day of the clinic.",
+    "cta": "See more on Instagram",
+    "unmute": "Unmute",
+    "mute": "Mute"
+  },
+  "team": {
+    "kicker": "Team",
+    "title": "Expert hands behind every smile",
+    "subtitle": "Tap a profile to meet them. A small team for genuinely personal care."
+  },
+  "why": {
+    "kicker": "Why choose us",
+    "title": "The difference is in the detail",
+    "items": [
+      {
+        "id": "lab",
+        "title": "Our own lab",
+        "description": "We make your smile here, with no middlemen. Full control and shorter times."
+      },
+      {
+        "id": "dsd",
+        "title": "See your smile first",
+        "description": "Digital design: you preview the result before we start."
+      },
+      {
+        "id": "boutique",
+        "title": "Boutique experience",
+        "description": "Limited intake. Every case gets the time it deserves."
+      },
+      {
+        "id": "location",
+        "title": "In the heart of Madrid",
+        "description": "Salamanca district, Calle de Recoletos 20."
+      }
+    ]
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Book your assessment",
+    "subtitle": "Tell us what you want to improve. We reply within 24 hours.",
+    "form": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "email": "Email",
+      "treatment": "Treatment of interest",
+      "treatmentPlaceholder": "Select a treatment",
+      "message": "Message (optional)",
+      "messagePlaceholder": "Tell us what you'd like to improve about your smile",
+      "submit": "Request appointment",
+      "submitting": "Sending",
+      "otherTreatment": "Other or not sure",
+      "consent": "I have read and accept the privacy policy.",
+      "required": "Required field",
+      "invalidEmail": "Enter a valid email",
+      "invalidPhone": "Enter a valid phone number",
+      "consentRequired": "You must accept the privacy policy",
+      "successTitle": "Thank you",
+      "success": "We've prepared your request in your email client. We'll be in touch very soon.",
+      "errorTitle": "Something went wrong",
+      "error": "We couldn't process the request. Please try again or email us directly."
+    },
+    "clinic": {
+      "label": "The clinic",
+      "addressLabel": "Address",
+      "address": "Calle de Recoletos 20",
+      "area": "Salamanca district, 28001 Madrid",
+      "phoneLabel": "Phone",
+      "phone": "+34 910 000 000",
+      "whatsappLabel": "WhatsApp",
+      "whatsapp": "+34 689 440 906",
+      "emailLabel": "Email",
+      "email": "hola@luxurysmile.es",
+      "hoursLabel": "Hours",
+      "hours": "Monday to Friday, 9:00 to 20:00",
+      "directions": "Get directions"
+    },
+    "map": {
+      "kicker": "Where we are",
+      "title": "In the heart of Madrid",
+      "directions": "Get directions",
+      "maps": "Google Maps",
+      "waze": "Waze"
+    },
+    "reviews": {
+      "kicker": "Reviews",
+      "title": "What our patients say",
+      "cta": "See reviews on Google",
+      "empty": "Read our verified reviews on Google."
+    }
+  },
+  "footer": {
+    "tagline": "Smile architecture in Madrid",
+    "cta": "Book your visit",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy policy",
+    "legal": "Legal notice"
+  }
+}
