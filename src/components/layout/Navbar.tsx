@@ -8,6 +8,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useContent } from "@/lib/content";
 
 const LINKS = [
+  { to: "/quienes-somos", key: "nav.about" },
   { to: "/tratamientos", key: "nav.treatments" },
   { to: "/resultados", key: "nav.results" },
   { to: "/equipo", key: "nav.team" },

@@ -366,62 +366,43 @@ export default function Contact() {
       {/* ---------- MAP + DIRECTIONS ---------- */}
       <section className="section border-t border-border">
         <div className="mx-auto max-w-[1400px]">
-          <div className="grid gap-10 lg:grid-cols-[300px_1fr] xl:grid-cols-[360px_1fr]">
-            <SectionReveal>
-              <div className="rounded-[1.75rem] border border-gold/60 bg-base p-1.5 shadow-[0_12px_34px_-20px_rgba(0,0,0,0.4)]">
-                <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.4rem] bg-foreground/5">
-                  <video
-                    src="/media/video/reel-01.mp4"
-                    className="absolute inset-0 h-full w-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                </div>
-              </div>
-            </SectionReveal>
-
-            <div className="flex flex-col justify-between">
-              <SectionReveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <span className="eyebrow">{t("contact.map.kicker")}</span>
-                  <h2 className="display mt-5 text-[clamp(1.8rem,4vw,3rem)]">
-                    {t("contact.map.title")}
-                  </h2>
-                  <p className="mt-4 font-sans text-sm text-muted">
-                    {t("contact.clinic.address")}, {t("contact.clinic.area")}
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <Button asChild variant="primary" size="sm">
-                    <a href={mapsDirUrl} target="_blank" rel="noopener noreferrer">
-                      <Navigation className="h-4 w-4" />
-                      {t("contact.map.maps")}
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" size="sm">
-                    <a href={wazeUrl} target="_blank" rel="noopener noreferrer">
-                      {t("contact.map.waze")}
-                    </a>
-                  </Button>
-                </div>
-              </SectionReveal>
-
-              <SectionReveal delay={0.1} className="mt-10 h-full">
-                <div className="h-full overflow-hidden rounded-[3px] border border-border">
-                  <iframe
-                    title={t("contact.map.title")}
-                    src={mapEmbedUrl}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="min-h-[320px] w-full sm:h-full lg:min-h-[440px]"
-                    style={{ border: 0, filter: "grayscale(0.2)" }}
-                  />
-                </div>
-              </SectionReveal>
+          <SectionReveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="eyebrow">{t("contact.map.kicker")}</span>
+              <h2 className="display mt-5 text-[clamp(1.8rem,4vw,3rem)]">
+                {t("contact.map.title")}
+              </h2>
+              <p className="mt-4 font-sans text-sm text-muted">
+                {t("contact.clinic.address")}, {t("contact.clinic.area")}
+              </p>
             </div>
-          </div>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild variant="primary" size="sm">
+                <a href={mapsDirUrl} target="_blank" rel="noopener noreferrer">
+                  <Navigation className="h-4 w-4" />
+                  {t("contact.map.maps")}
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="sm">
+                <a href={wazeUrl} target="_blank" rel="noopener noreferrer">
+                  {t("contact.map.waze")}
+                </a>
+              </Button>
+            </div>
+          </SectionReveal>
+
+          <SectionReveal delay={0.1} className="mt-10">
+            <div className="overflow-hidden rounded-[3px] border border-border">
+              <iframe
+                title={t("contact.map.title")}
+                src={mapEmbedUrl}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-[320px] w-full sm:h-[440px]"
+                style={{ border: 0, filter: "grayscale(0.2)" }}
+              />
+            </div>
+          </SectionReveal>
         </div>
       </section>
 

@@ -4,6 +4,7 @@
     "results": "Resultados",
     "team": "Equipo",
     "contact": "Contacto",
+    "about": "Quiénes somos",
     "book": "Reservar",
     "menu": "Menú",
     "close": "Cerrar"
@@ -41,7 +42,8 @@
     "treatmentsTitle": "Tratamientos",
     "resultsKicker": "Pacientes",
     "resultsTitle": "Pacientes felices",
-    "ctaTitle": "¿Lista para tu nueva sonrisa?",
+    "resultsSubtitle": "La sonrisa ya no se percibe como un complemento estético, sino como un rasgo clave de tu identidad, estatus, confianza y seguridad.",
+    "ctaTitle": "¿Listo para tu nueva sonrisa?",
     "ctaText": "No es solo un tratamiento, es una conversación donde juntos diseñamos tu sonrisa en 3D, la pruebas antes y la esculpimos a mano. En menos de dos semanas, tu sonrisa soñada estará en tu rostro para siempre."
   },
   "treatments": {
@@ -94,6 +96,30 @@
     "kicker": "Equipo",
     "title": "Manos expertas detrás de cada sonrisa",
     "subtitle": "Toca un perfil para conocerlo. Un equipo reducido para una atención muy personal."
+  },
+  "about": {
+    "kicker": "Quiénes somos",
+    "title": "Arquitectura de sonrisas",
+    "introText": "En un mercado donde la estética se integra en el bienestar, la sonrisa se convierte en un activo de identidad y el lujo se expresa a través de la experiencia y la confianza, los resultados clínicos dejan de ser suficientes para explicar la elección del paciente.",
+    "identity": {
+      "kicker": "¿Cuál es nuestra identidad?",
+      "title": "Nuestra Identidad",
+      "box1Title": "Quiénes somos",
+      "box1Text": "Una red internacional de clínicas de odontología estética fundada en Colombia, liderada por el Dr. Martín Prato, con presencia en Latinoamérica y EE. UU y ahora Europa.",
+      "box2Title": "Qué defendemos",
+      "box2Text": "Entendemos la sonrisa como una arquitectura personalizada: una combinación de arte, ciencia y sensibilidad estética que no busca solo mejorar dientes, sino transformar la confianza y la identidad de las personas.",
+      "box3Title": "Qué nos hace diferente",
+      "box3Text": "Metodología propia, alto nivel de personalización y una experiencia boutique profundamente humana, donde la atención, el cuidado y el acompañamiento del paciente son el principal motor de nuestra propuesta de valor."
+    },
+    "locationsKicker": "Nuestras sedes",
+    "locationsTitle": "Dónde creamos magia",
+    "clinicTitle": "La Clínica",
+    "clinicDesc": "Nuestra clínica boutique en el corazón de Madrid, diseñada para ofrecerte una experiencia exclusiva, privada y relajante.",
+    "labTitle": "El Laboratorio",
+    "labDesc": "Laboratorio in-house de alta tecnología donde diseñamos y personalizamos cada pieza a mano con la máxima precisión.",
+    "financeTitle": "Programa de financiación",
+    "financeDesc": "Creemos que la excelencia debe ser accesible. Ofrecemos planes de financiación personalizados para que inviertas en tu sonrisa con total tranquilidad.",
+    "financeCta": "Consultar planes"
   },
   "why": {
     "kicker": "Por qué elegirnos",

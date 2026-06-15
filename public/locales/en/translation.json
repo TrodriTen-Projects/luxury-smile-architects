@@ -4,7 +4,8 @@
     "results": "Results",
     "team": "Team",
     "contact": "Contact",
-    "book": "Book",
+    "about": "About Us",
+    "book": "Book now",
     "menu": "Menu",
     "close": "Close"
   },
@@ -41,6 +42,7 @@
     "treatmentsTitle": "Treatments",
     "resultsKicker": "Patients",
     "resultsTitle": "Happy Patients",
+    "resultsSubtitle": "A smile is no longer perceived as an aesthetic complement, but as a key feature of your identity, status, confidence, and security.",
     "ctaTitle": "Ready for your new smile?",
     "ctaText": "Not just a treatment, it's a conversation where we design your smile in 3D together, you try it before we touch anything, and we sculpt it by hand. In less than two weeks, the smile from the screen will be on your face forever."
   },
@@ -94,6 +96,30 @@
     "kicker": "Team",
     "title": "Expert hands behind every smile",
     "subtitle": "Tap a profile to meet them. A small team for genuinely personal care."
+  },
+  "about": {
+    "kicker": "About Us",
+    "title": "Smile Architecture",
+    "introText": "In a market where aesthetics integrates with well-being, a smile becomes an identity asset, and luxury is expressed through experience and trust, clinical results are no longer enough to explain a patient's choice.",
+    "identity": {
+      "kicker": "What is our identity?",
+      "title": "Our Identity",
+      "box1Title": "Who we are",
+      "box1Text": "An international network of aesthetic dentistry clinics founded in Colombia, led by Dr. Martín Prato, with a presence in Latin America and the US, and now Europe.",
+      "box2Title": "What we stand for",
+      "box2Text": "We understand the smile as personalized architecture: a combination of art, science, and aesthetic sensibility that does not seek just to improve teeth, but to transform the confidence and identity of people.",
+      "box3Title": "What makes us different",
+      "box3Text": "Our own methodology, high level of personalization, and a deeply human boutique experience, where attention, care, and patient accompaniment are the main driver of our value proposition."
+    },
+    "locationsKicker": "Our locations",
+    "locationsTitle": "Where we create magic",
+    "clinicTitle": "The Clinic",
+    "clinicDesc": "Our boutique clinic in the heart of Madrid, designed to offer you an exclusive, private, and relaxing experience.",
+    "labTitle": "The Laboratory",
+    "labDesc": "High-tech in-house laboratory where we design and customize each piece by hand with maximum precision.",
+    "financeTitle": "Financing Program",
+    "financeDesc": "We believe excellence should be accessible. We offer personalized financing plans so you can invest in your smile with complete peace of mind.",
+    "financeCta": "Check plans"
   },
   "why": {
     "kicker": "Why choose us",

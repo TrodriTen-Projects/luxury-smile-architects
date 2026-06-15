@@ -8,6 +8,7 @@ const Treatments = lazy(() => import("@/pages/Treatments"));
 const Results = lazy(() => import("@/pages/Results"));
 const Team = lazy(() => import("@/pages/Team"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const About = lazy(() => import("@/pages/About"));
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="tratamientos" element={<Treatments />} />
         <Route path="resultados" element={<Results />} />
         <Route path="equipo" element={<Team />} />
+        <Route path="quienes-somos" element={<About />} />
         <Route path="contacto" element={<Contact />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

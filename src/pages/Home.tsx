@@ -212,6 +212,9 @@ export default function Home() {
               <h2 className="display mt-6 text-[clamp(2.2rem,5vw,4rem)]">
                 {t("home.resultsTitle")}
               </h2>
+              <p className="mt-4 max-w-2xl text-pretty font-sans text-base font-light leading-relaxed text-muted">
+                {t("home.resultsSubtitle")}
+              </p>
             </div>
             <Link
               to="/resultados"
