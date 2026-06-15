@@ -10,7 +10,6 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { SectionReveal } from "@/components/SectionReveal";
-import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { INSTAGRAM_PROFILE } from "@/data/instagram";
 import { REEL_VIDEOS, VIDEO_POSTER } from "@/data/media";
 import { useContent } from "@/lib/content";
@@ -54,8 +53,14 @@ export function ReelsSection() {
   const { t } = useTranslation();
   const content = useContent();
   const [muted, setMuted] = useState(true);
-  const reelUrls = content.reels;
-  const hasEmbeds = reelUrls.length > 0;
+
+  // Reels = the clinic's own video clips (dropped in /public/media/video).
+  // Instagram only allows embedding the full POST (header, likes, caption),
+  // not the bare reel video — so to show clean playing reels, download them
+  // as .mp4 and place them in that folder.
+  const videos = content.videos.length ? content.videos : REEL_VIDEOS;
+
+  if (videos.length === 0) return null;
 
   return (
     <section className="section relative overflow-hidden">
@@ -84,58 +89,46 @@ export function ReelsSection() {
           </SectionReveal>
         </div>
 
-        {hasEmbeds ? (
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {reelUrls.map((url) => (
-              <InstagramEmbed key={url} url={url} />
-            ))}
-          </div>
-        ) : (
-          <Carousel
-            opts={{ align: "start", loop: true }}
-            className="mt-14"
-            aria-label={t("reels.title")}
-          >
-            <CarouselContent className="-ml-5">
-              {REEL_VIDEOS.map((src, i) => (
-                <CarouselItem
-                  key={src}
-                  className="basis-[74%] pl-5 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-                >
-                  <div className="rounded-[1.75rem] border border-gold/60 bg-base p-1.5 shadow-[0_12px_34px_-20px_rgba(0,0,0,0.4)]">
-                    <div className="group relative aspect-[9/16] overflow-hidden rounded-[1.4rem] bg-foreground/5">
-                      <ReelVideo src={src} muted={muted} />
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/45 to-transparent" />
-                      <span className="absolute left-4 top-4 font-sans text-[0.56rem] uppercase tracking-[0.24em] text-white/90">
-                        Reel {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-
-            <div className="mt-9 flex items-center justify-between">
-              <button
-                type="button"
-                onClick={() => setMuted((m) => !m)}
-                className="inline-flex items-center gap-2 font-sans text-[0.66rem] uppercase tracking-[0.2em] text-muted transition-colors hover:text-gold"
-                aria-pressed={!muted}
+        <Carousel
+          opts={{ align: "start", loop: true }}
+          className="mt-14"
+          aria-label={t("reels.title")}
+        >
+          <CarouselContent className="-ml-5">
+            {videos.map((src, i) => (
+              <CarouselItem
+                key={src}
+                className="basis-[74%] pl-5 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
-                {muted ? (
-                  <VolumeX className="h-4 w-4" />
-                ) : (
-                  <Volume2 className="h-4 w-4" />
-                )}
-                {muted ? t("reels.unmute") : t("reels.mute")}
-              </button>
-              <div className="flex items-center gap-3">
-                <CarouselPrevious className="static translate-y-0" />
-                <CarouselNext className="static translate-y-0" />
-              </div>
+                <div className="rounded-[1.75rem] border border-gold/60 bg-base p-1.5 shadow-[0_12px_34px_-20px_rgba(0,0,0,0.4)]">
+                  <div className="group relative aspect-[9/16] overflow-hidden rounded-[1.4rem] bg-foreground/5">
+                    <ReelVideo src={src} muted={muted} />
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/45 to-transparent" />
+                    <span className="absolute left-4 top-4 font-sans text-[0.56rem] uppercase tracking-[0.24em] text-white/90">
+                      Reel {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          <div className="mt-9 flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setMuted((m) => !m)}
+              className="inline-flex items-center gap-2 font-sans text-[0.66rem] uppercase tracking-[0.2em] text-muted transition-colors hover:text-gold"
+              aria-pressed={!muted}
+            >
+              {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+              {muted ? t("reels.unmute") : t("reels.mute")}
+            </button>
+            <div className="flex items-center gap-3">
+              <CarouselPrevious className="static translate-y-0" />
+              <CarouselNext className="static translate-y-0" />
             </div>
-          </Carousel>
-        )}
+          </div>
+        </Carousel>
       </div>
     </section>
   );

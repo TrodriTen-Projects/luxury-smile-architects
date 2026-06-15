@@ -1,5 +1,5 @@
 {
-  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). services: imagen por servicio. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). VIDEOS: sube tus .mp4 a /media/video y aparecen solos. REELS: vídeos locales (carpeta) e Instagram se COMBINAN; pega los enlaces de tus reels de Instagram en 'reels' y se muestran junto a los vídeos. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS GOOGLE: pon business.placeId y business.googleApiKey para importarlas en vivo; si no, usa el array reviews o reviewsUrl. beforeAfter: pares antes/después.",
+  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). services: imagen por servicio. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS GOOGLE: pon business.placeId y business.googleApiKey para importarlas en vivo; si no, usa el array reviews o reviewsUrl. beforeAfter: pares antes/después.",
   "hero": {
     "image": "/media/hero-main.jpg",
     "fallback": "/media/images/portrait-01.jpg",
@@ -21,7 +21,20 @@
   },
   "patients": [],
   "videos": [],
-  "reels": [],
+  "reels": [
+    "https://www.instagram.com/reel/DZUmJSPtz6I/",
+    "https://www.instagram.com/reel/DYwkSD1tcPZ/",
+    "https://www.instagram.com/reel/DYrEh2_t-rQ/",
+    "https://www.instagram.com/reel/DYNoDu0xJnr/",
+    "https://www.instagram.com/reel/DXmxzZEkb59/",
+    "https://www.instagram.com/reel/DXjJYzFgeMa/",
+    "https://www.instagram.com/reel/DW3uZ1cgGFO/",
+    "https://www.instagram.com/reel/DTu0WclDLEq/",
+    "https://www.instagram.com/reel/DZMUMahB4AA/",
+    "https://www.instagram.com/reel/DZXAi1atUN2/",
+    "https://www.instagram.com/reel/DZPMZLHBgKs/",
+    "https://www.instagram.com/reel/DY14Vt5u8hg/"
+  ],
   "team": [
     {
       "id": "prato",
