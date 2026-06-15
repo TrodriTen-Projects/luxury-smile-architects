@@ -3,18 +3,28 @@
 @tailwind utilities;
 
 @layer base {
+
   :root,
   .dark {
     /* Light luxury: warm white, ink text, antique gold */
-    --base: 42 30% 97%; /* #FAF8F4 warm white */
-    --surface: 0 0% 100%; /* #FFFFFF cards */
-    --elevated: 40 30% 95%; /* #F2EEE6 */
-    --border: 38 24% 87%; /* #E8E0D2 */
-    --foreground: 30 16% 9%; /* #1B1612 ink */
-    --muted: 34 9% 41%; /* #726A5F */
-    --gold: 40 53% 37%; /* #91712C deep gold (legible on white) */
-    --gold-deep: 40 56% 29%; /* #745920 */
-    --beige: 38 48% 56%; /* #C0974E champagne accent */
+    --base: 42 30% 97%;
+    /* #FAF8F4 warm white */
+    --surface: 0 0% 100%;
+    /* #FFFFFF cards */
+    --elevated: 40 30% 95%;
+    /* #F2EEE6 */
+    --border: 38 24% 87%;
+    /* #E8E0D2 */
+    --foreground: 30 16% 9%;
+    /* #1B1612 ink */
+    --muted: 34 9% 41%;
+    /* #726A5F */
+    --gold: 40 53% 37%;
+    /* #91712C deep gold (legible on white) */
+    --gold-deep: 40 56% 29%;
+    /* #745920 */
+    --beige: 38 48% 56%;
+    /* #C0974E champagne accent */
     --radius: 0.2rem;
   }
 
@@ -23,6 +33,7 @@
   }
 
   html {
+    font-size: 20px;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
@@ -71,18 +82,22 @@
     width: 9px;
     height: 9px;
   }
+
   ::-webkit-scrollbar-track {
     background: hsl(var(--base));
   }
+
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--border));
     border-radius: 99px;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--gold) / 0.6);
   }
 
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -104,6 +119,7 @@
     font-variation-settings: "opsz" 144, "wght" 400;
     letter-spacing: -0.02em;
   }
+
   .display-light {
     font-variation-settings: "opsz" 144, "wght" 340;
   }
@@ -117,12 +133,10 @@
   }
 
   .text-gold-gradient {
-    background: linear-gradient(
-      105deg,
-      hsl(var(--gold)),
-      hsl(var(--beige)) 50%,
-      hsl(var(--gold-deep))
-    );
+    background: linear-gradient(105deg,
+        hsl(var(--gold)),
+        hsl(var(--beige)) 50%,
+        hsl(var(--gold-deep)));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -140,22 +154,22 @@
   .link-underline {
     @apply relative inline-block transition-colors;
   }
+
   .link-underline::after {
     content: "";
     @apply absolute left-0 bottom-[-2px] h-px w-0 bg-gold transition-all duration-500;
   }
+
   .link-underline:hover::after {
     @apply w-full;
   }
 
   /* Scrim for text/captions placed over photos (theme-independent) */
   .photo-scrim {
-    background: linear-gradient(
-      to top,
-      rgba(10, 9, 8, 0.82),
-      rgba(10, 9, 8, 0.15) 45%,
-      transparent 70%
-    );
+    background: linear-gradient(to top,
+        rgba(10, 9, 8, 0.82),
+        rgba(10, 9, 8, 0.15) 45%,
+        transparent 70%);
   }
 }
 
@@ -163,12 +177,15 @@
   .text-balance {
     text-wrap: balance;
   }
+
   .text-pretty {
     text-wrap: pretty;
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;

@@ -21,12 +21,8 @@ import { SectionReveal } from "@/components/SectionReveal";
 import { GoogleReviews } from "@/components/GoogleReviews";
 import { buildContactSchema } from "@/lib/validation";
 import { sanitizeLine, sanitizeBlock } from "@/lib/sanitize";
-import { useContent } from "@/lib/content";
+import { useContent, pick } from "@/lib/content";
 
-interface Treatment {
-  id: string;
-  name: string;
-}
 type FieldErrors = Partial<Record<string, string>>;
 
 const EMPTY = {
@@ -41,9 +37,10 @@ const EMPTY = {
 };
 
 export default function Contact() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const content = useContent();
-  const treatments = t("treatments.items", { returnObjects: true }) as Treatment[];
+  const lang = i18n.resolvedLanguage ?? "es";
+  const treatments = content.treatments;
   const schema = useMemo(() => buildContactSchema(t), [t]);
 
   const place =
@@ -241,8 +238,8 @@ export default function Contact() {
                       {t("contact.form.treatmentPlaceholder")}
                     </option>
                     {treatments.map((tr) => (
-                      <option key={tr.id} value={tr.name} className="bg-surface text-foreground">
-                        {tr.name}
+                      <option key={tr.id} value={pick(tr.name, lang)} className="bg-surface text-foreground">
+                        {pick(tr.name, lang)}
                       </option>
                     ))}
                     <option value={t("contact.form.otherTreatment")} className="bg-surface text-foreground">

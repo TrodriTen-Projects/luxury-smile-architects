@@ -14,20 +14,15 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
-import { useContent } from "@/lib/content";
-
-interface Treatment {
-  id: string;
-  name: string;
-  tagline: string;
-}
+import { useContent, pick } from "@/lib/content";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const content = useContent();
-  const treatments = t("treatments.items", { returnObjects: true }) as Treatment[];
+  const lang = i18n.resolvedLanguage ?? "es";
+  const treatments = content.treatments;
   const patients = content.patients;
 
   return (
@@ -173,10 +168,10 @@ export default function Home() {
                   </span>
                   <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-5">
                     <span className="font-serif text-xl text-foreground transition-colors group-hover:text-gold sm:text-2xl">
-                      {item.name}
+                      {pick(item.name, lang)}
                     </span>
                     <span className="font-sans text-[0.64rem] uppercase tracking-[0.22em] text-muted">
-                      {item.tagline}
+                      {pick(item.tagline, lang)}
                     </span>
                   </span>
                   <ArrowUpRight className="h-5 w-5 text-muted transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold" />
@@ -229,7 +224,7 @@ export default function Home() {
           {patients.length > 0 ? (
             <Carousel
               opts={{ align: "start", loop: true }}
-              plugins={[Autoplay({ delay: 3200, stopOnInteraction: false, stopOnMouseEnter: true })]}
+              plugins={[Autoplay({ delay: 2200, stopOnInteraction: false, stopOnMouseEnter: false })]}
               className="mt-12"
             >
               <CarouselContent className="-ml-5">

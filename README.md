@@ -37,9 +37,9 @@ Es el "panel de control" de la web. Editas este archivo + subes imágenes a
 |---|---|
 | `hero.image` | Foto principal del inicio |
 | `logo.image` | Logo de la empresa (`null` = usa el logo de texto) |
-| `services` | Imagen de cada uno de los 9 tratamientos |
-| `patients` | Fotos del carrusel "Sonrisas felices" del inicio |
-| `reels` | Enlaces de tus **reels de Instagram** |
+| `treatments` | Servicios: añade/quita aquí (id, imagen, y nombre/lema/resumen en ES/EN) |
+| `patients` | Fotos del carrusel "Sonrisas felices" (solo súbelas a `/media/patients`) |
+| `reels`/vídeos | Vídeos del carrusel: solo súbelos a `/media/video` |
 | `team` | Personas del equipo (nombre, foto, cargo y bio en ES/EN) |
 | `beforeAfter` | Pares de fotos Antes/Después (página Resultados) |
 | `business.whatsapp` | Número de WhatsApp (lo usa "Más información" y Contacto) |
@@ -61,8 +61,9 @@ Sube tus archivos a estas carpetas y luego pon la ruta en `site.json`.
 |---|---|---|---|---|
 | **Foto principal (hero)** | 1 | `public/media/` → `hero-main.jpg` | Horizontal, ~2000×1200 px (rostro/sonrisa) | `hero.image` |
 | **Logo** | 1 | `public/media/` → `logo.svg` o `.png` | Horizontal, fondo transparente, legible sobre blanco | `logo.image` |
-| **Servicios** | 9 | `public/media/services/` | 5:4, ~1200×960 px | `services.<id>` |
-| **Pacientes (carrusel)** | las que quieras | `public/media/patients/` | Vertical 3:4, ~1080×1440 px | `patients` (lista) |
+| **Servicios** | 1 por servicio | `public/media/services/` | 5:4, ~1200×960 px | `treatments[].image` |
+| **Pacientes (carrusel)** | las que quieras | `public/media/patients/` | Vertical 3:4, ~1080×1440 px | (auto, solo subir) |
+| **Vídeos (reels)** | los que quieras | `public/media/video/` | Vertical 9:16, `.mp4` | (auto, solo subir) |
 | **Antes / Después** | pares (2 c/u) | `public/media/results/` | 4:3, ~1200×900 px, **mismo encuadre** | `beforeAfter[].before` / `.after` |
 | **Equipo (doctores)** | 1 por persona | `public/media/team/` | Vertical 4:5, ~1000×1250 px | `team[].photo` |
 | **Favicon** (opcional) | 1 | `public/` → `favicon.svg` | Cuadrado | (fijo) |
@@ -87,16 +88,21 @@ Los **9 `id` de servicios** son:
 2. En `site.json`: `"logo": { "image": "/media/logo.svg" }`.
 3. Si lo dejas en `null`, se muestra el logo de texto **LUXURY SMILE / ARCHITECTS**.
 
-### 4.3 Imágenes de los servicios
-1. Sube 9 imágenes a `public/media/services/` (una por tratamiento).
-2. En `site.json` → `services`, pon cada ruta, p. ej.:
+### 4.3 Servicios (añadir, quitar y editar)
+Todo en un solo sitio: `site.json` → array **`treatments`**. Añade o borra un bloque por servicio (texto en ES/EN). Aparecen solos en la página de Tratamientos, en el inicio y en el desplegable de Contacto.
+1. Sube la imagen del servicio a `public/media/services/`.
+2. Añade su bloque en `treatments`:
    ```json
-   "services": {
-     "estetica": "/media/services/estetica.jpg",
-     "implantes": "/media/services/implantes.jpg"
+   {
+     "id": "ortodoncia",
+     "image": "/media/services/ortodoncia.jpg",
+     "name":    { "es": "Ortodoncia",  "en": "Orthodontics" },
+     "tagline": { "es": "Alineación discreta", "en": "Discreet alignment" },
+     "summary": { "es": "Texto…", "en": "Text…" }
    }
    ```
-   *(Los textos de cada servicio se editan en las traducciones — ver §5.)*
+   - Para **quitar** un servicio: borra su bloque (y la coma que lo separa).
+   - El `id` debe ser único y sin espacios.
 
 ### 4.4 Carrusel "Sonrisas felices" (pacientes)
 1. Sube las fotos a `public/media/patients/`.

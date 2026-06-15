@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 // Self-hosted variable fonts (Fraunces full = opsz axis for display contrast).
 import "@fontsource-variable/fraunces/full.css";
 import "@fontsource-variable/fraunces/full-italic.css";
-import "@fontsource-variable/hanken-grotesk";
+import "@fontsource-variable/montserrat";
 
 import "@/index.css";
 import "@/lib/i18n";

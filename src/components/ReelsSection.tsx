@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Instagram, Volume2, VolumeX } from "lucide-react";
+import Autoplay from "embla-carousel-autoplay";
+import { Instagram } from "lucide-react";
 
 import {
   Carousel,
@@ -52,7 +53,7 @@ function ReelVideo({ src, muted }: { src: string; muted: boolean }) {
 export function ReelsSection() {
   const { t } = useTranslation();
   const content = useContent();
-  const [muted, setMuted] = useState(true);
+
 
   // Reels = the clinic's own video clips (dropped in /public/media/video).
   // Instagram only allows embedding the full POST (header, likes, caption),
@@ -91,6 +92,7 @@ export function ReelsSection() {
 
         <Carousel
           opts={{ align: "start", loop: true }}
+          plugins={[Autoplay({ delay: 2200, stopOnInteraction: false, stopOnMouseEnter: false })]}
           className="mt-14"
           aria-label={t("reels.title")}
         >
@@ -102,7 +104,7 @@ export function ReelsSection() {
               >
                 <div className="rounded-[1.75rem] border border-gold/60 bg-base p-1.5 shadow-[0_12px_34px_-20px_rgba(0,0,0,0.4)]">
                   <div className="group relative aspect-[9/16] overflow-hidden rounded-[1.4rem] bg-foreground/5">
-                    <ReelVideo src={src} muted={muted} />
+                    <ReelVideo src={src} muted />
                     <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/45 to-transparent" />
                     <span className="absolute left-4 top-4 font-sans text-[0.56rem] uppercase tracking-[0.24em] text-white/90">
                       Reel {String(i + 1).padStart(2, "0")}
@@ -113,20 +115,9 @@ export function ReelsSection() {
             ))}
           </CarouselContent>
 
-          <div className="mt-9 flex items-center justify-between">
-            <button
-              type="button"
-              onClick={() => setMuted((m) => !m)}
-              className="inline-flex items-center gap-2 font-sans text-[0.66rem] uppercase tracking-[0.2em] text-muted transition-colors hover:text-gold"
-              aria-pressed={!muted}
-            >
-              {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-              {muted ? t("reels.unmute") : t("reels.mute")}
-            </button>
-            <div className="flex items-center gap-3">
-              <CarouselPrevious className="static translate-y-0" />
-              <CarouselNext className="static translate-y-0" />
-            </div>
+          <div className="mt-9 flex items-center justify-end gap-3">
+            <CarouselPrevious className="static translate-y-0" />
+            <CarouselNext className="static translate-y-0" />
           </div>
         </Carousel>
       </div>

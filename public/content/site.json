@@ -1,5 +1,5 @@
 {
-  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). services: imagen por servicio. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS GOOGLE: pon business.placeId y business.googleApiKey para importarlas en vivo; si no, usa el array reviews o reviewsUrl. beforeAfter: pares antes/después.",
+  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). TRATAMIENTOS: añade o quita servicios en el array 'treatments' (cada uno: id único, image, y name/tagline/summary en es/en); aparecen solos en la página de Tratamientos, en el inicio y en el desplegable de Contacto. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS GOOGLE: pon business.placeId y business.googleApiKey para importarlas en vivo; si no, usa el array reviews o reviewsUrl. beforeAfter: pares antes/después.",
   "hero": {
     "image": "/media/hero-main.jpg",
     "fallback": "/media/images/portrait-01.jpg",
@@ -8,33 +8,154 @@
   "logo": {
     "image": null
   },
-  "services": {
-    "estetica": "/media/images/portrait-01.jpg",
-    "rehabilitacion": "/media/images/case-implant.jpg",
-    "digital": "/media/images/case-veneers.jpg",
-    "endodoncia": "/media/results/veneers-before.jpg",
-    "periodoncia": "/media/results/veneers-before.jpg",
-    "blanqueamiento": "/media/results/veneers-after.jpg",
-    "exodoncia": "/media/images/case-implant.jpg",
-    "cirugia": "/media/images/case-implant.jpg",
-    "implantes": "/media/images/case-veneers.jpg"
-  },
+  "treatments": [
+    {
+      "id": "estetica",
+      "image": "/media/images/portrait-01.jpg",
+      "name": {
+        "es": "Estética Dental",
+        "en": "Dental Aesthetics"
+      },
+      "tagline": {
+        "es": "Sonrisa transformadora",
+        "en": "A transformed smile"
+      },
+      "summary": {
+        "es": "Carillas, diseño de sonrisa y más para mejorar la armonía de tu sonrisa con un resultado natural que potencia tu confianza.",
+        "en": "Veneers, smile design and more to improve your smile's harmony with a natural result that boosts your confidence."
+      }
+    },
+    {
+      "id": "rehabilitacion",
+      "image": "/media/images/case-implant.jpg",
+      "name": {
+        "es": "Rehabilitación Oral",
+        "en": "Oral Rehabilitation"
+      },
+      "tagline": {
+        "es": "Función recuperada",
+        "en": "Function restored"
+      },
+      "summary": {
+        "es": "Restauramos la función y la estética de tu boca con prótesis de precisión, para una sonrisa armónica y duradera.",
+        "en": "We restore the function and aesthetics of your mouth with precision prosthetics, for a harmonious, lasting smile."
+      }
+    },
+    {
+      "id": "digital",
+      "image": "/media/images/case-veneers.jpg",
+      "name": {
+        "es": "Rehabilitación Oral Digital",
+        "en": "Digital Oral Rehabilitation"
+      },
+      "tagline": {
+        "es": "Diseño digital",
+        "en": "Digital design"
+      },
+      "summary": {
+        "es": "Escaneamos tu boca y diseñamos tu sonrisa con tecnología digital, para un tratamiento más cómodo y exacto. Ves el resultado antes de empezar.",
+        "en": "We scan your mouth and design your smile digitally, for a more comfortable, exact treatment. You see the result before we start."
+      }
+    },
+    {
+      "id": "endodoncia",
+      "image": "/media/results/veneers-before.jpg",
+      "name": {
+        "es": "Endodoncia",
+        "en": "Endodontics"
+      },
+      "tagline": {
+        "es": "Salva tu diente",
+        "en": "Save your tooth"
+      },
+      "summary": {
+        "es": "Tratamiento del interior del diente para eliminar el dolor de una infección profunda y conservar la pieza.",
+        "en": "Treatment of the inside of the tooth to remove the pain of a deep infection and preserve the piece."
+      }
+    },
+    {
+      "id": "periodoncia",
+      "image": "/media/results/veneers-before.jpg",
+      "name": {
+        "es": "Periodoncia",
+        "en": "Periodontics"
+      },
+      "tagline": {
+        "es": "Encías sanas",
+        "en": "Healthy gums"
+      },
+      "summary": {
+        "es": "Prevención y tratamiento de las enfermedades de las encías y el hueso para evitar la pérdida de dientes.",
+        "en": "Prevention and treatment of gum and bone disease to avoid tooth loss."
+      }
+    },
+    {
+      "id": "blanqueamiento",
+      "image": "/media/results/veneers-after.jpg",
+      "name": {
+        "es": "Blanqueamiento Dental",
+        "en": "Teeth Whitening"
+      },
+      "tagline": {
+        "es": "Luz natural",
+        "en": "Natural light"
+      },
+      "summary": {
+        "es": "Aclaramos el tono de tus dientes de forma segura y supervisada, eliminando manchas para una sonrisa más luminosa.",
+        "en": "We lighten the shade of your teeth safely and under supervision, removing stains for a brighter smile."
+      }
+    },
+    {
+      "id": "exodoncia",
+      "image": "/media/images/case-implant.jpg",
+      "name": {
+        "es": "Exodoncia",
+        "en": "Tooth Extraction"
+      },
+      "tagline": {
+        "es": "Extracción cuidadosa",
+        "en": "Careful extraction"
+      },
+      "summary": {
+        "es": "Extracción de piezas dañadas con la técnica más cuidadosa para minimizar molestias y proteger tu salud bucal.",
+        "en": "Removal of damaged teeth with the most careful technique to minimise discomfort and protect your oral health."
+      }
+    },
+    {
+      "id": "cirugia",
+      "image": "/media/images/case-implant.jpg",
+      "name": {
+        "es": "Cirugía Oral",
+        "en": "Oral Surgery"
+      },
+      "tagline": {
+        "es": "Salud sin complicaciones",
+        "en": "Health without complications"
+      },
+      "summary": {
+        "es": "Procedimientos quirúrgicos seguros para tratar piezas, lesiones y quistes, restaurando tu salud bucal.",
+        "en": "Safe surgical procedures to treat teeth, lesions and cysts, restoring your oral health."
+      }
+    },
+    {
+      "id": "implantes",
+      "image": "/media/images/case-veneers.jpg",
+      "name": {
+        "es": "Implantes Dentales",
+        "en": "Dental Implants"
+      },
+      "tagline": {
+        "es": "Raíces que perduran",
+        "en": "Roots that last"
+      },
+      "summary": {
+        "es": "Sustituimos la raíz del diente perdido con implantes biocompatibles que se integran al hueso y lo preservan.",
+        "en": "We replace the root of a lost tooth with biocompatible implants that integrate with the bone and preserve it."
+      }
+    }
+  ],
   "patients": [],
   "videos": [],
-  "reels": [
-    "https://www.instagram.com/reel/DZUmJSPtz6I/",
-    "https://www.instagram.com/reel/DYwkSD1tcPZ/",
-    "https://www.instagram.com/reel/DYrEh2_t-rQ/",
-    "https://www.instagram.com/reel/DYNoDu0xJnr/",
-    "https://www.instagram.com/reel/DXmxzZEkb59/",
-    "https://www.instagram.com/reel/DXjJYzFgeMa/",
-    "https://www.instagram.com/reel/DW3uZ1cgGFO/",
-    "https://www.instagram.com/reel/DTu0WclDLEq/",
-    "https://www.instagram.com/reel/DZMUMahB4AA/",
-    "https://www.instagram.com/reel/DZXAi1atUN2/",
-    "https://www.instagram.com/reel/DZPMZLHBgKs/",
-    "https://www.instagram.com/reel/DY14Vt5u8hg/"
-  ],
   "team": [
     {
       "id": "prato",
@@ -62,8 +183,8 @@
         "en": "Clinical Director"
       },
       "credentials": {
-        "es": "Odontólogo con máster en Endodoncia y trauma dentoalveolar",
-        "en": "Dentist with a master's degree in Endodontics and dentoalveolar trauma"
+        "es": "Odontólogo con Máster en Endodoncia y Trauma Dentoalveolar",
+        "en": "Dentist with a Master's degree in Endodontics and Dentoalveolar Trauma"
       },
       "bio": {
         "es": "Cuenta con mas de 15 años de experiencia en el manejo de dolor agudo y patologías dentales, odontologia estetica y rehabilitación oral y funcional.",
@@ -83,7 +204,7 @@
         "en": "Lawyer"
       },
       "bio": {
-        "es": "Con amplia experiencia en la gestión estratégica y operativa de clínicas odontológicas, orientado al crecimiento sostenible del negocio, la excelencia en la atención al paciente y el desarrollo de equipos de alto rendimiento. Especializado en liderazgo organizacional, planificación comercial, captación y fidelización de pacientes.",
+        "es": "Con amplia experiencia en la gestión estratégica y operativa de clínicas odontológicas, orientada al crecimiento sostenible del negocio, la excelencia en la atención al paciente y el desarrollo de equipos de alto rendimiento. Especializada en liderazgo organizacional, planificación comercial, captación y fidelización de pacientes.",
         "en": "With extensive experience in the strategic and operational management of dental clinics, focused on sustainable business growth, excellence in patient care, and the development of high-performance teams. Specialized in organizational leadership, commercial planning, patient acquisition, and retention."
       }
     },
@@ -96,8 +217,8 @@
         "en": "Dentist"
       },
       "credentials": {
-        "es": "Odontóloga con especialización en Ortodoncia y Ortopedia Maxilar",
-        "en": "Dentist with a specialization in Orthodontics and Maxillofacial Orthopedics"
+        "es": "Odontóloga con Especialización en Ortodoncia y Ortopedia Maxilar",
+        "en": "Dentist with a Specialization in Orthodontics and Maxillofacial Orthopedics"
       },
       "bio": {
         "es": "Con amplia experiencia en la atención integral de pacientes mediante el desarrollo de tratamientos preventivos, interceptivos y correctivos. Así mismo en ortodoncia invisible, diseño digital con Exocad y odontología estética,  rehabilitación estética, operatoria dental, prótesis adhesiva, cirugía oral, manejo de patologías perirradiculares, ortopedia maxilar y ortodoncia.",
@@ -124,24 +245,24 @@
   ],
   "beforeAfter": [
     {
+      "before": "/media/results/PO_Before.jpeg",
+      "after": "/media/results/PO_After.jpeg"
+    },
+    {
+      "before": "/media/results/RE_Before.jpeg",
+      "after": "/media/results/RE_After.jpeg"
+    },
+    {
       "before": "/media/results/veneers-before.jpg",
       "after": "/media/results/veneers-after.jpg"
     },
     {
-      "before": "/results/case-2-before.svg",
-      "after": "/results/case-2-after.svg"
+      "before": "/media/results/RC_Before.jpeg",
+      "after": "/media/results/RC_After.jpeg"
     },
     {
-      "before": "/results/case-3-before.svg",
-      "after": "/results/case-3-after.svg"
-    },
-    {
-      "before": "/results/case-4-before.svg",
-      "after": "/results/case-4-after.svg"
-    },
-    {
-      "before": "/results/case-5-before.svg",
-      "after": "/results/case-5-after.svg"
+      "before": "/media/results/DI_Before.jpeg",
+      "after": "/media/results/DI_After.jpeg"
     }
   ],
   "business": {

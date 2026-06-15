@@ -49,15 +49,15 @@ export function Navbar() {
       <nav className="mx-auto flex h-[4.5rem] max-w-[1400px] items-center justify-between gap-6 px-6 lg:px-12">
         {content.logo.image ? (
           <Link to="/" aria-label="Luxury Smile Architects">
-            <img src={content.logo.image} alt="Luxury Smile Architects" className="h-8 w-auto" />
+            <img src={content.logo.image} alt="Luxury Smile Architects" className="h-10 w-auto" />
           </Link>
         ) : (
           <Link to="/" className="flex flex-col leading-none" aria-label="Luxury Smile Architects">
-            <span className="font-serif text-[1.2rem] leading-none text-foreground" style={{ fontVariationSettings: '"opsz" 144, "wght" 500' }}>
+            <span className="font-sans text-[1.6rem] font-medium leading-none text-foreground">
               LUXURY SMILE
             </span>
-            <span className="font-sans text-[0.5rem] font-semibold uppercase tracking-[0.4em] text-gold">
-              Architects
+            <span className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-gold">
+              Architects Madrid
             </span>
           </Link>
         )}

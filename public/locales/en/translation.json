@@ -48,72 +48,7 @@
     "kicker": "Treatments",
     "title": "Everything your smile needs",
     "subtitle": "Tap a treatment to see the detail.",
-    "waMessage": "Hi, I'd like more information about {{name}}.",
-    "items": [
-      {
-        "id": "estetica",
-        "name": "Dental Aesthetics",
-        "tagline": "A transformed smile",
-        "summary": "Veneers, smile design and more to improve your smile's harmony with a natural result that boosts your confidence.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/estetica-dental/"
-      },
-      {
-        "id": "rehabilitacion",
-        "name": "Oral Rehabilitation",
-        "tagline": "Function restored",
-        "summary": "We restore the function and aesthetics of your mouth with precision prosthetics, for a harmonious, lasting smile.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/rehabilitacion-oral/"
-      },
-      {
-        "id": "digital",
-        "name": "Digital Oral Rehabilitation",
-        "tagline": "Digital design",
-        "summary": "We scan your mouth and design your smile digitally, for a more comfortable, exact treatment. You see the result before we start.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/"
-      },
-      {
-        "id": "endodoncia",
-        "name": "Endodontics",
-        "tagline": "Save your tooth",
-        "summary": "Treatment of the inside of the tooth to remove the pain of a deep infection and preserve the piece.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/endodoncia/"
-      },
-      {
-        "id": "periodoncia",
-        "name": "Periodontics",
-        "tagline": "Healthy gums",
-        "summary": "Prevention and treatment of gum and bone disease to avoid tooth loss.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/periodoncia/"
-      },
-      {
-        "id": "blanqueamiento",
-        "name": "Teeth Whitening",
-        "tagline": "Natural light",
-        "summary": "We lighten the shade of your teeth safely and under supervision, removing stains for a brighter smile.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/blanqueamiento-dental/"
-      },
-      {
-        "id": "exodoncia",
-        "name": "Tooth Extraction",
-        "tagline": "Careful extraction",
-        "summary": "Removal of damaged teeth with the most careful technique to minimise discomfort and protect your oral health.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/exodoncia/"
-      },
-      {
-        "id": "cirugia",
-        "name": "Oral Surgery",
-        "tagline": "Health without complications",
-        "summary": "Safe surgical procedures to treat teeth, lesions and cysts, restoring your oral health.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/cirugia-oral/"
-      },
-      {
-        "id": "implantes",
-        "name": "Dental Implants",
-        "tagline": "Roots that last",
-        "summary": "We replace the root of a lost tooth with biocompatible implants that integrate with the bone and preserve it.",
-        "source": "https://www.doctormartinprato.com/rehabilitacion-oral-digital/implantes-dentales/"
-      }
-    ]
+    "waMessage": "Hi, I'd like more information about {{name}}."
   },
   "results": {
     "kicker": "Results",
@@ -218,11 +153,11 @@
       "address": "Calle de Recoletos 20",
       "area": "Salamanca district, 28001 Madrid",
       "phoneLabel": "Phone",
-      "phone": "+34 910 000 000",
+      "phone": "+34 659 716 995",
       "whatsappLabel": "WhatsApp",
       "whatsapp": "+34 689 440 906",
       "emailLabel": "Email",
-      "email": "hola@luxurysmile.es",
+      "email": "contacto@luxurysmilearchitects.com",
       "hoursLabel": "Hours",
       "hours": "Monday to Friday, 9:00 to 20:00",
       "directions": "Get directions"

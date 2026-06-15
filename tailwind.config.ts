@@ -34,7 +34,7 @@ export default {
       },
       fontFamily: {
         serif: ["'Fraunces Variable'", "Fraunces", "Georgia", "serif"],
-        sans: ["'Hanken Grotesk Variable'", "Hanken Grotesk", "system-ui", "sans-serif"],
+        sans: ["'Montserrat Variable'", "Montserrat", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         luxe: "0.28em",
