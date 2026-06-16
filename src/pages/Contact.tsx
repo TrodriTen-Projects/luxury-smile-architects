@@ -1,6 +1,10 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-number-input";
+// Bundle the country flags so they're served from our own origin instead of the
+// library's default external CDN (purecatamphetamine.github.io), which our
+// strict `img-src 'self'` CSP blocks. Keeps the field offline-safe & CSP-clean.
+import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
 import {
   MapPin,
@@ -229,6 +233,7 @@ export default function Contact() {
                   <Field id="phone" label={t("contact.form.phone")} error={errors.phone}>
                     <PhoneInput
                       id="phone"
+                      flags={flags}
                       international
                       defaultCountry="ES"
                       value={values.phone}
@@ -454,8 +459,6 @@ export default function Contact() {
           </SectionReveal>
 
           <GoogleReviews
-            placeId={content.business.placeId}
-            apiKey={content.business.googleApiKey}
             fallback={content.reviews}
             reviewsUrl={content.business.reviewsUrl}
             cta={t("contact.reviews.cta")}

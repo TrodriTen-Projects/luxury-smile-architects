@@ -21,19 +21,30 @@ function ReelVideo({ src, muted }: { src: string; muted: boolean }) {
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    const io = new IntersectionObserver(
+    // Two observers so a clip is already buffered by the time it's shown:
+    //  - `buffer` starts downloading well before the slide scrolls in (wide
+    //    margin: ~1.5 screens ahead horizontally for the carousel, ½ screen
+    //    vertically as the section approaches).
+    //  - `playback` only plays/pauses once the clip is actually on screen.
+    const buffer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          v.preload = "auto";
-          void v.play().catch(() => {});
-        } else {
-          v.pause();
-        }
+        if (entry.isIntersecting && v.preload !== "auto") v.preload = "auto";
+      },
+      { rootMargin: "400px 1200px" },
+    );
+    const playback = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) void v.play().catch(() => {});
+        else v.pause();
       },
       { threshold: 0.55 },
     );
-    io.observe(v);
-    return () => io.disconnect();
+    buffer.observe(v);
+    playback.observe(v);
+    return () => {
+      buffer.disconnect();
+      playback.disconnect();
+    };
   }, []);
 
   return (

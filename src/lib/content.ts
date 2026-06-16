@@ -45,7 +45,6 @@ export interface SiteContent {
   treatments: Treatment[];
   patients: string[];
   videos: string[];
-  reels: string[];
   team: TeamMember[];
   beforeAfter: { before: string; after: string }[];
   business: {
@@ -54,8 +53,6 @@ export interface SiteContent {
     reviewsUrl: string;
     rating: string | null;
     reviewsCount: string | null;
-    placeId: string | null;
-    googleApiKey: string | null;
   };
   reviews: Review[];
 }
@@ -161,7 +158,6 @@ export const DEFAULT_CONTENT: SiteContent = {
   ],
   patients: [],
   videos: [],
-  reels: [],
   team: [
     {
       id: "prato",
@@ -229,8 +225,6 @@ export const DEFAULT_CONTENT: SiteContent = {
       "https://www.google.com/maps/search/?api=1&query=Luxury%20Smile%20Architects%20Madrid",
     rating: null,
     reviewsCount: null,
-    placeId: null,
-    googleApiKey: null,
   },
   reviews: [],
 };
@@ -242,7 +236,6 @@ function merge(base: SiteContent, patch: Partial<SiteContent>): SiteContent {
     treatments: patch.treatments?.length ? patch.treatments : base.treatments,
     patients: patch.patients?.length ? patch.patients : base.patients,
     videos: patch.videos?.length ? patch.videos : base.videos,
-    reels: patch.reels?.length ? patch.reels : base.reels,
     team: patch.team?.length ? patch.team : base.team,
     beforeAfter: patch.beforeAfter?.length ? patch.beforeAfter : base.beforeAfter,
     business: { ...base.business, ...(patch.business ?? {}) },

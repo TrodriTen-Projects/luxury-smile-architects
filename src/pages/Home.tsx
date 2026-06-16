@@ -24,6 +24,10 @@ export default function Home() {
   const lang = i18n.resolvedLanguage ?? "es";
   const treatments = content.treatments;
   const patients = content.patients;
+  // Whitelist the content-driven CSS value (defense in depth).
+  const heroPos = /^[a-z0-9%.\s-]{1,24}$/i.test(content.hero.position)
+    ? content.hero.position
+    : "center";
 
   return (
     <>
@@ -41,7 +45,7 @@ export default function Home() {
             aria-hidden="true"
             fetchPriority="high"
             className="h-full w-full object-cover"
-            style={{ objectPosition: content.hero.position }}
+            style={{ objectPosition: heroPos }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-base/30 lg:bg-gradient-to-r lg:from-base lg:via-base/20 lg:to-transparent" />
           <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-base/70 to-transparent" />

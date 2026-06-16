@@ -39,13 +39,16 @@ Es el "panel de control" de la web. Editas este archivo + subes imágenes a
 | `logo.image` | Logo de la empresa (`null` = usa el logo de texto) |
 | `treatments` | Servicios: añade/quita aquí (id, imagen, y nombre/lema/resumen en ES/EN) |
 | `patients` | Fotos del carrusel "Sonrisas felices" (solo súbelas a `/media/patients`) |
-| `reels`/vídeos | Vídeos del carrusel: solo súbelos a `/media/video` |
+| vídeos | Vídeos del carrusel "Reels": solo súbelos a `/media/video` |
 | `team` | Personas del equipo (nombre, foto, cargo y bio en ES/EN) |
 | `beforeAfter` | Pares de fotos Antes/Después (página Resultados) |
 | `business.whatsapp` | Número de WhatsApp (lo usa "Más información" y Contacto) |
-| `business.placeId` + `business.googleApiKey` | Para importar reseñas de Google en vivo |
 | `business.reviewsUrl` | Enlace a tu ficha/reseñas de Google |
-| `reviews` | Reseñas escritas a mano (si no usas la importación de Google) |
+| `reviews` | Reseñas escritas a mano (las "de respaldo" si la importación en vivo no está configurada) |
+
+> 🔑 La **clave de API de Google ya NO va en `site.json`**. Por seguridad se
+> configura como variable de entorno en Vercel (ver §4.8); así nunca llega al
+> navegador del visitante.
 
 > ⚠️ Es un archivo **JSON**: respeta las comillas `"`, las comas y los corchetes.
 > Si algo se rompe, valida el archivo en [jsonlint.com](https://jsonlint.com).
@@ -116,16 +119,17 @@ Todo en un solo sitio: `site.json` → array **`treatments`**. Añade o borra un
 3. Si lo dejas vacío (`[]`), se muestran marcos vacíos. Con fotos, el carrusel
    **se mueve solo** (autoplay).
 
-### 4.5 Reels de Instagram
-Pega los **enlaces** de tus reels en `site.json` → `reels`:
-```json
-"reels": [
-  "https://www.instagram.com/reel/XXXXXXXXX/",
-  "https://www.instagram.com/reel/YYYYYYYYY/"
-]
-```
-- Con enlaces → se incrustan los reels oficiales de Instagram.
-- Vacío (`[]`) → se muestran los vídeos locales de `public/media/video/`.
+### 4.5 Vídeos del carrusel (sección "Reels")
+El carrusel de vídeos reproduce los archivos **locales** que subas a
+`public/media/video/` (formato vertical 9:16, `.mp4`). No hay que tocar
+`site.json`: se indexan solos al hacer `dev`/`build`.
+
+- Para **añadir** un vídeo: súbelo a `public/media/video/`.
+- Para **quitarlo**: bórralo de esa carpeta.
+- El botón "Síguenos en Instagram" enlaza a tu perfil
+  (`src/data/instagram.ts`). Es solo un enlace externo: **ya no se incrustan**
+  publicaciones de Instagram en la web (más rápido y más privado para el
+  visitante).
 
 ### 4.6 Antes / Después (página Resultados)
 Cada caso necesita **2 fotos del mismo encuadre** (antes y después).
@@ -156,23 +160,43 @@ Es muy sencillo: todo en un solo sitio.
    - Para **quitar** a alguien: borra su bloque (y la coma que lo separa).
    - El `id` debe ser único y sin espacios.
 
-### 4.8 Reseñas de Google (importarlas en vivo)
-1. En **Google Cloud Console** crea un proyecto y habilita **Places API** y
-   **Maps JavaScript API**.
-2. Crea una **Clave de API** y restríngela a tu dominio.
+### 4.8 Reseñas de Google (importarlas en vivo, de forma segura)
+
+> **¿Por qué así?** Una clave de API que viaja al navegador la puede copiar
+> cualquiera (mirando el código de la página) y gastar tu cuota o cobrarte. Por
+> eso la clave vive **solo en el servidor**: el navegador llama a `/api/reviews`
+> (función serverless en Vercel) y es esa función la que usa la clave para
+> hablar con Google. La clave **nunca** se descarga al cliente.
+
+**Pasos (una sola vez):**
+1. En **Google Cloud Console** crea un proyecto y habilita **Places API**
+   (la *Maps JavaScript API* ya no hace falta: el mapa de Contacto es un iframe
+   sin clave).
+2. Crea una **Clave de API**. Restríngela a **Places API** y ponle un límite de
+   cuota/presupuesto diario (defensa ante abuso).
 3. Consigue tu **Place ID** en el "Place ID Finder" de Google.
-4. Ponlos en `site.json`:
-   ```json
-   "business": { "placeId": "ChIJ....", "googleApiKey": "AIza...." }
-   ```
-   Las reseñas aparecen en mini-tarjetas (Google muestra hasta ~5).
-- Sin esos datos, puedes escribir reseñas a mano en `reviews`:
-  ```json
-  "reviews": [
-    { "author": "María G.", "rating": 5, "text": "Increíble experiencia…", "date": "Hace 2 semanas" }
-  ]
-  ```
-- O simplemente se muestra el botón "Ver reseñas en Google" (`business.reviewsUrl`).
+4. En **Vercel → tu proyecto → Settings → Environment Variables**, añade dos
+   variables (para *Production* y *Preview*):
+
+   | Nombre | Valor |
+   | --- | --- |
+   | `GOOGLE_PLACES_API_KEY` | tu clave `AIza...` |
+   | `GOOGLE_PLACE_ID` | tu Place ID `ChIJ...` |
+
+   > ⚠️ **No** uses el prefijo `VITE_` ni las pongas en `site.json`: cualquier
+   > cosa con `VITE_` se empaqueta en el sitio público. (Para probar en local,
+   > crea un archivo `.env` partiendo de `.env.example`; ya está en `.gitignore`.)
+5. Haz *Redeploy*. Las reseñas aparecen en mini-tarjetas (hasta ~5) en Contacto.
+
+**Si NO configuras la clave** (o Google no responde), la web no se rompe:
+muestra las reseñas "de respaldo" que escribas a mano en `reviews` y, si no hay
+ninguna, el botón "Ver reseñas en Google" (`business.reviewsUrl`).
+
+```json
+"reviews": [
+  { "author": "María G.", "rating": 5, "text": "Increíble experiencia…", "date": "Hace 2 semanas" }
+]
+```
 
 ### 4.9 Datos de contacto (teléfono, email, WhatsApp, horario, dirección)
 - **WhatsApp**: en `site.json` → `business.whatsapp` (lo usan los botones).
@@ -229,9 +253,12 @@ src/                        <- código (no hace falta tocarlo)
 ## 8. Notas técnicas
 
 - **Stack:** Vite + React + TypeScript + Tailwind CSS + react-i18next.
-- **Seguridad:** cabeceras y *Content Security Policy* configuradas en
-  `vite.config.ts` y `vercel.json`; formulario de contacto con validación y
-  saneo anti-XSS. Si añades servicios externos nuevos, habrá que permitirlos en
-  la CSP.
+- **Seguridad:** *Content Security Policy* estricta (`script-src 'self'`, sin
+  scripts de terceros) y cabeceras de seguridad (HSTS, X-Frame-Options,
+  Referrer-Policy, Permissions-Policy…) en `vite.config.ts` y `vercel.json`;
+  *Subresource Integrity* en los bundles propios; formulario de contacto con
+  validación (Zod) y saneo anti-XSS (DOMPurify). La clave de Google vive solo en
+  el servidor (`/api/reviews`, ver §4.8). Si añades servicios externos nuevos,
+  habrá que permitirlos explícitamente en la CSP.
 - **Marca:** fondo claro, textos en negro y dorado; tipografías Fraunces +
   Hanken Grotesk (incluidas, sin depender de Google Fonts).

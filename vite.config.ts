@@ -4,26 +4,24 @@ import { sri } from "vite-plugin-sri3";
 import path from "node:path";
 
 /**
- * Hardened Content Security Policy that allows the external integrations we use
- * (Instagram embeds, remote imagery) while keeping script execution tight.
- * - script-src: our own bundles + Instagram's embed.js
- * - frame-src:  Instagram/Facebook iframes (reel embeds)
- * - img/media-src https: -> remote photos & Instagram CDN
- * - style-src 'unsafe-inline' -> Framer Motion + the Instagram embed inject styles
+ * Hardened Content Security Policy. No third-party scripts run on the site, so
+ * `script-src` stays locked to 'self'. The only external origin we allow is the
+ * Google Maps embed *iframe* on the Contact page (`frame-src`); it needs no API
+ * key. Google reviews come through our own `/api/reviews` serverless function,
+ * so `connect-src 'self'` is enough — the API key never reaches the browser.
+ * `style-src 'unsafe-inline'` is required by Framer Motion's inline styles.
  * frame-ancestors / HSTS are header-only directives, so they live in vercel.json.
  */
-const IG = "https://www.instagram.com https://platform.instagram.com";
-const GMAPS = "https://maps.googleapis.com https://maps.gstatic.com";
 const CSP = [
   "default-src 'self'",
   "base-uri 'self'",
-  `script-src 'self' ${IG} ${GMAPS}`,
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https:",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline'", // required by Framer Motion inline styles
+  "img-src 'self' data: blob:",
   "font-src 'self' data:",
-  `connect-src 'self' ${IG} https://graph.instagram.com https://i.instagram.com ${GMAPS}`,
-  "media-src 'self' https: blob:",
-  `frame-src ${IG} https://www.facebook.com https://www.google.com https://maps.google.com`,
+  "connect-src 'self'", // same-origin only (locales, site.json, /api/reviews)
+  "media-src 'self' blob:",
+  "frame-src https://www.google.com https://maps.google.com", // Maps embed only
   "object-src 'none'",
   "form-action 'self'",
   "worker-src 'self' blob:",

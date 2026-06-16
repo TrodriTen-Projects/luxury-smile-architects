@@ -1,5 +1,5 @@
 {
-  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). TRATAMIENTOS: añade o quita servicios en el array 'treatments' (cada uno: id único, image, y name/tagline/summary en es/en); aparecen solos en la página de Tratamientos, en el inicio y en el desplegable de Contacto. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS GOOGLE: pon business.placeId y business.googleApiKey para importarlas en vivo; si no, usa el array reviews o reviewsUrl. beforeAfter: pares antes/después.",
+  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). TRATAMIENTOS: añade o quita servicios en el array 'treatments' (cada uno: id único, image, y name/tagline/summary en es/en); aparecen solos en la página de Tratamientos, en el inicio y en el desplegable de Contacto. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS GOOGLE: la clave NO va aquí; configúrala en Vercel como variables de entorno GOOGLE_PLACES_API_KEY y GOOGLE_PLACE_ID (las lee /api/reviews en el servidor). Mientras tanto, escribe reseñas a mano en 'reviews' o usa el enlace 'reviewsUrl'. beforeAfter: pares antes/después.",
   "hero": {
     "image": "/media/hero-main.jpg",
     "fallback": "/media/images/portrait-01.jpg",
@@ -270,9 +270,7 @@
     "whatsapp": "+34689440906",
     "reviewsUrl": "https://www.google.com/maps/search/?api=1&query=Luxury%20Smile%20Architects%20Madrid",
     "rating": null,
-    "reviewsCount": null,
-    "placeId": null,
-    "googleApiKey": null
+    "reviewsCount": null
   },
   "reviews": []
 }
