@@ -33,7 +33,7 @@
   }
 
   html {
-    font-size: 20px;
+    font-size: 18px;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
@@ -43,6 +43,41 @@
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern", "liga", "calt";
     overflow-x: hidden;
+  }
+
+  .embla__container {
+    backface-visibility: hidden;
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
+  }
+
+  /* 
+   * react-phone-number-input overrides 
+   * Matches the luxury aesthetic of the other input fields.
+   */
+  .PhoneInputInput {
+    @apply flex-1 bg-transparent border-none p-0 m-0 outline-none focus:ring-0 text-base font-sans text-foreground placeholder:text-muted/70 min-w-0;
+  }
+
+  .PhoneInputCountry {
+    @apply mr-3 flex items-center shrink-0 border-none bg-transparent;
+  }
+
+  .PhoneInputCountrySelect {
+    @apply cursor-pointer bg-surface text-foreground;
+  }
+
+  .PhoneInputCountryIcon {
+    @apply w-6 h-4 border border-border/50 shadow-sm overflow-hidden;
+  }
+
+  .PhoneInputCountryIconImg {
+    @apply w-full h-full object-cover;
+  }
+
+  .PhoneInputCountrySelectArrow {
+    @apply opacity-50 ml-2 w-1.5 h-1.5 border-r border-b border-foreground transform rotate-45 mb-1;
   }
 
   /* Faint paper grain over the warm white */

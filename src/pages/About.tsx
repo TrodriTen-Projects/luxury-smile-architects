@@ -6,11 +6,9 @@ import { MapPin, Clock, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/SectionReveal";
-import { useContent } from "@/lib/content";
 
 export default function About() {
   const { t } = useTranslation();
-  const content = useContent();
 
   const [activeLocation, setActiveLocation] = useState<"clinic" | "lab" | null>(null);
 
@@ -54,45 +52,27 @@ export default function About() {
       </section>
 
       {/* Identity Boxes */}
-      <section className="bg-foreground py-24 text-base lg:py-32">
+      <section className="border-t border-border py-24 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <SectionReveal className="text-center">
-            <h2 className="display text-[clamp(2rem,4vw,3.5rem)] text-gold uppercase">
+            <h2 className="display text-[clamp(2rem,4vw,3.5rem)] uppercase text-gold">
               {t("about.identity.title")}
             </h2>
           </SectionReveal>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <SectionReveal delay={0}>
-              <div className="h-full bg-gold p-8 sm:p-10 text-center flex flex-col gap-6">
-                <h3 className="font-sans text-xl font-bold uppercase tracking-widest text-foreground">
-                  {t("about.identity.box1Title")}
-                </h3>
-                <p className="font-sans text-sm sm:text-base leading-relaxed text-foreground/90">
-                  {t("about.identity.box1Text")}
-                </p>
-              </div>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <div className="h-full bg-gold p-8 sm:p-10 text-center flex flex-col gap-6">
-                <h3 className="font-sans text-xl font-bold uppercase tracking-widest text-foreground">
-                  {t("about.identity.box2Title")}
-                </h3>
-                <p className="font-sans text-sm sm:text-base leading-relaxed text-foreground/90">
-                  {t("about.identity.box2Text")}
-                </p>
-              </div>
-            </SectionReveal>
-            <SectionReveal delay={0.2}>
-              <div className="h-full bg-gold p-8 sm:p-10 text-center flex flex-col gap-6">
-                <h3 className="font-sans text-xl font-bold uppercase tracking-widest text-foreground">
-                  {t("about.identity.box3Title")}
-                </h3>
-                <p className="font-sans text-sm sm:text-base leading-relaxed text-foreground/90">
-                  {t("about.identity.box3Text")}
-                </p>
-              </div>
-            </SectionReveal>
+            {([1, 2, 3] as const).map((n, i) => (
+              <SectionReveal key={n} delay={i * 0.1}>
+                <div className="flex h-full flex-col gap-6 rounded-[1.75rem] border border-gold/60 bg-surface p-8 text-center shadow-[0_12px_34px_-20px_rgba(0,0,0,0.4)] sm:p-10">
+                  <h3 className="font-sans text-xl font-bold uppercase tracking-widest text-foreground">
+                    {t(`about.identity.box${n}Title`)}
+                  </h3>
+                  <p className="font-sans text-sm leading-relaxed text-muted sm:text-[1.05rem]">
+                    {t(`about.identity.box${n}Text`)}
+                  </p>
+                </div>
+              </SectionReveal>
+            ))}
           </div>
         </div>
       </section>
@@ -166,14 +146,14 @@ export default function About() {
       </section>
 
       {/* Financing */}
-      <section className="border-t border-border bg-foreground px-6 py-16 text-base lg:px-12 lg:py-24">
+      <section className="border-t border-border bg-foreground px-6 py-16 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-[1400px]">
           <SectionReveal className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-24">
             <div>
-              <h2 className="display text-[clamp(2.4rem,5.5vw,4.5rem)] text-base">
+              <h2 className="display text-[clamp(2.4rem,5.5vw,4.5rem)] text-[hsl(var(--base))]">
                 {t("about.financeTitle")}
               </h2>
-              <p className="mt-6 max-w-2xl text-pretty font-sans text-xl font-light leading-relaxed text-base/80">
+              <p className="mt-6 max-w-2xl text-pretty font-sans text-xl font-light leading-relaxed text-[hsl(var(--base))]/80">
                 {t("about.financeDesc")}
               </p>
             </div>

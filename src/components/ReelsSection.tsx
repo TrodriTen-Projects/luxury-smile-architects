@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Autoplay from "embla-carousel-autoplay";
 import { Instagram } from "lucide-react";

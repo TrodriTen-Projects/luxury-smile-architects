@@ -47,45 +47,52 @@ export function Navbar() {
           : "border-b border-transparent",
       )}
     >
-      <nav className="mx-auto flex h-[4.5rem] max-w-[1400px] items-center justify-between gap-6 px-6 lg:px-12">
-        {content.logo.image ? (
-          <Link to="/" aria-label="Luxury Smile Architects">
-            <img src={content.logo.image} alt="Luxury Smile Architects" className="h-10 w-auto" />
-          </Link>
-        ) : (
-          <Link to="/" className="flex flex-col leading-none" aria-label="Luxury Smile Architects">
-            <span className="font-sans text-[1.6rem] font-medium leading-none text-foreground">
-              LUXURY SMILE
-            </span>
-            <span className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-gold">
-              Architects Madrid
-            </span>
-          </Link>
-        )}
+      <nav className="mx-auto flex h-[4.5rem] w-full max-w-[1400px] items-center justify-between gap-4 px-4 lg:px-8 xl:px-12">
+        {/* Left: Logo & Links */}
+        <div className="flex items-center gap-8 lg:gap-12 xl:gap-16">
+          <div className="flex shrink-0 items-center">
+            {content.logo.image ? (
+              <Link to="/" aria-label="Luxury Smile Architects" className="shrink-0">
+                <img src={content.logo.image} alt="Luxury Smile Architects" className="h-6 w-auto lg:h-7 xl:h-8" />
+              </Link>
+            ) : (
+              <Link to="/" className="flex shrink-0 flex-col leading-tight" aria-label="Luxury Smile Architects">
+                <span className="whitespace-nowrap font-sans text-lg font-medium tracking-wide text-foreground lg:text-xl xl:text-2xl">
+                  LUXURY SMILE
+                </span>
+                <span className="whitespace-nowrap font-sans text-[0.55rem] font-semibold uppercase tracking-[0.3em] text-gold lg:text-[0.6rem] xl:text-[0.65rem] xl:tracking-[0.4em]">
+                  Architects Madrid
+                </span>
+              </Link>
+            )}
+          </div>
 
-        <ul className="hidden items-center gap-10 lg:flex">
-          {LINKS.map((link) => (
-            <li key={link.to}>
-              <NavLink
-                to={link.to}
-                className={({ isActive }) =>
-                  cn(
-                    "link-underline font-sans text-[0.72rem] font-medium uppercase tracking-[0.2em] transition-colors",
-                    isActive ? "text-gold" : "text-muted hover:text-foreground",
-                  )
-                }
-              >
-                {t(link.key)}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+          {/* Links */}
+          <ul className="hidden items-center gap-4 lg:flex lg:gap-6 xl:gap-10 shrink-0">
+            {LINKS.map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) =>
+                    cn(
+                      "link-underline whitespace-nowrap font-sans text-[0.65rem] font-medium uppercase tracking-[0.15em] transition-colors xl:text-[0.72rem] xl:tracking-[0.2em]",
+                      isActive ? "text-gold" : "text-muted hover:text-foreground",
+                    )
+                  }
+                >
+                  {t(link.key)}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        <div className="hidden items-center gap-7 lg:flex">
+        {/* Right: Language & Button */}
+        <div className="hidden shrink-0 items-center justify-end gap-4 lg:flex lg:gap-6">
           <LanguageSwitcher />
           <Link
             to="/contacto"
-            className="link-underline font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-gold"
+            className="link-underline whitespace-nowrap font-sans text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-gold xl:text-[0.72rem] xl:tracking-[0.2em]"
           >
             {t("nav.book")}
           </Link>

@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import {
   MapPin,
   Phone,
@@ -225,7 +227,18 @@ export default function Contact() {
                 </div>
                 <div className="grid gap-7 sm:grid-cols-2">
                   <Field id="phone" label={t("contact.form.phone")} error={errors.phone}>
-                    <Input id="phone" type="tel" inputMode="tel" autoComplete="tel" value={values.phone} aria-invalid={!!errors.phone} onChange={(e) => set("phone", e.target.value)} />
+                    <PhoneInput
+                      id="phone"
+                      international
+                      defaultCountry="ES"
+                      value={values.phone}
+                      onChange={(val) => set("phone", val || "")}
+                      className={cn(
+                        "flex h-11 w-full rounded-none border-b border-border bg-transparent transition-colors",
+                        "focus-within:border-gold",
+                        errors.phone && "border-red-400/70"
+                      )}
+                    />
                   </Field>
                   <Field id="email" label={t("contact.form.email")} error={errors.email}>
                     <Input id="email" type="email" autoComplete="email" value={values.email} aria-invalid={!!errors.email} onChange={(e) => set("email", e.target.value)} />

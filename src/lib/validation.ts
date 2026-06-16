@@ -1,7 +1,5 @@
 import { z } from "zod";
-
-// Permissive but strict-enough international phone: digits, spaces, +, -, ()
-const phoneRegex = /^[+]?[\d\s().-]{7,20}$/;
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 /**
  * Factory so error messages can be localised via i18next at call time.
@@ -21,7 +19,9 @@ export function buildContactSchema(t: (key: string) => string) {
     phone: z
       .string()
       .trim()
-      .regex(phoneRegex, t("contact.form.invalidPhone")),
+      .refine((val) => isValidPhoneNumber(val), {
+        message: t("contact.form.invalidPhone"),
+      }),
     email: z
       .string()
       .trim()
