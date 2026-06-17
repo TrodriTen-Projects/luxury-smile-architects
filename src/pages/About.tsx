@@ -10,7 +10,7 @@ import { SectionReveal } from "@/components/SectionReveal";
 export default function About() {
   const { t } = useTranslation();
 
-  const [activeLocation, setActiveLocation] = useState<"clinic" | "lab" | null>(null);
+  const [activeLocation, setActiveLocation] = useState<"clinic" | "lab" | "finance" | null>(null);
 
   return (
     <>
@@ -159,7 +159,9 @@ export default function About() {
             </div>
             <div className="flex justify-start lg:justify-end">
               <Button asChild variant="primary" className="bg-gold text-foreground hover:bg-gold-deep hover:text-base border-none px-6">
-                <Link to="/contacto">{t("about.financeCta")}</Link>
+                <button type="button" onClick={() => setActiveLocation("finance")}>
+                  {t("about.financeCta")}
+                </button>
               </Button>
             </div>
           </SectionReveal>
@@ -225,6 +227,63 @@ export default function About() {
             <Button variant="outline" className="px-4" onClick={() => setActiveLocation(null)}>
               {t("common.back")}
             </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={activeLocation === "finance"} onOpenChange={(open) => !open && setActiveLocation(null)}>
+        <DialogContent className="max-w-2xl p-8 max-h-[90vh] overflow-y-auto">
+          <DialogTitle className="text-2xl font-serif text-foreground mb-2">
+            {t("about.financeModal.title")}
+          </DialogTitle>
+          <div className="text-gold font-sans text-xs uppercase tracking-widest mb-6">
+            {t("about.financeModal.subtitle")}
+          </div>
+          
+          <DialogDescription className="text-sm font-sans text-foreground leading-relaxed mb-8">
+            {t("about.financeModal.intro")}
+          </DialogDescription>
+
+          <div className="space-y-8">
+            <div>
+              <h3 className="font-serif text-lg text-foreground mb-4">{t("about.financeModal.howTitle")}</h3>
+              <ul className="space-y-4">
+                {(t("about.financeModal.howSteps", { returnObjects: true }) as string[]).map((step, i) => (
+                  <li key={i} className="flex gap-3 items-start">
+                    <span className="font-sans text-sm text-foreground/80 leading-relaxed"><strong className="text-foreground">{i + 1}.</strong> {step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg text-foreground mb-4">{t("about.financeModal.timeTitle")}</h3>
+              <p className="font-sans text-sm text-foreground/80 leading-relaxed">
+                {t("about.financeModal.timeText")}
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-lg text-foreground mb-4">{t("about.financeModal.importantTitle")}</h3>
+              <ul className="space-y-3">
+                {(t("about.financeModal.importantList", { returnObjects: true }) as string[]).map((item, i) => (
+                  <li key={i} className="flex gap-3 items-start">
+                    <span className="font-sans text-sm text-foreground/80 leading-relaxed">• {item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-10 pt-8 border-t border-border text-center">
+            <p className="font-serif text-gold text-lg italic mb-8">{t("about.financeModal.footer")}</p>
+            <div className="flex gap-3 sm:w-2/3 mx-auto">
+              <Button asChild variant="primary" className="flex-1">
+                <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("about.financeModal.cta")}</Link>
+              </Button>
+              <Button variant="outline" className="px-4" onClick={() => setActiveLocation(null)}>
+                {t("common.back")}
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

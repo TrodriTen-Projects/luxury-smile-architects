@@ -47,6 +47,7 @@ const EMPTY = {
   source: "",
   message: "",
   consent: false,
+  needsFinancing: false,
   company: "",
 };
 
@@ -90,6 +91,7 @@ export default function Contact() {
       source: sanitizeLine(values.source, 60),
       message: sanitizeBlock(values.message, 2000),
       consent: values.consent,
+      needsFinancing: values.needsFinancing,
       company: sanitizeLine(values.company, 0),
     };
     if (cleaned.company) {
@@ -114,10 +116,10 @@ export default function Contact() {
         ? "¡Hola! Me gustaría solicitar una cita. Mis datos son:"
         : "Hello! I would like to request an appointment. My details are:";
 
-      // Strip trailing punctuation so WhatsApp's markdown parser reliably applies bold
+      // Strip trailing punctuation so the label is clean
       const boldLabel = (key: string) => {
         const text = t(key).replace(/[:?]/g, "").trim();
-        return `*${text}*:`;
+        return `${text}:`;
       };
 
       const body = [
@@ -128,7 +130,8 @@ export default function Contact() {
         `${boldLabel("contact.form.email")} ${d.email}`,
         `${boldLabel("contact.form.treatment")} ${d.treatment}`,
         `${boldLabel("contact.form.source")} ${d.source}`,
-        d.message ? `\n${boldLabel("contact.form.message")}\n_${d.message}_` : null,
+        d.needsFinancing ? `\n${lang === "es" ? "Financiación" : "Financing"}: ${lang === "es" ? "Sí, necesito información." : "Yes, I need information."}` : null,
+        d.message ? `\n${boldLabel("contact.form.message")}\n${d.message}` : null,
       ]
         .filter((line) => line !== null)
         .join("\n");
@@ -323,6 +326,20 @@ export default function Contact() {
                 <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
                   <label htmlFor="company">Company</label>
                   <input id="company" type="text" tabIndex={-1} autoComplete="off" value={values.company} onChange={(e) => set("company", e.target.value)} />
+                </div>
+
+                <div className="flex flex-col items-start gap-1 mb-2 mt-4">
+                  <label className="flex items-center gap-3 font-sans text-sm text-foreground cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={values.needsFinancing} 
+                      onChange={(e) => set("needsFinancing", e.target.checked)}
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-gold cursor-pointer" 
+                    />
+                    <span>
+                      {lang === "es" ? "Deseo recibir información sobre el plan de financiación" : "I would like to receive information about the financing plan"}
+                    </span>
+                  </label>
                 </div>
 
                 <div className="flex flex-col items-start gap-1">

@@ -119,7 +119,29 @@
     "labDesc": "High-tech in-house laboratory where we design and customize each piece by hand with maximum precision.",
     "financeTitle": "Financing Program",
     "financeDesc": "We believe excellence should be accessible. We offer personalized financing plans so you can invest in your smile with complete peace of mind.",
-    "financeCta": "Check plans"
+    "financeCta": "Check plans",
+    "financeModal": {
+      "title": "FINANCING PLAN",
+      "subtitle": "Luxury Smile Architects",
+      "intro": "At Luxury Smile Architects, we want to make accessing the smile of your dreams easier. That is why we offer you a simple, fast, and secure financing system.",
+      "howTitle": "How does it work?",
+      "howSteps": [
+        "The patient must provide the following documentation: Valid National Identity Document (DNI or NIE) and Latest payslip.",
+        "As a general requirement, the applicant must prove a minimum seniority of one (1) year at their current workplace.",
+        "A financing application form will be completed with the personal and employment data required by the financial institution.",
+        "Once all documentation is submitted, the application will be sent for review."
+      ],
+      "timeTitle": "Response time",
+      "timeText": "Financing approval is usually obtained within approximately 24 hours, subject to validation and analysis by the financial institution.",
+      "importantTitle": "Important information",
+      "importantList": [
+        "Approval is subject to the solvency study carried out by the collaborating financial institution.",
+        "Financing may vary depending on the economic profile of the applicant and the conditions in force at the time of application.",
+        "Our team will be available to accompany you throughout the process and answer any questions."
+      ],
+      "footer": "We transform smiles, also facilitating the path to achieve them",
+      "cta": "Request Financing"
+    }
   },
   "why": {
     "kicker": "Why choose us",

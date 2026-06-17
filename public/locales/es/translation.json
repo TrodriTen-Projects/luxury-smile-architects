@@ -119,7 +119,29 @@
     "labDesc": "Laboratorio in-house de alta tecnología donde diseñamos y personalizamos cada pieza a mano con la máxima precisión.",
     "financeTitle": "Programa de financiación",
     "financeDesc": "Creemos que la excelencia debe ser accesible. Ofrecemos planes de financiación personalizados para que inviertas en tu sonrisa con total tranquilidad.",
-    "financeCta": "Consultar planes"
+    "financeCta": "Consultar planes",
+    "financeModal": {
+      "title": "PLAN DE FINANCIACIÓN",
+      "subtitle": "Luxury Smile Architects",
+      "intro": "En Luxury Smile Architects queremos que acceder a la sonrisa de tus sueños sea más fácil. Por eso, ponemos a tu disposición un sistema de financiación sencillo, rápido y seguro.",
+      "howTitle": "¿Cómo funciona?",
+      "howSteps": [
+        "El paciente deberá presentar la siguiente documentación: Documento Nacional de Identidad (DNI o NIE) vigente y Última nómina.",
+        "Como requisito general, el solicitante deberá acreditar una antigüedad mínima de un (1) año en su actual lugar de trabajo.",
+        "Se completará un formulario de solicitud de financiación con los datos personales y laborales requeridos por la entidad financiera.",
+        "Una vez presentada toda la documentación, la solicitud será enviada para su estudio."
+      ],
+      "timeTitle": "Tiempo de respuesta",
+      "timeText": "La aprobación de la financiación suele obtenerse en un plazo aproximado de 24 horas, sujeto a la validación y análisis por parte de la entidad financiera.",
+      "importantTitle": "Información importante",
+      "importantList": [
+        "La aprobación está sujeta al estudio de solvencia realizado por la entidad financiera colaboradora.",
+        "La financiación puede variar según el perfil económico del solicitante y las condiciones vigentes en el momento de la solicitud.",
+        "Nuestro equipo estará disponible para acompañarte durante todo el proceso y resolver cualquier duda."
+      ],
+      "footer": "Transformamos sonrisas, facilitando también el camino para conseguirlas",
+      "cta": "Solicitar Financiación"
+    }
   },
   "why": {
     "kicker": "Por qué elegirnos",

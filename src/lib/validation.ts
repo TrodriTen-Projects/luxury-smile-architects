@@ -33,6 +33,7 @@ export function buildContactSchema(t: (key: string) => string) {
     consent: z.literal(true, {
       errorMap: () => ({ message: t("contact.form.consentRequired") }),
     }),
+    needsFinancing: z.boolean().default(false),
     // Honeypot — must stay empty. Bots tend to fill every field.
     company: z.string().max(0).optional().or(z.literal("")),
   });
