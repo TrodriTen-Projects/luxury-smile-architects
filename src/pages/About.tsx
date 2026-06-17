@@ -187,7 +187,7 @@ export default function About() {
               <span className="font-sans text-sm text-foreground">{t("contact.clinic.hours")}</span>
             </div>
           </div>
-          <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="primary" className="flex-1">
               <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
             </Button>
@@ -220,7 +220,7 @@ export default function About() {
               <span className="font-sans text-sm text-foreground">Ajustes estéticos en tiempo real.</span>
             </li>
           </ul>
-          <div className="mt-2 flex gap-3">
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="primary" className="flex-1">
               <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
             </Button>
@@ -276,7 +276,7 @@ export default function About() {
 
           <div className="mt-10 pt-8 border-t border-border text-center">
             <p className="font-serif text-gold text-lg italic mb-8">{t("about.financeModal.footer")}</p>
-            <div className="flex gap-3 sm:w-2/3 mx-auto">
+            <div className="flex flex-col gap-3 sm:w-2/3 sm:flex-row mx-auto">
               <Button asChild variant="primary" className="flex-1">
                 <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("about.financeModal.cta")}</Link>
               </Button>
