@@ -1,5 +1,5 @@
 {
-  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). TRATAMIENTOS: añade o quita servicios en el array 'treatments' (cada uno: id único, image, y name/tagline/summary en es/en); aparecen solos en la página de Tratamientos, en el inicio y en el desplegable de Contacto. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS GOOGLE: la clave NO va aquí; configúrala en Vercel como variables de entorno GOOGLE_PLACES_API_KEY y GOOGLE_PLACE_ID (las lee /api/reviews en el servidor). Mientras tanto, escribe reseñas a mano en 'reviews' o usa el enlace 'reviewsUrl'. beforeAfter: pares antes/después.",
+  "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). TRATAMIENTOS: añade o quita servicios en el array 'treatments' (cada uno: id único, image, y name/tagline/summary en es/en); aparecen solos en la página de Tratamientos, en el inicio y en el desplegable de Contacto. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS: son manuales. Copia tus reseñas reales de Google en el array 'reviews' (cada una: author, rating de 1 a 5, text y date) y pon hasta unas 10. El contador de arriba se edita en business.rating (p. ej. '4,9') y business.reviewsCount (p. ej. '127 reseñas'); pon null en ambos para ocultarlo. 'reviewsUrl' es el enlace a tu ficha de Google. Ya no hay clave de API ni función de servidor. beforeAfter: pares antes/después.",
   "hero": {
     "image": "/media/hero-main.jpg",
     "fallback": "/media/images/portrait-01.jpg",
@@ -11,7 +11,7 @@
   "treatments": [
     {
       "id": "estetica",
-      "image": "/media/images/portrait-01.jpg",
+      "image": "/media/images/ES_treatment.jpg",
       "name": {
         "es": "Estética Dental",
         "en": "Dental Aesthetics"
@@ -27,7 +27,7 @@
     },
     {
       "id": "rehabilitacion",
-      "image": "/media/images/case-implant.jpg",
+      "image": "/media/images/RO_treatment.jpg",
       "name": {
         "es": "Rehabilitación Oral",
         "en": "Oral Rehabilitation"
@@ -43,7 +43,7 @@
     },
     {
       "id": "digital",
-      "image": "/media/images/case-veneers.jpg",
+      "image": "/media/images/DI_treatment.jpg",
       "name": {
         "es": "Rehabilitación Oral Digital",
         "en": "Digital Oral Rehabilitation"
@@ -59,7 +59,7 @@
     },
     {
       "id": "endodoncia",
-      "image": "/media/results/veneers-before.jpg",
+      "image": "/media/images/EN_treatment.jpg",
       "name": {
         "es": "Endodoncia",
         "en": "Endodontics"
@@ -75,7 +75,7 @@
     },
     {
       "id": "periodoncia",
-      "image": "/media/results/veneers-before.jpg",
+      "image": "/media/images/PR_treatment.jpg",
       "name": {
         "es": "Periodoncia",
         "en": "Periodontics"
@@ -91,7 +91,7 @@
     },
     {
       "id": "blanqueamiento",
-      "image": "/media/results/veneers-after.jpg",
+      "image": "/media/images/BL_treatment.jpg",
       "name": {
         "es": "Blanqueamiento Dental",
         "en": "Teeth Whitening"
@@ -107,7 +107,7 @@
     },
     {
       "id": "exodoncia",
-      "image": "/media/images/case-implant.jpg",
+      "image": "/media/images/EX_treatment.jpg",
       "name": {
         "es": "Exodoncia",
         "en": "Tooth Extraction"
@@ -123,7 +123,7 @@
     },
     {
       "id": "cirugia",
-      "image": "/media/images/case-implant.jpg",
+      "image": "/media/images/",
       "name": {
         "es": "Cirugía Oral",
         "en": "Oral Surgery"
@@ -139,7 +139,7 @@
     },
     {
       "id": "implantes",
-      "image": "/media/images/case-veneers.jpg",
+      "image": "/media/images/IM_treatment.jpg",
       "name": {
         "es": "Implantes Dentales",
         "en": "Dental Implants"
@@ -154,8 +154,6 @@
       }
     }
   ],
-  "patients": [],
-  "videos": [],
   "team": [
     {
       "id": "prato",
@@ -253,8 +251,8 @@
       "after": "/media/results/RE_After.jpeg"
     },
     {
-      "before": "/media/results/veneers-before.jpg",
-      "after": "/media/results/veneers-after.jpg"
+      "before": "/media/results/BL_Before.jpeg",
+      "after": "/media/results/BL_After.jpeg"
     },
     {
       "before": "/media/results/RC_Before.jpeg",
@@ -269,8 +267,108 @@
     "placeQuery": "Calle de Recoletos 20, 28001 Madrid",
     "whatsapp": "+34689440906",
     "reviewsUrl": "https://www.google.com/maps/search/?api=1&query=Luxury%20Smile%20Architects%20Madrid",
-    "rating": null,
-    "reviewsCount": null
+    "rating": "5.0",
+    "reviewsCount": {
+      "en": "11 reviews",
+      "es": "11 reseñas"
+    }
   },
-  "reviews": []
+  "reviews": [
+    {
+      "author": "Angie Vargas",
+      "rating": 5,
+      "text": {
+        "en": "Excellent place! The patient care is top-notch, it's in a great location, and best of all, the professional expertise is evident in every treatment they perform. Highly recommended!",
+        "es": "¡Excelente lugar! La atención al paciente es de primera, está en una excelente ubicación, y lo mejor de todo, la experiencia profesional es evidente en cada tratamiento que realizan. ¡Muy recomendable!"
+      },
+      "date": {
+        "en": "4 months ago",
+        "es": "hace 4 meses"
+      }
+    },
+    {
+      "author": "Carlos Sánchez Martin",
+      "rating": 5,
+      "text": {
+        "en": "I started treatment with Dr. Escudero, and I can say that all my fear and phobia of dentists has disappeared. The assistant, Viviana, was wonderful, and Sergio's service was outstanding, always very attentive to all my questions. I recommend them 1000/1000.",
+        "es": "Comencé el tratamiento con el Dr. Escudero, y puedo decir que todo mi miedo y fobia a los dentistas ha desaparecido. La asistente, Viviana, fue maravillosa, y el servicio de Sergio fue excepcional, siempre muy atento a todas mis dudas. Los recomiendo 1000/1000."
+      },
+      "date": {
+        "en": "3 months ago",
+        "es": "hace 3 meses"
+      }
+    },
+    {
+      "author": "Diana Rojas",
+      "rating": 5,
+      "text": {
+        "en": "The service was top-notch from the moment I arrived until the very end... excellent. They are a team of professionals who gave me complete confidence and provided excellent support!",
+        "es": "El servicio fue de primera desde que llegué hasta el final... excelente. ¡Son un equipo de profesionales que me dieron total confianza y brindaron un excelente apoyo!"
+      },
+      "date": {
+        "en": "Edited 3 weeks ago",
+        "es": "Editado hace 3 semanas"
+      }
+    },
+    {
+      "author": "Selección R.H",
+      "rating": 5,
+      "text": {
+        "en": "I was delighted with my veneers, they finished my treatment in just two days. I want to thank the whole team for the speed and the treatment I received.",
+        "es": "Quede encantado con mis carillas, en solo dos días terminaron mi tratamiento, quiero agradecer a todo el equipo por la rapidez y trato recibido."
+      },
+      "date": {
+        "en": "4 months ago",
+        "es": "hace 4 meses"
+      }
+    },
+    {
+      "author": "Catalin Roman",
+      "rating": 5,
+      "text": {
+        "en": "I've been a patient of Dr. Alejandra for a month. They have the best treatments and the service is 1000 points! The best clinic and the best doctors",
+        "es": "Me atiendo hace un mes con la Dra. Alejandra. Son los mejores tratamientos y la atención 1000 puntos! La mejor clínica y los mejores doctores"
+      },
+      "date": {
+        "en": "2 months ago",
+        "es": "hace 2 meses"
+      }
+    },
+    {
+      "author": "Ludmila Maldonado",
+      "rating": 5,
+      "text": {
+        "en": "Going to the Luxury Clinic is a unique experience; the service and the luxury are truly the best. Thank you.",
+        "es": "Ir a Luxury Clinic es una experiencia única; el servicio y el lujo son verdaderamente los mejores. Gracias."
+      },
+      "date": {
+        "en": "5 months ago",
+        "es": "hace 5 meses"
+      }
+    },
+    {
+      "author": "Sandra Marino",
+      "rating": 5,
+      "text": {
+        "en": "The work they do positively impacts the community, generating real smiles and significant changes in the lives of those who receive their help. For their human quality and dedication, they are a totally recommendable place worthy of recognition.",
+        "es": "El trabajo que realizan impacta de manera positiva en la comunidad, generando sonrisas reales y cambios significativos en la vida de quienes reciben su ayuda. Por su calidad humana y dedicación, Hacen Sonrisas es un lugar totalmente recomendable y digno de reconocimiento."
+      },
+      "date": {
+        "en": "4 months ago",
+        "es": "hace 4 meses"
+      }
+    },
+    {
+      "author": "Claudia Alvarez",
+      "rating": 5,
+      "text": {
+        "en": "Spectacular",
+        "es": "Espectacular"
+      },
+      "date": {
+        "en": "3 months ago",
+        "es": "hace 3 meses"
+      }
+    }
+  ]
 }

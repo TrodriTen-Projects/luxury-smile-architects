@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 export interface Review {
   author: string;
   rating: number;
-  text: string;
-  date?: string;
+  text: Localized;
+  date?: Localized;
 }
 
 export interface Localized {
@@ -52,7 +52,7 @@ export interface SiteContent {
     whatsapp: string;
     reviewsUrl: string;
     rating: string | null;
-    reviewsCount: string | null;
+    reviewsCount: Localized | null;
   };
   reviews: Review[];
 }

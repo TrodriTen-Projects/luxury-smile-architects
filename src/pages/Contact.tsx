@@ -109,19 +109,33 @@ export default function Contact() {
     setStatus("submitting");
     try {
       const d = parsed.data;
-      const to = t("contact.clinic.email");
-      const subject = `${t("nav.book")}: ${d.firstName} ${d.lastName}`;
+      const waPhone = (content.business.whatsapp || "").replace(/[^\d]/g, "");
+      const greeting = lang === "es" 
+        ? "¡Hola! Me gustaría solicitar una cita. Mis datos son:"
+        : "Hello! I would like to request an appointment. My details are:";
+
+      // Strip trailing punctuation so WhatsApp's markdown parser reliably applies bold
+      const boldLabel = (key: string) => {
+        const text = t(key).replace(/[:?]/g, "").trim();
+        return `*${text}*:`;
+      };
+
       const body = [
-        `${t("contact.form.firstName")}: ${d.firstName} ${d.lastName}`,
-        `${t("contact.form.phone")}: ${d.phone}`,
-        `${t("contact.form.email")}: ${d.email}`,
-        `${t("contact.form.treatment")}: ${d.treatment}`,
-        `${t("contact.form.source")}: ${d.source}`,
-        d.message ? `${t("contact.form.message")}: ${d.message}` : "",
+        greeting,
+        "",
+        `${boldLabel("contact.form.firstName")} ${d.firstName} ${d.lastName}`,
+        `${boldLabel("contact.form.phone")} ${d.phone}`,
+        `${boldLabel("contact.form.email")} ${d.email}`,
+        `${boldLabel("contact.form.treatment")} ${d.treatment}`,
+        `${boldLabel("contact.form.source")} ${d.source}`,
+        d.message ? `\n${boldLabel("contact.form.message")}\n_${d.message}_` : null,
       ]
-        .filter(Boolean)
+        .filter((line) => line !== null)
         .join("\n");
-      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(body)}`;
+      window.open(waUrl, "_blank");
+      
       setStatus("success");
       setValues({ ...EMPTY });
     } catch {
@@ -442,7 +456,7 @@ export default function Contact() {
                   </span>
                   {content.business.rating}
                   {content.business.reviewsCount
-                    ? ` · ${content.business.reviewsCount}`
+                    ? ` · ${pick(content.business.reviewsCount, lang)}`
                     : ""}
                 </p>
               )}
@@ -459,7 +473,7 @@ export default function Contact() {
           </SectionReveal>
 
           <GoogleReviews
-            fallback={content.reviews}
+            reviews={content.reviews}
             reviewsUrl={content.business.reviewsUrl}
             cta={t("contact.reviews.cta")}
             empty={t("contact.reviews.empty")}

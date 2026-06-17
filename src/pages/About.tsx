@@ -97,7 +97,7 @@ export default function About() {
               >
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.4rem] bg-foreground/5">
                   <video
-                    src="/media/video/reel-01.mp4"
+                    src="/media/video/clinic-01.mp4"
                     className="absolute inset-0 h-full w-full object-cover"
                     autoPlay
                     loop
@@ -124,7 +124,7 @@ export default function About() {
               >
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.4rem] bg-foreground/5">
                   <video
-                    src="/media/video/reel-02.mp4"
+                    src="/media/video/lab-01.mp4"
                     className="absolute inset-0 h-full w-full object-cover"
                     autoPlay
                     loop

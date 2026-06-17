@@ -1,0 +1,5 @@
+# SPA fallback: serve index.html for client-side routes (/, /tratamientos,
+# /contacto, etc.). Cloudflare Pages serves real static files first, so this
+# only catches paths that don't match an existing asset. 200 = rewrite, not a
+# redirect, so the URL stays put for react-router.
+/*    /index.html   200

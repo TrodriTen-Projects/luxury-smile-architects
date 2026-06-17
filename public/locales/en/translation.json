@@ -179,8 +179,8 @@
       "invalidEmail": "Enter a valid email",
       "invalidPhone": "Enter a valid phone number",
       "consentRequired": "You must accept the privacy policy",
-      "successTitle": "Thank you",
-      "success": "We've prepared your request in your email client. We'll be in touch very soon.",
+      "successTitle": "Thank You",
+      "success": "We've redirected you to WhatsApp to send your request. See you there!",
       "errorTitle": "Something went wrong",
       "error": "We couldn't process the request. Please try again or email us directly."
     },
@@ -201,7 +201,7 @@
       "emailLabel": "Email",
       "email": "contacto@luxurysmilearchitects.com",
       "hoursLabel": "Hours",
-      "hours": "Monday to Friday, 9:00 to 20:00",
+      "hours": "Monday to Friday, 10:00 to 20:00",
       "directions": "Get directions"
     },
     "map": {

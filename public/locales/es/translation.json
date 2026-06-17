@@ -65,7 +65,7 @@
         "caption": "Sector anterior"
       },
       {
-        "title": "Diseño en resina",
+        "title": "Diseño en composite",
         "caption": "Bordes y proporción"
       },
       {
@@ -180,7 +180,7 @@
       "invalidPhone": "Introduce un teléfono válido",
       "consentRequired": "Debes aceptar la política de privacidad",
       "successTitle": "Gracias",
-      "success": "Hemos preparado tu solicitud en tu correo. Te contactaremos muy pronto.",
+      "success": "Te hemos redirigido a WhatsApp para enviar tu solicitud. \u00A1Nos vemos all\u00ED!",
       "errorTitle": "Algo salió mal",
       "error": "No se pudo procesar la solicitud. Inténtalo de nuevo o escríbenos directamente."
     },
@@ -201,7 +201,7 @@
       "emailLabel": "Email",
       "email": "contacto@luxurysmilearchitects.com",
       "hoursLabel": "Horario",
-      "hours": "Lunes a viernes, 9:00 a 20:00",
+      "hours": "Lunes a viernes, 10:00 a 20:00",
       "directions": "Cómo llegar"
     },
     "map": {

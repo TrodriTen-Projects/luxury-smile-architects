@@ -7,10 +7,12 @@ import path from "node:path";
  * Hardened Content Security Policy. No third-party scripts run on the site, so
  * `script-src` stays locked to 'self'. The only external origin we allow is the
  * Google Maps embed *iframe* on the Contact page (`frame-src`); it needs no API
- * key. Google reviews come through our own `/api/reviews` serverless function,
- * so `connect-src 'self'` is enough — the API key never reaches the browser.
- * `style-src 'unsafe-inline'` is required by Framer Motion's inline styles.
- * frame-ancestors / HSTS are header-only directives, so they live in vercel.json.
+ * key. Reviews are hand-curated in site.json (no API key, no server), so
+ * `connect-src 'self'` only needs to cover same-origin JSON fetches (site.json,
+ * locales, media indexes). `style-src 'unsafe-inline'` is required by Framer
+ * Motion's inline styles. frame-ancestors / HSTS are header-only directives, so
+ * on Cloudflare Pages they live in public/_headers (this <meta> is the in-HTML
+ * copy that ships regardless of host).
  */
 const CSP = [
   "default-src 'self'",
@@ -19,7 +21,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'", // required by Framer Motion inline styles
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
-  "connect-src 'self'", // same-origin only (locales, site.json, /api/reviews)
+  "connect-src 'self'", // same-origin only (locales, site.json, media indexes)
   "media-src 'self' blob:",
   "frame-src https://www.google.com https://maps.google.com", // Maps embed only
   "object-src 'none'",
