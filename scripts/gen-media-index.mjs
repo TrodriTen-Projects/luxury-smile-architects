@@ -13,7 +13,7 @@ const publicDir = resolve(dirname(fileURLToPath(import.meta.url)), "..", "public
 // Folders (relative to /public) to index as a flat list of file URLs.
 const TARGETS = [
   { rel: "media/patients", re: /\.(jpe?g|png|webp|avif|gif)$/i },
-  { rel: "media/video", re: /\.(mp4|webm|mov|m4v)$/i },
+  { rel: "media/video", re: /^reel-.*\.(mp4|webm|mov|m4v)$/i },
 ];
 
 for (const { rel, re } of TARGETS) {
