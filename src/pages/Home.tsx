@@ -123,89 +123,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ---------- STORYTELLING (text only) ---------- */}
-      <section className="section border-t border-border">
-        <div className="mx-auto max-w-3xl text-center">
-          <SectionReveal>
-            <span className="eyebrow">{t("home.introKicker")}</span>
-          </SectionReveal>
-          <SectionReveal delay={0.08}>
-            <h2 className="display mt-6 text-[clamp(2rem,5vw,3.6rem)] text-foreground">
-              {t("home.introTitle")}
-            </h2>
-          </SectionReveal>
-          <SectionReveal delay={0.16}>
-            <p className="mx-auto mt-7 max-w-xl text-pretty font-sans text-lg font-light leading-relaxed text-muted">
-              {t("home.introText")}
-            </p>
-          </SectionReveal>
-        </div>
-      </section>
-
-      {/* ---------- TREATMENTS preview (all) ---------- */}
-      <section className="section border-t border-border">
-        <div className="mx-auto max-w-[1400px]">
-          <SectionReveal className="flex items-end justify-between">
-            <div>
-              <span className="eyebrow">{t("home.treatmentsKicker")}</span>
-              <h2 className="display mt-6 text-[clamp(2.2rem,5vw,4rem)]">
-                {t("home.treatmentsTitle")}
-              </h2>
-            </div>
-            <Link
-              to="/tratamientos"
-              className="link-underline hidden font-sans text-[0.72rem] uppercase tracking-[0.2em] text-gold sm:inline"
-            >
-              {t("common.allTreatments")}
-            </Link>
-          </SectionReveal>
-
-          <ul className="mt-14">
-            {treatments.map((item, i) => (
-              <SectionReveal as="li" key={item.id} delay={(i % 3) * 0.04}>
-                <Link
-                  to="/tratamientos"
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-border py-6 transition-colors last:border-b hover:bg-elevated"
-                >
-                  <span className="index-num text-xl sm:text-2xl">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-5">
-                    <span className="font-serif text-xl text-foreground transition-colors group-hover:text-gold sm:text-2xl">
-                      {pick(item.name, lang)}
-                    </span>
-                    <span className="font-sans text-[0.64rem] uppercase tracking-[0.22em] text-muted">
-                      {pick(item.tagline, lang)}
-                    </span>
-                  </span>
-                  <ArrowUpRight className="h-5 w-5 text-muted transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold" />
-                </Link>
-              </SectionReveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ---------- CTA band (after treatments, before carousels) ---------- */}
-      <section className="border-y border-border bg-elevated/50">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-8 px-6 py-20 text-center lg:px-12 lg:py-24">
-          <SectionReveal>
-            <h2 className="display text-[clamp(2rem,5vw,3.6rem)] text-foreground">
-              {t("home.ctaTitle")}
-            </h2>
-          </SectionReveal>
-          <SectionReveal delay={0.06}>
-            <p className="mx-auto max-w-2xl text-pretty font-sans text-base font-light leading-relaxed text-muted">
-              {t("home.ctaText")}
-            </p>
-          </SectionReveal>
-          <SectionReveal delay={0.12}>
-            <Button asChild size="lg">
-              <Link to="/contacto">{t("common.bookCta")}</Link>
-            </Button>
-          </SectionReveal>
-        </div>
-      </section>
+      {/* ---------- REELS ---------- */}
+      <ReelsSection />
 
       {/* ---------- PATIENTS carousel (autoplay) ---------- */}
       <section className="section border-t border-border pb-8 sm:pb-12 lg:pb-16">
@@ -271,8 +190,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- REELS ---------- */}
-      <ReelsSection />
+      {/* ---------- CTA band (after carousels, before treatments) ---------- */}
+      <section className="border-y border-border bg-elevated/50">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-8 px-6 py-20 text-center lg:px-12 lg:py-24">
+          <SectionReveal>
+            <h2 className="display text-[clamp(2rem,5vw,3.6rem)] text-foreground">
+              {t("home.ctaTitle")}
+            </h2>
+          </SectionReveal>
+          <SectionReveal delay={0.06}>
+            <p className="mx-auto max-w-2xl text-pretty font-sans text-base font-light leading-relaxed text-muted">
+              {t("home.ctaText")}
+            </p>
+          </SectionReveal>
+          <SectionReveal delay={0.12} className="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md mx-auto">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <Link to="/contacto">{t("common.bookCta")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
+              <Link to="/resultados">{t("common.viewResults")}</Link>
+            </Button>
+          </SectionReveal>
+        </div>
+      </section>
+
+      {/* ---------- TREATMENTS preview (all) ---------- */}
+      <section className="section border-t border-border">
+        <div className="mx-auto max-w-[1400px]">
+          <SectionReveal className="flex items-end justify-between">
+            <div>
+              <span className="eyebrow">{t("home.treatmentsKicker")}</span>
+              <h2 className="display mt-6 text-[clamp(2.2rem,5vw,4rem)]">
+                {t("home.treatmentsTitle")}
+              </h2>
+            </div>
+            <Link
+              to="/tratamientos"
+              className="link-underline hidden font-sans text-[0.72rem] uppercase tracking-[0.2em] text-gold sm:inline"
+            >
+              {t("common.allTreatments")}
+            </Link>
+          </SectionReveal>
+
+          <ul className="mt-14">
+            {treatments.map((item, i) => (
+              <SectionReveal as="li" key={item.id} delay={(i % 3) * 0.04}>
+                <Link
+                  to="/tratamientos"
+                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-border py-6 transition-colors last:border-b hover:bg-elevated"
+                >
+                  <span className="index-num text-xl sm:text-2xl">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-5">
+                    <span className="font-serif text-xl text-foreground transition-colors group-hover:text-gold sm:text-2xl">
+                      {pick(item.name, lang)}
+                    </span>
+                    <span className="font-sans text-[0.64rem] uppercase tracking-[0.22em] text-muted">
+                      {pick(item.tagline, lang)}
+                    </span>
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 text-muted transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold" />
+                </Link>
+              </SectionReveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ---------- STORYTELLING (text only) ---------- */}
+      <section className="section border-t border-border">
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionReveal>
+            <span className="eyebrow">{t("home.introKicker")}</span>
+          </SectionReveal>
+          <SectionReveal delay={0.08}>
+            <h2 className="display mt-6 text-[clamp(2rem,5vw,3.6rem)] text-foreground">
+              {t("home.introTitle")}
+            </h2>
+          </SectionReveal>
+          <SectionReveal delay={0.16}>
+            <p className="mx-auto mt-7 max-w-xl text-pretty font-sans text-lg font-light leading-relaxed text-muted">
+              {t("home.introText")}
+            </p>
+          </SectionReveal>
+        </div>
+      </section>
     </>
   );
 }
