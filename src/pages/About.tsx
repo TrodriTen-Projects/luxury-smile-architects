@@ -188,10 +188,10 @@ export default function About() {
             </div>
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="primary" size="lg" className="flex-1">
+            <Button asChild variant="primary" size="lg" className="flex-1 text-sm sm:text-base h-14">
               <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
             </Button>
-            <Button variant="outline" size="lg" className="px-4" onClick={() => setActiveLocation(null)}>
+            <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
               {t("common.back")}
             </Button>
           </div>
@@ -221,10 +221,10 @@ export default function About() {
             </li>
           </ul>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="primary" size="lg" className="flex-1">
+            <Button asChild variant="primary" size="lg" className="flex-1 text-sm sm:text-base h-14">
               <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
             </Button>
-            <Button variant="outline" size="lg" className="px-4" onClick={() => setActiveLocation(null)}>
+            <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
               {t("common.back")}
             </Button>
           </div>
@@ -277,10 +277,10 @@ export default function About() {
           <div className="mt-10 pt-8 border-t border-border text-center">
             <p className="font-serif text-gold text-lg italic mb-8">{t("about.financeModal.footer")}</p>
             <div className="flex flex-col gap-3 sm:w-2/3 sm:flex-row mx-auto">
-              <Button asChild variant="primary" size="lg" className="flex-1">
+              <Button asChild variant="primary" size="lg" className="flex-1 text-sm sm:text-base h-14">
                 <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("about.financeModal.cta")}</Link>
               </Button>
-              <Button variant="outline" size="lg" className="px-4" onClick={() => setActiveLocation(null)}>
+              <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
                 {t("common.back")}
               </Button>
             </div>
