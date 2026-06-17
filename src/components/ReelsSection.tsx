@@ -11,9 +11,14 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { SectionReveal } from "@/components/SectionReveal";
-import { INSTAGRAM_PROFILE } from "@/data/instagram";
-import { REEL_VIDEOS, VIDEO_POSTER } from "@/data/media";
 import { useContent } from "@/lib/content";
+
+const REEL_VIDEOS = Array.from(
+  { length: 12 },
+  (_, i) => `/media/video/reel-${String(i + 1).padStart(2, "0")}.mp4`,
+);
+
+const VIDEO_POSTER = "/media/images/smile-03.jpg";
 
 function ReelVideo({ src, muted }: { src: string; muted: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -90,7 +95,7 @@ export function ReelsSection() {
           </div>
           <SectionReveal delay={0.12}>
             <a
-              href={INSTAGRAM_PROFILE}
+              href={content.business.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="link-underline inline-flex items-center gap-2 font-sans text-[0.72rem] uppercase tracking-[0.2em] text-gold"

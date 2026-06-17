@@ -51,6 +51,7 @@ export interface SiteContent {
     placeQuery: string;
     whatsapp: string;
     reviewsUrl: string;
+    instagram: string;
     rating: string | null;
     reviewsCount: Localized | null;
   };
@@ -223,6 +224,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     whatsapp: "+34689440906",
     reviewsUrl:
       "https://www.google.com/maps/search/?api=1&query=Luxury%20Smile%20Architects%20Madrid",
+    instagram: "https://www.instagram.com/luxurysmilearchitectsmadrid/",
     rating: null,
     reviewsCount: null,
   },

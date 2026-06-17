@@ -1,0 +1,109 @@
+name: CI/CD
+
+# Security (dependencies + SAST) -> Build -> Deploy to Cloudflare Pages.
+# Deploy only runs on a push to the default branch, and only if the security
+# checks and the build pass first.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+# A newer push to the same branch cancels the in-progress run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # 1a. Dependency security -----------------------------------------------------
+  security-deps:
+    name: Dependencies (npm audit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      # Hard gate: fail the pipeline on HIGH/CRITICAL in shipped (production) deps.
+      - name: npm audit (production deps, fail on high+)
+        run: npm audit --omit=dev --audit-level=high
+      # Informational: full report including dev tooling (never blocks).
+      - name: npm audit (full report)
+        if: always()
+        run: npm audit || true
+      # On PRs, flag any newly-introduced vulnerable/incompatible-licensed deps.
+      - name: Dependency review
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+  # 1b. SAST (static analysis) --------------------------------------------------
+  sast:
+    name: SAST (CodeQL)
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
+
+  # 2. Build --------------------------------------------------------------------
+  build:
+    name: Build
+    needs: [security-deps, sast]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  # 3. Deploy (only on push to the default branch) ------------------------------
+  deploy:
+    name: Deploy to Cloudflare Pages
+    needs: build
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # The project name must match the Pages project in your Cloudflare
+          # dashboard (create it once as a "Direct Upload" project).
+          command: pages deploy dist --project-name=luxury-smile-architects --branch=main
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

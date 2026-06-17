@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
 
-import { INSTAGRAM_PROFILE } from "@/data/instagram";
+import { useContent } from "@/lib/content";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const NAV = [
@@ -14,6 +14,7 @@ const NAV = [
 
 export function Footer() {
   const { t } = useTranslation();
+  const content = useContent();
   const year = new Date().getFullYear();
 
   return (
@@ -71,7 +72,7 @@ export function Footer() {
           <div>
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">Instagram</p>
             <a
-              href={INSTAGRAM_PROFILE}
+              href={content.business.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="link-underline mt-3 inline-flex items-center gap-2 font-sans text-sm text-foreground"
