@@ -118,7 +118,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-[4.5rem] z-40 flex flex-col bg-base/95 px-6 pb-12 pt-10 backdrop-blur-md lg:hidden"
+            className="absolute left-0 top-[4.5rem] z-40 flex w-full h-[calc(100dvh-4.5rem)] flex-col bg-base/95 px-6 pb-12 pt-10 backdrop-blur-xl lg:hidden"
           >
             <ul className="flex flex-col">
               {LINKS.map((link, i) => (
