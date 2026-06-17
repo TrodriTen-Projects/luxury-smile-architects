@@ -13,10 +13,7 @@ import {
 import { SectionReveal } from "@/components/SectionReveal";
 import { useContent } from "@/lib/content";
 
-const REEL_VIDEOS = Array.from(
-  { length: 12 },
-  (_, i) => `/media/video/reel-${String(i + 1).padStart(2, "0")}.mp4`,
-);
+import REEL_VIDEOS from "../../public/media/video/index.json";
 
 const VIDEO_POSTER = "/media/images/smile-03.jpg";
 
