@@ -69,7 +69,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     {
       id: "estetica",
       image: "/media/images/portrait-01.jpg",
-      name: { es: "Estética Dental", en: "Dental Aesthetics" },
+      name: { es: "Estética Dental y Carillas", en: "Dental Aesthetics & Veneers" },
       tagline: { es: "Sonrisa transformadora", en: "A transformed smile" },
       summary: {
         es: "Carillas, diseño de sonrisa y más para mejorar la armonía de tu sonrisa con un resultado natural que potencia tu confianza.",
@@ -199,11 +199,11 @@ export const DEFAULT_CONTENT: SiteContent = {
       name: "Dra. Maira Alejandra Angarita",
       photo: "/team/maira-angarita.svg",
       role: {
-        es: "Estética dental y diseño de sonrisa",
+        es: "Estética dental, carillas y diseño de sonrisa",
         en: "Dental aesthetics and smile design",
       },
       credentials: {
-        es: "Estética dental",
+        es: "Estética dental y carillas",
         en: "Dental aesthetics",
       },
       bio: {
