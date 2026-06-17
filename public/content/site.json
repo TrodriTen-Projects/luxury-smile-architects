@@ -2,7 +2,7 @@
   "_readme": "Edita este archivo y sube archivos a /public/media para actualizar la web. Tras subir/editar hay que recompilar (npm run build). hero.image: foto principal. hero.position: encuadre 'X% Y%' (Y 0%=arriba, 100%=abajo; baja el número para subir el rostro). logo.image: PNG/SVG del logo (null = usa el texto). TRATAMIENTOS: añade o quita servicios en el array 'treatments' (cada uno: id único, image, y name/tagline/summary en es/en); aparecen solos en la página de Tratamientos, en el inicio y en el desplegable de Contacto. PACIENTES: solo sube las fotos a /media/patients y aparecen solas en el carrusel (no hace falta listarlas). REELS/VIDEOS: el carrusel de 'Sonrisas que hablan' muestra los .mp4 de /media/video (súbelos y aparecen solos). Instagram NO deja reproducir el vídeo del reel suelto en tu web (solo incrusta la publicación entera, con cabecera y comentarios), por eso para mostrar un reel: descárgalo como .mp4 y súbelo a /media/video. El campo 'reels' (enlaces) ya no se incrusta. EQUIPO: añade o quita personas en 'team' (sube su foto a /media/team y pon la ruta en photo). RESEÑAS: son manuales. Copia tus reseñas reales de Google en el array 'reviews' (cada una: author, rating de 1 a 5, text y date) y pon hasta unas 10. El contador de arriba se edita en business.rating (p. ej. '4,9') y business.reviewsCount (p. ej. '127 reseñas'); pon null en ambos para ocultarlo. 'reviewsUrl' es el enlace a tu ficha de Google. Ya no hay clave de API ni función de servidor. beforeAfter: pares antes/después.",
   "hero": {
     "image": "/media/images/hero-main.jpg",
-    "fallback": "/media/images/portrait-01.jpg",
+    "fallback": "",
     "position": "100% 0%"
   },
   "logo": {
