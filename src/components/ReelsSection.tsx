@@ -13,7 +13,6 @@ import {
 import { SectionReveal } from "@/components/SectionReveal";
 import { useContent } from "@/lib/content";
 
-import REEL_VIDEOS from "../../public/media/video/index.json";
 
 const VIDEO_POSTER = "/media/images/smile-03.jpg";
 
@@ -72,7 +71,7 @@ export function ReelsSection() {
   // Instagram only allows embedding the full POST (header, likes, caption),
   // not the bare reel video — so to show clean playing reels, download them
   // as .mp4 and place them in that folder.
-  const videos = content.videos.length ? content.videos : REEL_VIDEOS;
+  const videos = content.videos;
 
   if (videos.length === 0) return null;
 

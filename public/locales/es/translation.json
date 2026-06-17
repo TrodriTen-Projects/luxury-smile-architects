@@ -99,7 +99,7 @@
   },
   "about": {
     "kicker": "Quiénes somos",
-    "title": "Arquitectura de sonrisas",
+    "title": "Arquitectos de sonrisas",
     "introText": "En un mercado donde la estética se integra en el bienestar, la sonrisa se convierte en un activo de identidad y el lujo se expresa a través de la experiencia y la confianza, los resultados clínicos dejan de ser suficientes para explicar la elección del paciente.",
     "identity": {
       "kicker": "¿Cuál es nuestra identidad?",
@@ -108,7 +108,7 @@
       "box1Text": "Una red internacional de clínicas de odontología estética fundada en Colombia, liderada por el Dr. Martín Prato, con presencia en Latinoamérica y EE. UU y ahora Europa.",
       "box2Title": "Qué defendemos",
       "box2Text": "Entendemos la sonrisa como una arquitectura personalizada: una combinación de arte, ciencia y sensibilidad estética que no busca solo mejorar dientes, sino transformar la confianza y la identidad de las personas.",
-      "box3Title": "Qué nos hace diferente",
+      "box3Title": "Qué nos hace diferentes",
       "box3Text": "Metodología propia, alto nivel de personalización y una experiencia boutique profundamente humana, donde la atención, el cuidado y el acompañamiento del paciente son el principal motor de nuestra propuesta de valor."
     },
     "locationsKicker": "Nuestras sedes",
@@ -241,7 +241,7 @@
     }
   },
   "footer": {
-    "tagline": "Arquitectura de sonrisas en Madrid",
+    "tagline": "Arquitectos de sonrisas en Madrid",
     "cta": "Reserva tu cita",
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de privacidad",

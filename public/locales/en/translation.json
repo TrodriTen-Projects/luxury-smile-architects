@@ -99,7 +99,7 @@
   },
   "about": {
     "kicker": "About Us",
-    "title": "Smile Architecture",
+    "title": "Smile Architects",
     "introText": "In a market where aesthetics integrates with well-being, a smile becomes an identity asset, and luxury is expressed through experience and trust, clinical results are no longer enough to explain a patient's choice.",
     "identity": {
       "kicker": "What is our identity?",
@@ -241,7 +241,7 @@
     }
   },
   "footer": {
-    "tagline": "Smile architecture in Madrid",
+    "tagline": "Smile architects in Madrid",
     "cta": "Book your visit",
     "rights": "All rights reserved.",
     "privacy": "Privacy policy",

@@ -87,6 +87,16 @@ export const DEFAULT_CONTENT: SiteContent = {
       },
     },
     {
+      id: "medicina-estetica",
+      image: "/media/images/ME_treatment.jpg",
+      name: { es: "Medicina Estética", en: "Aesthetic Medicine" },
+      tagline: { es: "Armonía facial", en: "Facial harmony" },
+      summary: {
+        es: "Medicina Estética Facial, Regenerativa y Antienvejecimiento, Neuromoduladores, Bruxismo, Sonrisa Gingival, Laser Fotona y Apnea del Sueño.",
+        en: "Facial, Regenerative and Anti-aging Aesthetic Medicine, Neuromodulators, Bruxism, Gummy Smile, Fotona Laser and Sleep Apnea.",
+      },
+    },
+    {
       id: "digital",
       image: "/media/images/case-veneers.jpg",
       name: { es: "Rehabilitación Oral Digital", en: "Digital Oral Rehabilitation" },
