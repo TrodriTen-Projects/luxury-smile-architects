@@ -60,9 +60,9 @@ export interface SiteContent {
 
 export const DEFAULT_CONTENT: SiteContent = {
   hero: {
-    image: "/media/hero-main.jpg",
-    fallback: "/media/images/portrait-01.jpg",
-    position: "50% 5%",
+    image: "/media/images/hero-main.jpg",
+    fallback: "",
+    position: "50% 0%",
   },
   logo: { image: null },
   treatments: [
