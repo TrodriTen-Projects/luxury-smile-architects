@@ -3,7 +3,7 @@
   "hero": {
     "image": "/media/images/hero-main.jpg",
     "fallback": "",
-    "position": "100% 0%"
+    "position": "50% 0%"
   },
   "logo": {
     "image": null
