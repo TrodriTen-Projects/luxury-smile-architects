@@ -21,7 +21,7 @@
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dompurify": "^3.2.4",
+    "dompurify": "^3.4.11",
     "embla-carousel": "8.5.2",
     "embla-carousel-autoplay": "8.5.2",
     "embla-carousel-react": "8.5.2",
