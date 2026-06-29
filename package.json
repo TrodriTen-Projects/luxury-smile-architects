@@ -11,7 +11,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
-    "media-index": "node scripts/gen-media-index.mjs"
+    "media-index": "node scripts/gen-media-index.mjs",
+    "compress-videos": "node scripts/compress-videos.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.9",

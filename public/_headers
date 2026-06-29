@@ -19,3 +19,8 @@
 # Translations can change between deploys — revalidate hourly.
 /locales/*
   Cache-Control: public, max-age=3600, must-revalidate
+
+# Reels / images rarely change — let the browser keep them for a week so
+# repeat visits don't re-download. Bump the filename if you swap a clip.
+/media/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
