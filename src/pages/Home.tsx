@@ -15,12 +15,14 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { useContent, pick } from "@/lib/content";
+import { useSeo } from "@/lib/seo";
 import { entryInitial, isSuppressingEntry } from "@/lib/prerendered";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  useSeo({ key: "home", path: "/" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const treatments = content.treatments;

@@ -12,6 +12,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useContent, type TeamMember } from "@/lib/content";
+import { useSeo } from "@/lib/seo";
 
 interface Reason {
   id: string;
@@ -21,6 +22,7 @@ interface Reason {
 
 export default function Team() {
   const { t, i18n } = useTranslation();
+  useSeo({ key: "team", path: "/equipo" });
   const content = useContent();
   const reasons = t("why.items", { returnObjects: true }) as Reason[];
   const [active, setActive] = useState<TeamMember | null>(null);

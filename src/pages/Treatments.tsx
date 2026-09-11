@@ -12,9 +12,11 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useContent, pick, type Treatment } from "@/lib/content";
+import { useSeo } from "@/lib/seo";
 
 export default function Treatments() {
   const { t, i18n } = useTranslation();
+  useSeo({ key: "treatments", path: "/tratamientos" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const items = content.treatments;

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { useSeo } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -53,6 +54,7 @@ const EMPTY = {
 
 export default function Contact() {
   const { t, i18n } = useTranslation();
+  useSeo({ key: "contact", path: "/contacto" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const treatments = content.treatments;

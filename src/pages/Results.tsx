@@ -5,6 +5,7 @@ import { ImageComparison } from "@/components/ui/image-comparison";
 import { SectionReveal } from "@/components/SectionReveal";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/lib/content";
+import { useSeo } from "@/lib/seo";
 
 interface Box {
   title: string;
@@ -13,6 +14,7 @@ interface Box {
 
 export default function Results() {
   const { t } = useTranslation();
+  useSeo({ key: "results", path: "/resultados" });
   const content = useContent();
   const boxes = t("results.boxes", { returnObjects: true }) as Box[];
   const pairs = content.beforeAfter;

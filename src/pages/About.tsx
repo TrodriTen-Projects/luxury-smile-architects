@@ -6,9 +6,11 @@ import { MapPin, Clock, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/SectionReveal";
+import { useSeo } from "@/lib/seo";
 
 export default function About() {
   const { t } = useTranslation();
+  useSeo({ key: "about", path: "/quienes-somos" });
 
   const [activeLocation, setActiveLocation] = useState<"clinic" | "lab" | "finance" | null>(null);
 

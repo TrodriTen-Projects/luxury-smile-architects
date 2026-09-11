@@ -23,7 +23,7 @@ import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { ROUTES, outputFileFor } from "./routes.mjs";
+import { ROUTES, ORIGIN, outputFileFor } from "./routes.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
@@ -204,6 +204,20 @@ function validate(route, html, heading, consoleErrors) {
   if (!html.includes(`id="${STATE_ID}"`)) {
     problems.push(`falta el bloque de estado #${STATE_ID} (la hidratación fallaría)`);
   }
+  // Per-page head (src/lib/seo.ts) is written from an effect, so it only lands
+  // in the HTML if effects ran before capture. Missing tags here mean the page
+  // would ship with the generic fallback head from index.html.
+  const canonical = html.match(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i)?.[1];
+  const expected = `${ORIGIN}${route.path}`;
+  if (!canonical) problems.push("sin <link rel=canonical>");
+  else if (canonical !== expected) {
+    problems.push(`canonical "${canonical}" no coincide con "${expected}"`);
+  }
+  for (const tag of ["og:url", "og:image", "og:title", "og:description"]) {
+    if (!html.includes(`property="${tag}"`)) problems.push(`falta <meta property="${tag}">`);
+  }
+  if (!html.includes('name="twitter:card"')) problems.push("faltan las Twitter Cards");
+
   if (!heading) problems.push("no se encontró un encabezado con texto en <main>");
   if (!/<\/html>/i.test(html)) problems.push("el HTML serializado está truncado");
 
@@ -252,6 +266,20 @@ async function main() {
       rendered.push({ route, html });
       const kb = (Buffer.byteLength(html, "utf8") / 1024).toFixed(1);
       console.log(`  ✓ ${route.path.padEnd(16)} ${kb.padStart(6)} kB  h1: ${heading.slice(0, 42)}`);
+    }
+
+    // Duplicate titles across pages are a classic SEO own-goal and can only
+    // be spotted once every route is in hand.
+    const seen = new Map();
+    for (const { route, html } of rendered) {
+      const title = html.match(/<title>([^<]*)<\/title>/i)?.[1] ?? "";
+      if (!title) throw new Error(`"${route.path}" se quedó sin <title>`);
+      if (seen.has(title)) {
+        throw new Error(
+          `Título duplicado "${title}" en ${seen.get(title)} y ${route.path}`,
+        );
+      }
+      seen.set(title, route.path);
     }
 
     // Nothing is written until every route rendered and validated.
