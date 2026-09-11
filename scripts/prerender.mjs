@@ -23,7 +23,7 @@ import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { ROUTES, ORIGIN, outputFileFor } from "./routes.mjs";
+import { ROUTES, ERROR_ROUTE, ORIGIN, outputFileFor } from "./routes.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
@@ -69,7 +69,7 @@ async function launchBrowser() {
 async function assertRoutesInSync() {
   const source = await readFile(join(ROOT, "src", "lib", "routes.ts"), "utf8");
   const inRouter = [...source.matchAll(/path:\s*"([^"]+)"/g)].map((m) => m[1]).sort();
-  const inBuild = ROUTES.map((r) => r.path).sort();
+  const inBuild = [...ROUTES.map((r) => r.path), ERROR_ROUTE.path].sort();
   const same =
     inRouter.length === inBuild.length && inRouter.every((p, i) => p === inBuild[i]);
   if (!same) {
@@ -323,7 +323,8 @@ async function main() {
   const rendered = [];
 
   try {
-    for (const route of ROUTES) {
+    const toRender = [...ROUTES, ERROR_ROUTE];
+    for (const route of toRender) {
       const { html, consoleErrors, heading } = await renderRoute(browser, origin, route);
       validate(route, html, heading, consoleErrors);
       rendered.push({ route, html });
@@ -347,7 +348,7 @@ async function main() {
 
     // Nothing is written until every route rendered and validated.
     for (const { route, html } of rendered) {
-      const target = join(DIST, outputFileFor(route.path));
+      const target = join(DIST, route.output ?? outputFileFor(route.path));
       await mkdir(dirname(target), { recursive: true });
       await writeFile(target, html, "utf8");
     }

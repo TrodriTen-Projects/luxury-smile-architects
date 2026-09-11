@@ -17,11 +17,14 @@ import path from "node:path";
 const CSP = [
   "default-src 'self'",
   "base-uri 'self'",
-  "script-src 'self'",
+  // Meta Pixel and GA4 (gtag.js). Both load only after the visitor accepts in
+  // the consent banner; see src/lib/tracking.ts. No 'unsafe-inline' — the tags
+  // are initialised from the app bundle, which is already 'self'.
+  "script-src 'self' https://connect.facebook.net https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'", // required by Framer Motion inline styles
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com",
   "font-src 'self' data:",
-  "connect-src 'self'", // same-origin only (locales, site.json, media indexes)
+  "connect-src 'self' https://www.facebook.com https://connect.facebook.net https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
   "media-src 'self' blob:",
   "frame-src https://www.google.com https://maps.google.com", // Maps embed only
   "object-src 'none'",

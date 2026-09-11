@@ -413,5 +413,9 @@
         "es": "hace 3 meses"
       }
     }
-  ]
+  ],
+  "tracking": {
+    "metaPixelId": "",
+    "ga4MeasurementId": ""
+  }
 }

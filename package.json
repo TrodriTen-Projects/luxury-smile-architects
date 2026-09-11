@@ -13,7 +13,7 @@
     "lint": "tsc --noEmit",
     "media-index": "node scripts/gen-media-index.mjs",
     "compress-videos": "node scripts/compress-videos.mjs",
-    "postbuild": "node scripts/prerender.mjs",
+    "postbuild": "node scripts/prerender.mjs && node scripts/gen-sitemap.mjs",
     "og-images": "node scripts/gen-og-images.mjs",
     "validate-schema": "node scripts/validate-schema.mjs"
   },

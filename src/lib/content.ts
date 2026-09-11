@@ -81,6 +81,8 @@ export interface SiteContent {
   team: TeamMember[];
   beforeAfter: { before: string; after: string }[];
   business: BusinessInfo;
+  /** Analytics IDs. Empty string = that tag stays off, with no console noise. */
+  tracking: { metaPixelId: string; ga4MeasurementId: string };
   reviews: Review[];
 }
 
@@ -281,6 +283,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     rating: null,
     reviewsCount: null,
   },
+  tracking: { metaPixelId: "", ga4MeasurementId: "" },
   reviews: [],
 };
 
@@ -294,6 +297,7 @@ function merge(base: SiteContent, patch: Partial<SiteContent>): SiteContent {
     team: patch.team?.length ? patch.team : base.team,
     beforeAfter: patch.beforeAfter?.length ? patch.beforeAfter : base.beforeAfter,
     business: { ...base.business, ...(patch.business ?? {}) },
+    tracking: { ...base.tracking, ...(patch.tracking ?? {}) },
     reviews: patch.reviews ?? base.reviews,
   };
 }

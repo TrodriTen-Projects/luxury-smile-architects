@@ -22,6 +22,14 @@ export const ROUTES = [
   { path: "/contacto", changefreq: "yearly", priority: "0.9" },
 ];
 
+/**
+ * The 404 page. Prerendered like the rest but deliberately outside `ROUTES`:
+ * it must never appear in the sitemap, and it is written to `dist/404.html`,
+ * which is the file Cloudflare Pages serves — with a real 404 status — for any
+ * path that does not match a file.
+ */
+export const ERROR_ROUTE = { path: "/404", output: "404.html" };
+
 /** Production origin, used for canonical URLs, og:url and the sitemap. */
 export const ORIGIN = "https://luxurysmile.es";
 

@@ -271,6 +271,21 @@
     "contact": {
       "title": "Contact and Appointments · Luxury Smile Architects Madrid",
       "description": "Book your assessment at Calle de Recoletos 20, Salamanca district, 28001 Madrid. Monday to Friday, 10:00–20:00 · +34 689 440 906."
+    },
+    "notFound": {
+      "title": "Page not found · Luxury Smile Architects",
+      "description": "The link you followed does not exist. Go back to the homepage or contact the clinic at Calle de Recoletos 20, Salamanca district, Madrid."
     }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The link you followed does not exist or has moved. From here you can go back to the homepage or get in touch.",
+    "home": "Back to homepage"
+  },
+  "consent": {
+    "title": "Cookies and measurement",
+    "text": "We use analytics and advertising cookies (Google Analytics and Meta) to understand how you reached the site. Nothing is enabled until you accept, and you can decline without losing any functionality.",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }

@@ -271,6 +271,21 @@
     "contact": {
       "title": "Contacto y cita previa · Luxury Smile Architects Madrid",
       "description": "Pide tu valoración en Calle de Recoletos 20, Barrio de Salamanca, 28001 Madrid. Lunes a viernes de 10:00 a 20:00 · +34 689 440 906."
+    },
+    "notFound": {
+      "title": "Página no encontrada · Luxury Smile Architects",
+      "description": "El enlace que has seguido no existe. Vuelve al inicio o contacta con la clínica en Calle de Recoletos 20, Barrio de Salamanca, Madrid."
     }
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "El enlace que has seguido no existe o ha cambiado de sitio. Desde aquí puedes volver al inicio o escribirnos.",
+    "home": "Volver al inicio"
+  },
+  "consent": {
+    "title": "Cookies y medición",
+    "text": "Usamos cookies de medición y publicidad (Google Analytics y Meta) para entender cómo llegas a la web. No se activa nada hasta que lo aceptes, y puedes rechazarlo sin perder ninguna funcionalidad.",
+    "accept": "Aceptar",
+    "decline": "Rechazar"
   }
 }

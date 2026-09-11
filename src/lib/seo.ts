@@ -31,6 +31,8 @@ export interface SeoInput {
   /** Root-relative or absolute image; falls back to the shared social image. */
   image?: string;
   type?: "website" | "article";
+  /** Keeps the page out of the index (404), while still following its links. */
+  noindex?: boolean;
 }
 
 function absolute(url: string): string {
@@ -78,7 +80,7 @@ function upsertSchema(graph: object): void {
   element.textContent = JSON.stringify(graph);
 }
 
-export function useSeo({ key, path, image, type = "website" }: SeoInput): void {
+export function useSeo({ key, path, image, type = "website", noindex = false }: SeoInput): void {
   const { t, i18n } = useTranslation();
   const language = i18n.resolvedLanguage ?? "es";
   const content = useContent();
@@ -91,6 +93,7 @@ export function useSeo({ key, path, image, type = "website" }: SeoInput): void {
 
     document.title = title;
     upsertMeta("name", "description", description);
+    upsertMeta("name", "robots", noindex ? "noindex, follow" : "index, follow");
     upsertLink("canonical", canonical);
 
     upsertMeta("property", "og:type", type);
@@ -111,5 +114,5 @@ export function useSeo({ key, path, image, type = "website" }: SeoInput): void {
     upsertSchema(
       buildGraph(content, { key, path, title, description, image: socialImage }, language),
     );
-  }, [t, key, path, image, type, language, content]);
+  }, [t, key, path, image, type, noindex, language, content]);
 }

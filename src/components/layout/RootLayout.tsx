@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ScrollToTop } from "./ScrollToTop";
+import { ConsentBanner } from "@/components/ConsentBanner";
 import { entryInitial, releaseEntryAnimations } from "@/lib/prerendered";
 import { applyPreferredLanguage } from "@/lib/i18n";
 
@@ -50,6 +51,7 @@ export function RootLayout() {
         </motion.div>
       </main>
       <Footer />
+      <ConsentBanner />
     </>
   );
 }

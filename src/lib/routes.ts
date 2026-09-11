@@ -29,6 +29,15 @@ export const ROUTES: AppRoute[] = [
 ];
 
 /**
+ * The 404 page. Kept out of `ROUTES` so it never reaches the sitemap; mirrors
+ * ERROR_ROUTE in scripts/routes.mjs, which writes it to `dist/404.html`.
+ */
+export const ERROR_ROUTE: AppRoute = {
+  path: "/404",
+  load: () => import("@/pages/NotFound"),
+};
+
+/**
  * Pages whose module is already in hand, so they can render synchronously.
  *
  * Nothing here goes through `React.lazy`, and that is deliberate: `lazy`
@@ -71,5 +80,5 @@ export function normalizePath(pathname: string): string {
 
 export function findRoute(pathname: string): AppRoute | undefined {
   const target = normalizePath(pathname);
-  return ROUTES.find((route) => route.path === target);
+  return [...ROUTES, ERROR_ROUTE].find((route) => route.path === target);
 }

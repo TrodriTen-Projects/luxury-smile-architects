@@ -1,5 +1,18 @@
-# SPA fallback: serve index.html for client-side routes (/, /tratamientos,
-# /contacto, etc.). Cloudflare Pages serves real static files first, so this
-# only catches paths that don't match an existing asset. 200 = rewrite, not a
-# redirect, so the URL stays put for react-router.
-/*    /index.html   200
+# Intentionally almost empty.
+#
+# There used to be a catch-all here:
+#
+#   /*    /index.html   200
+#
+# which rewrote every unmatched path to the homepage and answered 200. That was
+# needed while the app was a client-rendered SPA, but it meant /sitemap.xml,
+# /assets/typo.js and every mistyped URL all looked like valid pages to a
+# crawler — soft 404s across the entire site.
+#
+# Now that `postbuild` prerenders one real HTML file per route, Cloudflare Pages
+# serves those files directly and answers 404 (with dist/404.html) for anything
+# else, which is what a crawler should see. If the prerender ever fails, the
+# build fails with it, so a half-built dist/ never reaches production.
+#
+# Add redirects here when URLs move, e.g.:
+#   /old-path    /nuevo-path    301
