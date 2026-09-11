@@ -4,6 +4,12 @@ import { useTranslation } from "react-i18next";
 // numbers; the default entry ships the full dataset and was most of this
 // page's weight.
 import PhoneInput from "react-phone-number-input/min";
+// Bundled, not lazy-loaded, and not from the library's CDN
+// (purecatamphetamine.github.io), which `img-src 'self'` blocks. Deferring them
+// was tried and reverted: the field sat there with an empty placeholder instead
+// of a flag. The metadata still comes from `/min`, which is where most of the
+// weight was.
+import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
 import {
   MapPin,
@@ -38,9 +44,6 @@ import { useContent, pick } from "@/lib/content";
 
 type FieldErrors = Partial<Record<string, string>>;
 
-/** Country code -> flag component, as shipped by react-phone-number-input. */
-type FlagSet = Record<string, React.ComponentType<{ title?: string }>>;
-
 const EMPTY = {
   firstName: "",
   lastName: "",
@@ -74,37 +77,6 @@ export default function Contact() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [privacyOpen, setPrivacyOpen] = useState(false);
-
-  // 265 inline SVGs, one per country — the single heaviest thing on this page.
-  // Loaded after mount as its own chunk so the form is interactive first; the
-  // field simply shows country codes until they arrive. They are bundled rather
-  // than fetched from the library's default CDN because `img-src 'self'` blocks
-  // it, and relaxing the CSP for decorative flags is not a trade worth making.
-  const [flags, setFlags] = useState<FlagSet | undefined>(undefined);
-  useEffect(() => {
-    let active = true;
-    void import("react-phone-number-input/flags").then((module) => {
-      if (active) setFlags(module.default as FlagSet);
-    });
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  // Always supplied, even before the flags arrive. Left to its own devices the
-  // library falls back to its CDN (purecatamphetamine.github.io), which
-  // `img-src 'self'` blocks — so the field would sit there firing blocked
-  // requests. A neutral box holds the space until the real flag lands.
-  const FlagBox = useMemo(() => {
-    function Flag({ country, countryName }: { country: string; countryName: string }) {
-      const Loaded = flags?.[country];
-      if (!Loaded) {
-        return <span className="inline-block h-3 w-4 rounded-[1px] bg-foreground/15" aria-hidden="true" />;
-      }
-      return <Loaded title={countryName} />;
-    }
-    return Flag;
-  }, [flags]);
 
   // The Maps embed pulls ~1.3 MB of Google's own JavaScript (places, util,
   // init_embed). `loading="lazy"` is not enough: Chrome's threshold for iframes
@@ -312,7 +284,7 @@ export default function Contact() {
                   <Field id="phone" label={t("contact.form.phone")} error={errors.phone}>
                     <PhoneInput
                       id="phone"
-                      flagComponent={FlagBox}
+                      flags={flags}
                       international
                       defaultCountry="ES"
                       value={values.phone}

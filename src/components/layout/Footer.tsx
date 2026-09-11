@@ -51,15 +51,19 @@ export function Footer() {
             — which is what a crawler and an answer engine actually index.
             `<address>` and `tel:` make it machine-readable rather than
             decorative text. */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-          <address className="not-italic">
+        {/* `min-w-0` on every cell is load-bearing: grid items default to
+            `min-width: auto`, so the email address (34 characters, unbreakable)
+            refused to shrink and overlapped the Instagram column. Five columns
+            only at xl, where there is room for them. */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <address className="min-w-0 not-italic">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.addressLabel")}
             </p>
             <p className="mt-3 font-sans text-sm text-foreground">{t("contact.clinic.address")}</p>
             <p className="font-sans text-sm text-muted">{t("contact.clinic.area")}</p>
           </address>
-          <div>
+          <div className="min-w-0">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.phoneLabel")}
             </p>
@@ -70,30 +74,30 @@ export function Footer() {
               {t("contact.clinic.phone")}
             </a>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.hoursLabel")}
             </p>
             <p className="mt-3 font-sans text-sm text-muted">{t("contact.clinic.hours")}</p>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.emailLabel")}
             </p>
             <a
               href={`mailto:${t("contact.clinic.email")}`}
-              className="link-underline mt-3 inline-block font-sans text-sm text-foreground"
+              className="link-underline mt-3 inline-block break-all font-sans text-sm text-foreground"
             >
               {t("contact.clinic.email")}
             </a>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">Instagram</p>
             <a
               href={content.business.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline mt-3 inline-flex items-center gap-2 font-sans text-sm text-foreground"
+              className="link-underline mt-3 inline-flex items-center gap-2 break-all font-sans text-sm text-foreground"
             >
               <Instagram className="h-4 w-4" />
               @luxurysmilearchitectsmadrid
