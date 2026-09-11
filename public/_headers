@@ -1,8 +1,14 @@
 # Cloudflare Pages security headers + caching.
-# Applied to every response. Keep the CSP in sync with the `CSP` constant in
-# vite.config.ts (which injects the same policy as a <meta> tag into index.html).
+# Keep the CSP in sync with the `CSP` constant in vite.config.ts (which injects
+# the same policy as a <meta> tag into index.html).
+#
+# The policy allows exactly two third parties, both opt-in behind the consent
+# banner: Meta Pixel (connect.facebook.net) and GA4 via gtag.js
+# (www.googletagmanager.com). Nothing loads until the visitor accepts.
+# `script-src` has no 'unsafe-inline' and must not gain one: the tags are
+# initialised from the app bundle, which is already 'self'.
 /*
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; media-src 'self' blob:; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none'; object-src 'none'; form-action 'self'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; script-src 'self' https://connect.facebook.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.facebook.com https://connect.facebook.net https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; media-src 'self' blob:; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none'; object-src 'none'; form-action 'self'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
@@ -11,10 +17,17 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
   X-DNS-Prefetch-Control: off
+  # Prerendered HTML: always revalidate, so a redeploy is visible immediately.
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Fingerprinted bundles never change — cache them hard.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Edited through the CMS, and carries the analytics IDs. A long cache here
+# would mean a content change takes hours to show up.
+/content/*
+  Cache-Control: public, max-age=60, must-revalidate
 
 # Translations can change between deploys — revalidate hourly.
 /locales/*
@@ -24,3 +37,22 @@
 # repeat visits don't re-download. Bump the filename if you swap a clip.
 /media/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# Regenerated from the hero on every build; content-addressed by deploy.
+/og-default.jpg
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# CMS. El documento /admin lo sirve una Pages Function con su propia CSP
+# (functions/admin/index.js); esto solo cachea sus assets. El bundle lleva la
+# versión fijada en package.json y se regenera en cada build.
+/admin/*
+  Cache-Control: public, max-age=3600, must-revalidate
+  X-Robots-Tag: noindex, nofollow

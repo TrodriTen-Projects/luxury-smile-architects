@@ -6,9 +6,13 @@ import { MapPin, Clock, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/SectionReveal";
+import { useSeo } from "@/lib/seo";
+import { useLocalePath } from "@/lib/use-locale-path";
 
 export default function About() {
   const { t } = useTranslation();
+  const p = useLocalePath();
+  useSeo({ pageId: "about" });
 
   const [activeLocation, setActiveLocation] = useState<"clinic" | "lab" | "finance" | null>(null);
 
@@ -189,7 +193,7 @@ export default function About() {
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="primary" size="lg" className="flex-1 text-sm sm:text-base h-14">
-              <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
+              <Link to={p("contact")} onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
             </Button>
             <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
               {t("common.back")}
@@ -222,7 +226,7 @@ export default function About() {
           </ul>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="primary" size="lg" className="flex-1 text-sm sm:text-base h-14">
-              <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
+              <Link to={p("contact")} onClick={() => setActiveLocation(null)}>{t("common.bookCta")}</Link>
             </Button>
             <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
               {t("common.back")}
@@ -278,7 +282,7 @@ export default function About() {
             <p className="font-serif text-gold text-lg italic mb-8">{t("about.financeModal.footer")}</p>
             <div className="flex flex-col gap-3 sm:w-2/3 sm:flex-row mx-auto">
               <Button asChild variant="primary" size="lg" className="flex-1 text-sm sm:text-base h-14">
-                <Link to="/contacto" onClick={() => setActiveLocation(null)}>{t("about.financeModal.cta")}</Link>
+                <Link to={p("contact")} onClick={() => setActiveLocation(null)}>{t("about.financeModal.cta")}</Link>
               </Button>
               <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
                 {t("common.back")}

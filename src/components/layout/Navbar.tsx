@@ -4,19 +4,21 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
+import { useLocalePath } from "@/lib/use-locale-path";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useContent } from "@/lib/content";
 
 const LINKS = [
-  { to: "/quienes-somos", key: "nav.about" },
-  { to: "/tratamientos", key: "nav.treatments" },
-  { to: "/resultados", key: "nav.results" },
-  { to: "/equipo", key: "nav.team" },
-  { to: "/contacto", key: "nav.contact" },
+  { page: "about", key: "nav.about" },
+  { page: "treatments", key: "nav.treatments" },
+  { page: "results", key: "nav.results" },
+  { page: "team", key: "nav.team" },
+  { page: "contact", key: "nav.contact" },
 ] as const;
 
 export function Navbar() {
   const { t } = useTranslation();
+  const p = useLocalePath();
   const { pathname } = useLocation();
   const content = useContent();
   const [scrolled, setScrolled] = useState(false);
@@ -52,11 +54,11 @@ export function Navbar() {
         <div className="flex items-center gap-8 lg:gap-12 xl:gap-16">
           <div className="flex shrink-0 items-center">
             {content.logo.image ? (
-              <Link to="/" aria-label="Luxury Smile Architects" className="shrink-0">
+              <Link to={p("home")} aria-label="Luxury Smile Architects" className="shrink-0">
                 <img src={content.logo.image} alt="Luxury Smile Architects" className="h-6 w-auto lg:h-7 xl:h-8" />
               </Link>
             ) : (
-              <Link to="/" className="flex shrink-0 flex-col leading-tight" aria-label="Luxury Smile Architects">
+              <Link to={p("home")} className="flex shrink-0 flex-col leading-tight" aria-label="Luxury Smile Architects">
                 <span className="whitespace-nowrap font-sans text-lg font-medium tracking-wide text-foreground lg:text-xl xl:text-2xl">
                   LUXURY SMILE
                 </span>
@@ -70,9 +72,9 @@ export function Navbar() {
           {/* Links */}
           <ul className="hidden items-center gap-4 lg:flex lg:gap-6 xl:gap-10 shrink-0">
             {LINKS.map((link) => (
-              <li key={link.to}>
+              <li key={link.page}>
                 <NavLink
-                  to={link.to}
+                  to={p(link.page)}
                   className={({ isActive }) =>
                     cn(
                       "link-underline whitespace-nowrap font-sans text-[0.65rem] font-medium uppercase tracking-[0.15em] transition-colors xl:text-[0.72rem] xl:tracking-[0.2em]",
@@ -91,7 +93,7 @@ export function Navbar() {
         <div className="hidden shrink-0 items-center justify-end gap-4 lg:flex lg:gap-6">
           <LanguageSwitcher />
           <Link
-            to="/contacto"
+            to={p("contact")}
             className="link-underline whitespace-nowrap font-sans text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-gold xl:text-[0.72rem] xl:tracking-[0.2em]"
           >
             {t("nav.book")}
@@ -123,13 +125,13 @@ export function Navbar() {
             <ul className="flex flex-col">
               {LINKS.map((link, i) => (
                 <motion.li
-                  key={link.to}
+                  key={link.page}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 * i + 0.05 }}
                 >
                   <NavLink
-                    to={link.to}
+                    to={p(link.page)}
                     className="flex items-center justify-between border-b border-border/50 py-6"
                   >
                     <span className="display text-4xl text-foreground">{t(link.key)}</span>
@@ -140,7 +142,7 @@ export function Navbar() {
             </ul>
             <div className="mt-auto flex items-center justify-between pt-10">
               <LanguageSwitcher />
-              <Link to="/contacto" className="eyebrow text-gold">
+              <Link to={p("contact")} className="eyebrow text-gold">
                 {t("nav.book")}
               </Link>
             </div>

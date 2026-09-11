@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
 
 import { useContent } from "@/lib/content";
+import { useLocalePath } from "@/lib/use-locale-path";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const NAV = [
-  { to: "/tratamientos", key: "nav.treatments" },
-  { to: "/resultados", key: "nav.results" },
-  { to: "/equipo", key: "nav.team" },
-  { to: "/contacto", key: "nav.contact" },
+  { page: "treatments", key: "nav.treatments" },
+  { page: "results", key: "nav.results" },
+  { page: "team", key: "nav.team" },
+  { page: "contact", key: "nav.contact" },
 ] as const;
 
 export function Footer() {
   const { t } = useTranslation();
+  const p = useLocalePath();
   const content = useContent();
   const year = new Date().getFullYear();
 
@@ -23,7 +25,7 @@ export function Footer() {
         <div className="flex flex-col gap-16 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="eyebrow mb-6">{t("footer.tagline")}</p>
-            <Link to="/contacto" className="block">
+            <Link to={p("contact")} className="block">
               <span className="display block text-[clamp(2.5rem,6vw,5rem)] text-foreground">
                 {t("footer.cta")}
               </span>
@@ -32,8 +34,8 @@ export function Footer() {
           <nav className="flex flex-col gap-3">
             {NAV.map((item) => (
               <Link
-                key={item.to}
-                to={item.to}
+                key={item.page}
+                to={p(item.page)}
                 className="link-underline font-sans text-sm uppercase tracking-[0.2em] text-muted hover:text-foreground"
               >
                 {t(item.key)}
@@ -44,38 +46,58 @@ export function Footer() {
 
         <div className="my-14 hairline" />
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+        {/* NAP. Prerendering puts this block in the HTML of all seven pages, so
+            the name, address and phone are readable without running JavaScript
+            — which is what a crawler and an answer engine actually index.
+            `<address>` and `tel:` make it machine-readable rather than
+            decorative text. */}
+        {/* `min-w-0` on every cell is load-bearing: grid items default to
+            `min-width: auto`, so the email address (34 characters, unbreakable)
+            refused to shrink and overlapped the Instagram column. Five columns
+            only at xl, where there is room for them. */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <address className="min-w-0 not-italic">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.addressLabel")}
             </p>
             <p className="mt-3 font-sans text-sm text-foreground">{t("contact.clinic.address")}</p>
             <p className="font-sans text-sm text-muted">{t("contact.clinic.area")}</p>
+          </address>
+          <div className="min-w-0">
+            <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
+              {t("contact.clinic.phoneLabel")}
+            </p>
+            <a
+              href={`tel:${t("contact.clinic.phone").replace(/[^\d+]/g, "")}`}
+              className="link-underline mt-3 inline-block font-sans text-sm text-foreground"
+            >
+              {t("contact.clinic.phone")}
+            </a>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.hoursLabel")}
             </p>
             <p className="mt-3 font-sans text-sm text-muted">{t("contact.clinic.hours")}</p>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.emailLabel")}
             </p>
             <a
               href={`mailto:${t("contact.clinic.email")}`}
-              className="link-underline mt-3 inline-block font-sans text-sm text-foreground"
+              className="link-underline mt-3 inline-block break-all font-sans text-sm text-foreground"
             >
               {t("contact.clinic.email")}
             </a>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">Instagram</p>
             <a
               href={content.business.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline mt-3 inline-flex items-center gap-2 font-sans text-sm text-foreground"
+              className="link-underline mt-3 inline-flex items-center gap-2 break-all font-sans text-sm text-foreground"
             >
               <Instagram className="h-4 w-4" />
               @luxurysmilearchitectsmadrid

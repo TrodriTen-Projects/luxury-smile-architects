@@ -1,2 +1,42 @@
+# Luxury Smile Architects — https://luxurysmilearchitects.eu
+#
+# IMPORTANT: this file is currently NOT what the domain serves. Cloudflare's
+# managed robots.txt is switched on and replaces it, prepending `Disallow: /`
+# for GPTBot, ClaudeBot, Google-Extended, CCBot and others, plus a
+# `Content-Signal: ai-train=no`. Check with:
+#
+#   curl https://luxurysmilearchitects.eu/robots.txt
+#
+# Until that setting is turned off (Cloudflare dashboard -> Security ->
+# Settings -> Bot traffic -> managed robots.txt), everything below is inert.
+# Turning it off is also only half the job: the WAF answers 403 to those same
+# crawlers before they ever reach the HTML.
+
 User-agent: *
 Allow: /
+# Panel de contenido: nada que indexar.
+Disallow: /admin
+
+# Answer engines. These are allowed on purpose: being cited by ChatGPT,
+# Perplexity or Claude is the point of the GEO work, not a side effect.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Controls whether Googlebot's existing crawl may be used for Gemini training.
+# Not a crawler: it never requests a page.
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://luxurysmilearchitects.eu/sitemap.xml

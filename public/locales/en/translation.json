@@ -217,7 +217,7 @@
       "address": "Calle de Recoletos 20",
       "area": "Salamanca district, 28001 Madrid",
       "phoneLabel": "Phone",
-      "phone": "+34 659 716 995",
+      "phone": "+34 689 440 906",
       "whatsappLabel": "WhatsApp",
       "whatsapp": "+34 689 440 906",
       "emailLabel": "Email",
@@ -246,5 +246,46 @@
     "rights": "All rights reserved.",
     "privacy": "Privacy policy",
     "legal": "Legal notice"
+  },
+  "seo": {
+    "home": {
+      "title": "Luxury Smile Architects · Aesthetic Dentistry in Madrid",
+      "description": "Aesthetic dentistry in the Salamanca district, Madrid. Smile design with Dr. Martín Prato. Calle de Recoletos 20 · +34 689 440 906."
+    },
+    "treatments": {
+      "title": "Treatments · Luxury Smile Architects Madrid",
+      "description": "Veneers, smile design, implants, whitening and oral rehabilitation in Madrid. Calle de Recoletos 20, Salamanca district · +34 689 440 906."
+    },
+    "results": {
+      "title": "Before and After Results · Luxury Smile Architects",
+      "description": "Real smile design cases in composite and porcelain. Clinic at Calle de Recoletos 20, Salamanca district, Madrid · +34 689 440 906."
+    },
+    "team": {
+      "title": "Clinical Team · Luxury Smile Architects Madrid",
+      "description": "Dr. Martín Prato and the Luxury Smile Architects team in Madrid. Calle de Recoletos 20, Salamanca district · +34 689 440 906."
+    },
+    "about": {
+      "title": "About Us · Luxury Smile Architects Madrid",
+      "description": "Boutique aesthetic dentistry clinic with its own lab in the Salamanca district. Calle de Recoletos 20, Madrid · +34 689 440 906."
+    },
+    "contact": {
+      "title": "Contact and Appointments · Luxury Smile Architects Madrid",
+      "description": "Book your assessment at Calle de Recoletos 20, Salamanca district, 28001 Madrid. Monday to Friday, 10:00–20:00 · +34 689 440 906."
+    },
+    "notFound": {
+      "title": "Page not found · Luxury Smile Architects",
+      "description": "The link you followed does not exist. Go back to the homepage or contact the clinic at Calle de Recoletos 20, Salamanca district, Madrid."
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The link you followed does not exist or has moved. From here you can go back to the homepage or get in touch.",
+    "home": "Back to homepage"
+  },
+  "consent": {
+    "title": "Cookies and measurement",
+    "text": "We use analytics and advertising cookies (Google Analytics and Meta) to understand how you reached the site. Nothing is enabled until you accept, and you can decline without losing any functionality.",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }

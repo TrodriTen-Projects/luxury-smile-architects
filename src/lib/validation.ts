@@ -1,5 +1,7 @@
 import { z } from "zod";
-import { isValidPhoneNumber } from "react-phone-number-input";
+// Same metadata set as the form (see Contact.tsx), so the validator and the
+// input agree and the bundle carries one copy, not two.
+import { isValidPhoneNumber } from "react-phone-number-input/min";
 
 /**
  * Factory so error messages can be localised via i18next at call time.

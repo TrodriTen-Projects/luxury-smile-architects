@@ -1,9 +1,14 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import PhoneInput from "react-phone-number-input";
-// Bundle the country flags so they're served from our own origin instead of the
-// library's default external CDN (purecatamphetamine.github.io), which our
-// strict `img-src 'self'` CSP blocks. Keeps the field offline-safe & CSP-clean.
+// `/min` carries the smallest libphonenumber metadata that still validates
+// numbers; the default entry ships the full dataset and was most of this
+// page's weight.
+import PhoneInput from "react-phone-number-input/min";
+// Bundled, not lazy-loaded, and not from the library's CDN
+// (purecatamphetamine.github.io), which `img-src 'self'` blocks. Deferring them
+// was tried and reverted: the field sat there with an empty placeholder instead
+// of a flag. The metadata still comes from `/min`, which is where most of the
+// weight was.
 import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
 import {
@@ -19,6 +24,7 @@ import {
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { useSeo } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -53,6 +59,7 @@ const EMPTY = {
 
 export default function Contact() {
   const { t, i18n } = useTranslation();
+  useSeo({ pageId: "contact" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const treatments = content.treatments;
@@ -70,6 +77,33 @@ export default function Contact() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [privacyOpen, setPrivacyOpen] = useState(false);
+
+  // The Maps embed pulls ~1.3 MB of Google's own JavaScript (places, util,
+  // init_embed). `loading="lazy"` is not enough: Chrome's threshold for iframes
+  // is generous enough that it still loads on this page. Mounting the iframe
+  // only once its container is actually near the viewport keeps that megabyte
+  // off the initial load, and the map still appears on scroll as before.
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const [mapVisible, setMapVisible] = useState(false);
+  useEffect(() => {
+    const node = mapRef.current;
+    if (!node || mapVisible) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setMapVisible(true); // no observer: fall back to loading it
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setMapVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [mapVisible]);
 
   const set = (key: keyof typeof EMPTY, value: string | boolean) =>
     setValues((v) => ({ ...v, [key]: value }));
@@ -441,15 +475,22 @@ export default function Contact() {
           </SectionReveal>
 
           <SectionReveal delay={0.1} className="mt-10">
-            <div className="overflow-hidden rounded-[3px] border border-border">
-              <iframe
-                title={t("contact.map.title")}
-                src={mapEmbedUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-[320px] w-full sm:h-[440px]"
-                style={{ border: 0, filter: "grayscale(0.2)" }}
-              />
+            <div ref={mapRef} className="overflow-hidden rounded-[3px] border border-border">
+              {mapVisible ? (
+                <iframe
+                  title={t("contact.map.title")}
+                  src={mapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-[320px] w-full sm:h-[440px]"
+                  style={{ border: 0, filter: "grayscale(0.2)" }}
+                />
+              ) : (
+                <div
+                  className="h-[320px] w-full bg-elevated sm:h-[440px]"
+                  aria-hidden="true"
+                />
+              )}
             </div>
           </SectionReveal>
         </div>

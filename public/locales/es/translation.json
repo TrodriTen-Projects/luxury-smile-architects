@@ -202,7 +202,7 @@
       "invalidPhone": "Introduce un teléfono válido",
       "consentRequired": "Debes aceptar la política de privacidad",
       "successTitle": "Gracias",
-      "success": "Te hemos redirigido a WhatsApp para enviar tu solicitud. \u00A1Nos vemos all\u00ED!",
+      "success": "Te hemos redirigido a WhatsApp para enviar tu solicitud. ¡Nos vemos allí!",
       "errorTitle": "Algo salió mal",
       "error": "No se pudo procesar la solicitud. Inténtalo de nuevo o escríbenos directamente."
     },
@@ -217,7 +217,7 @@
       "address": "Calle de Recoletos 20",
       "area": "Barrio de Salamanca, 28001 Madrid",
       "phoneLabel": "Teléfono",
-      "phone": "+34 659 716 995",
+      "phone": "+34 689 440 906",
       "whatsappLabel": "WhatsApp",
       "whatsapp": "+34 689 440 906",
       "emailLabel": "Email",
@@ -246,5 +246,46 @@
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de privacidad",
     "legal": "Aviso legal"
+  },
+  "seo": {
+    "home": {
+      "title": "Luxury Smile Architects · Odontología estética en Madrid",
+      "description": "Odontología estética en el Barrio de Salamanca, Madrid. Diseño de sonrisa con el Dr. Martín Prato. Calle de Recoletos 20 · +34 689 440 906."
+    },
+    "treatments": {
+      "title": "Tratamientos · Luxury Smile Architects Madrid",
+      "description": "Carillas, diseño de sonrisa, implantes, blanqueamiento y rehabilitación oral en Madrid. Calle de Recoletos 20, Barrio de Salamanca · +34 689 440 906."
+    },
+    "results": {
+      "title": "Resultados antes y después · Luxury Smile Architects",
+      "description": "Casos reales de diseño de sonrisa en composite y porcelana. Clínica en Calle de Recoletos 20, Barrio de Salamanca, Madrid · +34 689 440 906."
+    },
+    "team": {
+      "title": "Equipo clínico · Luxury Smile Architects Madrid",
+      "description": "El Dr. Martín Prato y el equipo de Luxury Smile Architects en Madrid. Calle de Recoletos 20, Barrio de Salamanca · +34 689 440 906."
+    },
+    "about": {
+      "title": "Quiénes somos · Luxury Smile Architects Madrid",
+      "description": "Clínica boutique de odontología estética con laboratorio propio en el Barrio de Salamanca. Calle de Recoletos 20, Madrid · +34 689 440 906."
+    },
+    "contact": {
+      "title": "Contacto y cita previa · Luxury Smile Architects Madrid",
+      "description": "Pide tu valoración en Calle de Recoletos 20, Barrio de Salamanca, 28001 Madrid. Lunes a viernes de 10:00 a 20:00 · +34 689 440 906."
+    },
+    "notFound": {
+      "title": "Página no encontrada · Luxury Smile Architects",
+      "description": "El enlace que has seguido no existe. Vuelve al inicio o contacta con la clínica en Calle de Recoletos 20, Barrio de Salamanca, Madrid."
+    }
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "El enlace que has seguido no existe o ha cambiado de sitio. Desde aquí puedes volver al inicio o escribirnos.",
+    "home": "Volver al inicio"
+  },
+  "consent": {
+    "title": "Cookies y medición",
+    "text": "Usamos cookies de medición y publicidad (Google Analytics y Meta) para entender cómo llegas a la web. No se activa nada hasta que lo aceptes, y puedes rechazarlo sin perder ninguna funcionalidad.",
+    "accept": "Aceptar",
+    "decline": "Rechazar"
   }
 }

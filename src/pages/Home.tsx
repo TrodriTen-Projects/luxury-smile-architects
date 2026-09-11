@@ -15,11 +15,16 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { useContent, pick } from "@/lib/content";
+import { useLocalePath } from "@/lib/use-locale-path";
+import { useSeo } from "@/lib/seo";
+import { entryInitial, isSuppressingEntry } from "@/lib/prerendered";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  const p = useLocalePath();
+  useSeo({ pageId: "home" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const treatments = content.treatments;
@@ -54,7 +59,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1400px] items-center px-6 pt-24 lg:px-12">
           <div className="w-full lg:w-[54%] lg:pr-10">
           <motion.p
-            initial={{ opacity: 0, y: 14 }}
+            initial={entryInitial({ opacity: 0, y: 14 })}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
             className="eyebrow"
@@ -64,7 +69,7 @@ export default function Home() {
 
           <h1 className="display mt-7 text-[clamp(2.8rem,7vw,6rem)]">
             <motion.span
-              initial={{ opacity: 0, y: 28 }}
+              initial={entryInitial({ opacity: 0, y: 28 })}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease, delay: 0.08 }}
               className="block text-foreground"
@@ -72,7 +77,7 @@ export default function Home() {
               {t("hero.title")}
             </motion.span>
             <motion.span
-              initial={{ opacity: 0, y: 28 }}
+              initial={entryInitial({ opacity: 0, y: 28 })}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease, delay: 0.18 }}
               className="display-light block italic text-gold-gradient"
@@ -82,7 +87,7 @@ export default function Home() {
           </h1>
 
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={entryInitial({ opacity: 0, y: 18 })}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease, delay: 0.34 }}
             className="mt-10 flex max-w-md flex-col gap-7 border-t border-foreground/15 pt-7"
@@ -92,13 +97,13 @@ export default function Home() {
             </p>
             <div className="flex items-center gap-8">
               <Link
-                to="/contacto"
+                to={p("contact")}
                 className="link-underline font-sans text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-gold"
               >
                 {t("hero.ctaPrimary")}
               </Link>
               <Link
-                to="/resultados"
+                to={p("results")}
                 className="link-underline font-sans text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-foreground"
               >
                 {t("hero.ctaSecondary")}
@@ -109,13 +114,15 @@ export default function Home() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={entryInitial({ opacity: 0 })}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 1 }}
           className="pointer-events-none absolute bottom-8 left-6 z-10 hidden text-muted lg:left-12 lg:flex"
         >
           <motion.span
-            animate={{ y: [0, 8, 0] }}
+            // Held still until hydration: a looping keyframe serialises at an
+            // arbitrary point in its cycle, which no client render can match.
+            animate={isSuppressingEntry() ? { y: 0 } : { y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.9, ease: "easeInOut" }}
           >
             <ArrowDown className="h-4 w-4" />
@@ -140,7 +147,7 @@ export default function Home() {
               </p>
             </div>
             <Link
-              to="/resultados"
+              to={p("results")}
               className="link-underline hidden font-sans text-[0.72rem] uppercase tracking-[0.2em] text-gold sm:inline"
             >
               {t("common.viewResults")}
@@ -205,10 +212,10 @@ export default function Home() {
           </SectionReveal>
           <SectionReveal delay={0.12} className="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md mx-auto">
             <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link to="/contacto">{t("common.bookCta")}</Link>
+              <Link to={p("contact")}>{t("common.bookCta")}</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link to="/resultados">{t("common.viewResults")}</Link>
+              <Link to={p("results")}>{t("common.viewResults")}</Link>
             </Button>
           </SectionReveal>
         </div>
@@ -225,7 +232,7 @@ export default function Home() {
               </h2>
             </div>
             <Link
-              to="/tratamientos"
+              to={p("treatments")}
               className="link-underline hidden font-sans text-[0.72rem] uppercase tracking-[0.2em] text-gold sm:inline"
             >
               {t("common.allTreatments")}
@@ -236,7 +243,7 @@ export default function Home() {
             {treatments.map((item, i) => (
               <SectionReveal as="li" key={item.id} delay={(i % 3) * 0.04}>
                 <Link
-                  to="/tratamientos"
+                  to={p("treatments")}
                   className="group grid grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-border py-6 transition-colors last:border-b hover:bg-elevated"
                 >
                   <span className="index-num text-xl sm:text-2xl">

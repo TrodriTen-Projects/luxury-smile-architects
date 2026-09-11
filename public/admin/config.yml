@@ -1,0 +1,2156 @@
+# GENERADO por scripts/gen-cms-config.mjs — no editar a mano.
+# Los campos de los archivos de idioma se derivan del JSON real: un campo
+# que faltara aquí borraría esa traducción al guardar desde el CMS.
+backend:
+  name: "github"
+  repo: "TrodriTen-Projects/luxury-smile-architects"
+  branch: "master"
+  base_url: "https://luxurysmilearchitects.eu"
+  auth_endpoint: "api/auth"
+  commit_messages:
+    update: "contenido: actualiza {{collection}}"
+    uploadMedia: "contenido: sube {{path}}"
+    deleteMedia: "contenido: elimina {{path}}"
+media_folder: "public/media"
+public_folder: "/media"
+locale: "es"
+publish_mode: "simple"
+collections:
+  - name: "contenido"
+    label: "Contenido"
+    files:
+      - name: "site"
+        label: "Clínica, equipo y tratamientos"
+        file: "public/content/site.json"
+        description: "Datos de la clínica, equipo, tratamientos, casos y reseñas. Al guardar se publica solo en unos minutos."
+        fields:
+          - name: "_readme"
+            label: "Notas internas (no tocar)"
+            widget: "text"
+            required: false
+          - name: "hero"
+            label: "Portada"
+            widget: "object"
+            fields:
+              - name: "image"
+                label: "Foto principal"
+                widget: "image"
+              - name: "fallback"
+                label: "Foto alternativa"
+                widget: "image"
+                required: false
+              - name: "position"
+                label: "Encuadre (p. ej. 50% 0%)"
+                widget: "string"
+                hint: "El segundo número sube o baja el recorte: 0% arriba, 100% abajo. También decide el recorte de la imagen que se ve al compartir el enlace."
+          - name: "logo"
+            label: "Logotipo"
+            widget: "object"
+            fields:
+              - name: "image"
+                label: "Imagen del logo"
+                widget: "image"
+                required: false
+          - name: "treatments"
+            label: "Tratamientos"
+            label_singular: "Tratamiento"
+            widget: "list"
+            summary: "{{fields.name.es}}"
+            hint: "Cada tratamiento aparece en la página de Tratamientos, en el inicio y en el desplegable de Contacto. También se publica como dato estructurado para Google."
+            fields:
+              - name: "id"
+                label: "Identificador único (sin espacios)"
+                widget: "string"
+                pattern:
+                  - "^[a-z0-9-]+$"
+                  - "Solo minúsculas, números y guiones"
+              - name: "image"
+                label: "Imagen"
+                widget: "image"
+              - name: "name"
+                label: "Nombre"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "string"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "string"
+              - name: "tagline"
+                label: "Frase corta"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "string"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "string"
+              - name: "summary"
+                label: "Descripción"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "text"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "text"
+          - name: "team"
+            label: "Equipo"
+            label_singular: "Persona"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - name: "id"
+                label: "Identificador único (sin espacios)"
+                widget: "string"
+                pattern:
+                  - "^[a-z0-9-]+$"
+                  - "Solo minúsculas, números y guiones"
+              - name: "name"
+                label: "Nombre completo"
+                widget: "string"
+              - name: "photo"
+                label: "Foto"
+                widget: "image"
+              - name: "role"
+                label: "Puesto"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "string"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "string"
+              - name: "credentials"
+                label: "Titulación"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "string"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "string"
+              - name: "bio"
+                label: "Biografía"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "text"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "text"
+          - name: "beforeAfter"
+            label: "Casos antes y después"
+            label_singular: "Caso"
+            widget: "list"
+            fields:
+              - name: "before"
+                label: "Antes"
+                widget: "image"
+              - name: "after"
+                label: "Después"
+                widget: "image"
+          - name: "business"
+            label: "Datos de la clínica"
+            widget: "object"
+            hint: "Estos datos alimentan la ficha que leen Google y los asistentes de IA. Deben coincidir exactamente con Google Business Profile."
+            fields:
+              - name: "placeQuery"
+                label: "Dirección para el mapa"
+                widget: "string"
+              - name: "phone"
+                label: "Teléfono principal"
+                widget: "string"
+                hint: "Formato internacional sin espacios, p. ej. +34689440906. Debe ser el mismo que figura en Google Business Profile."
+                pattern:
+                  - "^\\+[0-9]{9,15}$"
+                  - "Formato internacional, p. ej. +34689440906"
+              - name: "phoneSecondary"
+                label: "Teléfono secundario"
+                widget: "string"
+                required: false
+                pattern:
+                  - "^\\+[0-9]{9,15}$"
+                  - "Formato internacional, p. ej. +34659716995"
+              - name: "whatsapp"
+                label: "WhatsApp"
+                widget: "string"
+                pattern:
+                  - "^\\+[0-9]{9,15}$"
+                  - "Formato internacional, p. ej. +34689440906"
+              - name: "email"
+                label: "Email"
+                widget: "string"
+              - name: "address"
+                label: "Dirección"
+                widget: "object"
+                fields:
+                  - name: "street"
+                    label: "Calle y número"
+                    widget: "string"
+                  - name: "district"
+                    label: "Barrio"
+                    widget: "string"
+                  - name: "postalCode"
+                    label: "Código postal"
+                    widget: "string"
+                  - name: "city"
+                    label: "Ciudad"
+                    widget: "string"
+                  - name: "region"
+                    label: "Provincia"
+                    widget: "string"
+                  - name: "country"
+                    label: "País (2 letras, p. ej. ES)"
+                    widget: "string"
+                    pattern:
+                      - "^[A-Z]{2}$"
+                      - "Dos letras mayúsculas"
+              - name: "geo"
+                label: "Coordenadas"
+                widget: "object"
+                hint: "Se obtienen en Google Maps: clic derecho sobre el local y 'Qué hay aquí'."
+                fields:
+                  - name: "latitude"
+                    label: "Latitud"
+                    widget: "number"
+                    value_type: "float"
+                  - name: "longitude"
+                    label: "Longitud"
+                    widget: "number"
+                    value_type: "float"
+              - name: "hours"
+                label: "Horario"
+                widget: "object"
+                hint: "Solo los días que se abre. No listar un día equivale a cerrado."
+                fields:
+                  - name: "days"
+                    label: "Días (en inglés: Monday, Tuesday…)"
+                    widget: "list"
+                  - name: "opens"
+                    label: "Abre (HH:MM)"
+                    widget: "string"
+                    pattern:
+                      - "^[0-2][0-9]:[0-5][0-9]$"
+                      - "Formato HH:MM"
+                  - name: "closes"
+                    label: "Cierra (HH:MM)"
+                    widget: "string"
+                    pattern:
+                      - "^[0-2][0-9]:[0-5][0-9]$"
+                      - "Formato HH:MM"
+              - name: "reviewsUrl"
+                label: "Enlace a las reseñas de Google"
+                widget: "string"
+              - name: "instagram"
+                label: "Instagram"
+                widget: "string"
+              - name: "rating"
+                label: "Nota media (p. ej. 5.0)"
+                widget: "string"
+                required: false
+              - name: "reviewsCount"
+                label: "Número de reseñas (texto)"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "string"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "string"
+          - name: "tracking"
+            label: "Medición"
+            widget: "object"
+            hint: "Dejar vacío desactiva esa herramienta, sin errores. Nada se activa hasta que el visitante acepta las cookies."
+            fields:
+              - name: "metaPixelId"
+                label: "ID del píxel de Meta"
+                widget: "string"
+                required: false
+                pattern:
+                  - "^$|^[0-9]{15,16}$"
+                  - "15 o 16 dígitos, o vacío para desactivarlo"
+              - name: "ga4MeasurementId"
+                label: "ID de medición de Google Analytics 4"
+                widget: "string"
+                required: false
+                pattern:
+                  - "^$|^G-[A-Z0-9]{6,12}$"
+                  - "Empieza por G-, o vacío para desactivarlo"
+          - name: "reviews"
+            label: "Reseñas"
+            label_singular: "Reseña"
+            widget: "list"
+            summary: "{{fields.author}}"
+            hint: "Se muestran en la web como contenido. No se publican como dato estructurado: las directrices de Google prohíben marcar reseñas copiadas de otro sitio."
+            fields:
+              - name: "author"
+                label: "Autor"
+                widget: "string"
+              - name: "rating"
+                label: "Estrellas (1 a 5)"
+                widget: "number"
+                value_type: "int"
+                min: 1
+                max: 5
+              - name: "text"
+                label: "Texto"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "text"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "text"
+              - name: "date"
+                label: "Fecha (texto)"
+                widget: "object"
+                fields:
+                  - name: "es"
+                    label: "Español"
+                    widget: "string"
+                  - name: "en"
+                    label: "Inglés"
+                    widget: "string"
+      - name: "locale_es"
+        label: "Textos en español"
+        file: "public/locales/es/translation.json"
+        description: "Todos los textos visibles de la web en español."
+        fields:
+          - name: "nav"
+            label: "Nav"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "treatments"
+                label: "Treatments"
+                widget: "string"
+                required: false
+              - name: "results"
+                label: "Results"
+                widget: "string"
+                required: false
+              - name: "team"
+                label: "Team"
+                widget: "string"
+                required: false
+              - name: "contact"
+                label: "Contact"
+                widget: "string"
+                required: false
+              - name: "about"
+                label: "About"
+                widget: "string"
+                required: false
+              - name: "book"
+                label: "Book"
+                widget: "string"
+                required: false
+              - name: "menu"
+                label: "Menu"
+                widget: "string"
+                required: false
+              - name: "close"
+                label: "Close"
+                widget: "string"
+                required: false
+          - name: "lang"
+            label: "Lang"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "switch"
+                label: "Switch"
+                widget: "string"
+                required: false
+              - name: "es"
+                label: "Es"
+                widget: "string"
+                required: false
+              - name: "en"
+                label: "En"
+                widget: "string"
+                required: false
+          - name: "common"
+            label: "Common"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "bookCta"
+                label: "Book Cta"
+                widget: "string"
+                required: false
+              - name: "discover"
+                label: "Discover"
+                widget: "string"
+                required: false
+              - name: "allTreatments"
+                label: "All Treatments"
+                widget: "string"
+                required: false
+              - name: "viewTreatment"
+                label: "View Treatment"
+                widget: "string"
+                required: false
+              - name: "moreInfo"
+                label: "More Info"
+                widget: "string"
+                required: false
+              - name: "back"
+                label: "Back"
+                widget: "string"
+                required: false
+              - name: "viewResults"
+                label: "View Results"
+                widget: "string"
+                required: false
+              - name: "talkToUs"
+                label: "Talk To Us"
+                widget: "string"
+                required: false
+              - name: "followUs"
+                label: "Follow Us"
+                widget: "string"
+                required: false
+          - name: "hero"
+            label: "Hero"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "titleAccent"
+                label: "Title Accent"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "text"
+                required: false
+              - name: "ctaPrimary"
+                label: "Cta Primary"
+                widget: "string"
+                required: false
+              - name: "ctaSecondary"
+                label: "Cta Secondary"
+                widget: "string"
+                required: false
+              - name: "scroll"
+                label: "Scroll"
+                widget: "string"
+                required: false
+          - name: "home"
+            label: "Home"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "introKicker"
+                label: "Intro Kicker"
+                widget: "string"
+                required: false
+              - name: "introTitle"
+                label: "Intro Title"
+                widget: "string"
+                required: false
+              - name: "introText"
+                label: "Intro Text"
+                widget: "text"
+                required: false
+              - name: "treatmentsKicker"
+                label: "Treatments Kicker"
+                widget: "string"
+                required: false
+              - name: "treatmentsTitle"
+                label: "Treatments Title"
+                widget: "string"
+                required: false
+              - name: "resultsKicker"
+                label: "Results Kicker"
+                widget: "string"
+                required: false
+              - name: "resultsTitle"
+                label: "Results Title"
+                widget: "string"
+                required: false
+              - name: "resultsSubtitle"
+                label: "Results Subtitle"
+                widget: "text"
+                required: false
+              - name: "ctaTitle"
+                label: "Cta Title"
+                widget: "string"
+                required: false
+              - name: "ctaText"
+                label: "Cta Text"
+                widget: "text"
+                required: false
+          - name: "treatments"
+            label: "Treatments"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "waMessage"
+                label: "Wa Message"
+                widget: "string"
+                required: false
+          - name: "results"
+            label: "Results"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "before"
+                label: "Before"
+                widget: "string"
+                required: false
+              - name: "after"
+                label: "After"
+                widget: "string"
+                required: false
+              - name: "hint"
+                label: "Hint"
+                widget: "string"
+                required: false
+              - name: "boxes"
+                label: "Boxes"
+                widget: "list"
+                required: false
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "caption"
+                    label: "Caption"
+                    widget: "string"
+                    required: false
+              - name: "ctaTitle"
+                label: "Cta Title"
+                widget: "string"
+                required: false
+              - name: "cta"
+                label: "Cta"
+                widget: "string"
+                required: false
+          - name: "reels"
+            label: "Reels"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "cta"
+                label: "Cta"
+                widget: "string"
+                required: false
+              - name: "unmute"
+                label: "Unmute"
+                widget: "string"
+                required: false
+              - name: "mute"
+                label: "Mute"
+                widget: "string"
+                required: false
+          - name: "team"
+            label: "Team"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+          - name: "about"
+            label: "About"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "introText"
+                label: "Intro Text"
+                widget: "text"
+                required: false
+              - name: "identity"
+                label: "Identity"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "kicker"
+                    label: "Kicker"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "box1Title"
+                    label: "Box1 Title"
+                    widget: "string"
+                    required: false
+                  - name: "box1Text"
+                    label: "Box1 Text"
+                    widget: "text"
+                    required: false
+                  - name: "box2Title"
+                    label: "Box2 Title"
+                    widget: "string"
+                    required: false
+                  - name: "box2Text"
+                    label: "Box2 Text"
+                    widget: "text"
+                    required: false
+                  - name: "box3Title"
+                    label: "Box3 Title"
+                    widget: "string"
+                    required: false
+                  - name: "box3Text"
+                    label: "Box3 Text"
+                    widget: "text"
+                    required: false
+              - name: "locationsKicker"
+                label: "Locations Kicker"
+                widget: "string"
+                required: false
+              - name: "locationsTitle"
+                label: "Locations Title"
+                widget: "string"
+                required: false
+              - name: "clinicTitle"
+                label: "Clinic Title"
+                widget: "string"
+                required: false
+              - name: "clinicDesc"
+                label: "Clinic Desc"
+                widget: "text"
+                required: false
+              - name: "labTitle"
+                label: "Lab Title"
+                widget: "string"
+                required: false
+              - name: "labDesc"
+                label: "Lab Desc"
+                widget: "text"
+                required: false
+              - name: "financeTitle"
+                label: "Finance Title"
+                widget: "string"
+                required: false
+              - name: "financeDesc"
+                label: "Finance Desc"
+                widget: "text"
+                required: false
+              - name: "financeCta"
+                label: "Finance Cta"
+                widget: "string"
+                required: false
+              - name: "financeModal"
+                label: "Finance Modal"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "subtitle"
+                    label: "Subtitle"
+                    widget: "string"
+                    required: false
+                  - name: "intro"
+                    label: "Intro"
+                    widget: "text"
+                    required: false
+                  - name: "howTitle"
+                    label: "How Title"
+                    widget: "string"
+                    required: false
+                  - name: "howSteps"
+                    label: "How Steps"
+                    widget: "list"
+                    required: false
+                  - name: "timeTitle"
+                    label: "Time Title"
+                    widget: "string"
+                    required: false
+                  - name: "timeText"
+                    label: "Time Text"
+                    widget: "text"
+                    required: false
+                  - name: "importantTitle"
+                    label: "Important Title"
+                    widget: "string"
+                    required: false
+                  - name: "importantList"
+                    label: "Important List"
+                    widget: "list"
+                    required: false
+                  - name: "footer"
+                    label: "Footer"
+                    widget: "string"
+                    required: false
+                  - name: "cta"
+                    label: "Cta"
+                    widget: "string"
+                    required: false
+          - name: "why"
+            label: "Why"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "items"
+                label: "Items"
+                widget: "list"
+                required: false
+                fields:
+                  - name: "id"
+                    label: "Id"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "string"
+                    required: false
+          - name: "contact"
+            label: "Contact"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "form"
+                label: "Form"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "firstName"
+                    label: "First Name"
+                    widget: "string"
+                    required: false
+                  - name: "lastName"
+                    label: "Last Name"
+                    widget: "string"
+                    required: false
+                  - name: "phone"
+                    label: "Phone"
+                    widget: "string"
+                    required: false
+                  - name: "email"
+                    label: "Email"
+                    widget: "string"
+                    required: false
+                  - name: "treatment"
+                    label: "Treatment"
+                    widget: "string"
+                    required: false
+                  - name: "treatmentPlaceholder"
+                    label: "Treatment Placeholder"
+                    widget: "string"
+                    required: false
+                  - name: "message"
+                    label: "Message"
+                    widget: "string"
+                    required: false
+                  - name: "messagePlaceholder"
+                    label: "Message Placeholder"
+                    widget: "string"
+                    required: false
+                  - name: "submit"
+                    label: "Submit"
+                    widget: "string"
+                    required: false
+                  - name: "submitting"
+                    label: "Submitting"
+                    widget: "string"
+                    required: false
+                  - name: "otherTreatment"
+                    label: "Other Treatment"
+                    widget: "string"
+                    required: false
+                  - name: "source"
+                    label: "Source"
+                    widget: "string"
+                    required: false
+                  - name: "sourcePlaceholder"
+                    label: "Source Placeholder"
+                    widget: "string"
+                    required: false
+                  - name: "sources"
+                    label: "Sources"
+                    widget: "object"
+                    required: false
+                    collapsed: true
+                    fields:
+                      - name: "instagram"
+                        label: "Instagram"
+                        widget: "string"
+                        required: false
+                      - name: "tiktok"
+                        label: "Tiktok"
+                        widget: "string"
+                        required: false
+                      - name: "facebook"
+                        label: "Facebook"
+                        widget: "string"
+                        required: false
+                      - name: "google"
+                        label: "Google"
+                        widget: "string"
+                        required: false
+                      - name: "friend"
+                        label: "Friend"
+                        widget: "string"
+                        required: false
+                      - name: "ads"
+                        label: "Ads"
+                        widget: "string"
+                        required: false
+                      - name: "other"
+                        label: "Other"
+                        widget: "string"
+                        required: false
+                  - name: "consent"
+                    label: "Consent"
+                    widget: "string"
+                    required: false
+                  - name: "required"
+                    label: "Required"
+                    widget: "string"
+                    required: false
+                  - name: "invalidEmail"
+                    label: "Invalid Email"
+                    widget: "string"
+                    required: false
+                  - name: "invalidPhone"
+                    label: "Invalid Phone"
+                    widget: "string"
+                    required: false
+                  - name: "consentRequired"
+                    label: "Consent Required"
+                    widget: "string"
+                    required: false
+                  - name: "successTitle"
+                    label: "Success Title"
+                    widget: "string"
+                    required: false
+                  - name: "success"
+                    label: "Success"
+                    widget: "string"
+                    required: false
+                  - name: "errorTitle"
+                    label: "Error Title"
+                    widget: "string"
+                    required: false
+                  - name: "error"
+                    label: "Error"
+                    widget: "string"
+                    required: false
+              - name: "privacy"
+                label: "Privacy"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "content"
+                    label: "Content"
+                    widget: "text"
+                    required: false
+                  - name: "accept"
+                    label: "Accept"
+                    widget: "string"
+                    required: false
+              - name: "clinic"
+                label: "Clinic"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "label"
+                    label: "Label"
+                    widget: "string"
+                    required: false
+                  - name: "addressLabel"
+                    label: "Address Label"
+                    widget: "string"
+                    required: false
+                  - name: "address"
+                    label: "Address"
+                    widget: "string"
+                    required: false
+                  - name: "area"
+                    label: "Area"
+                    widget: "string"
+                    required: false
+                  - name: "phoneLabel"
+                    label: "Phone Label"
+                    widget: "string"
+                    required: false
+                  - name: "phone"
+                    label: "Phone"
+                    widget: "string"
+                    required: false
+                  - name: "whatsappLabel"
+                    label: "Whatsapp Label"
+                    widget: "string"
+                    required: false
+                  - name: "whatsapp"
+                    label: "Whatsapp"
+                    widget: "string"
+                    required: false
+                  - name: "emailLabel"
+                    label: "Email Label"
+                    widget: "string"
+                    required: false
+                  - name: "email"
+                    label: "Email"
+                    widget: "string"
+                    required: false
+                  - name: "hoursLabel"
+                    label: "Hours Label"
+                    widget: "string"
+                    required: false
+                  - name: "hours"
+                    label: "Hours"
+                    widget: "string"
+                    required: false
+                  - name: "directions"
+                    label: "Directions"
+                    widget: "string"
+                    required: false
+              - name: "map"
+                label: "Map"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "kicker"
+                    label: "Kicker"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "directions"
+                    label: "Directions"
+                    widget: "string"
+                    required: false
+                  - name: "maps"
+                    label: "Maps"
+                    widget: "string"
+                    required: false
+                  - name: "waze"
+                    label: "Waze"
+                    widget: "string"
+                    required: false
+              - name: "reviews"
+                label: "Reviews"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "kicker"
+                    label: "Kicker"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "cta"
+                    label: "Cta"
+                    widget: "string"
+                    required: false
+                  - name: "empty"
+                    label: "Empty"
+                    widget: "string"
+                    required: false
+          - name: "footer"
+            label: "Footer"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "tagline"
+                label: "Tagline"
+                widget: "string"
+                required: false
+              - name: "cta"
+                label: "Cta"
+                widget: "string"
+                required: false
+              - name: "rights"
+                label: "Rights"
+                widget: "string"
+                required: false
+              - name: "privacy"
+                label: "Privacy"
+                widget: "string"
+                required: false
+              - name: "legal"
+                label: "Legal"
+                widget: "string"
+                required: false
+          - name: "seo"
+            label: "Seo"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "home"
+                label: "Home"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "treatments"
+                label: "Treatments"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "results"
+                label: "Results"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "team"
+                label: "Team"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "about"
+                label: "About"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "contact"
+                label: "Contact"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "notFound"
+                label: "Not Found"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+          - name: "notFound"
+            label: "Not Found"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "text"
+                label: "Text"
+                widget: "text"
+                required: false
+              - name: "home"
+                label: "Home"
+                widget: "string"
+                required: false
+          - name: "consent"
+            label: "Consent"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "text"
+                label: "Text"
+                widget: "text"
+                required: false
+              - name: "accept"
+                label: "Accept"
+                widget: "string"
+                required: false
+              - name: "decline"
+                label: "Decline"
+                widget: "string"
+                required: false
+      - name: "locale_en"
+        label: "Textos en inglés"
+        file: "public/locales/en/translation.json"
+        description: "Los mismos textos, en inglés."
+        fields:
+          - name: "nav"
+            label: "Nav"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "treatments"
+                label: "Treatments"
+                widget: "string"
+                required: false
+              - name: "results"
+                label: "Results"
+                widget: "string"
+                required: false
+              - name: "team"
+                label: "Team"
+                widget: "string"
+                required: false
+              - name: "contact"
+                label: "Contact"
+                widget: "string"
+                required: false
+              - name: "about"
+                label: "About"
+                widget: "string"
+                required: false
+              - name: "book"
+                label: "Book"
+                widget: "string"
+                required: false
+              - name: "menu"
+                label: "Menu"
+                widget: "string"
+                required: false
+              - name: "close"
+                label: "Close"
+                widget: "string"
+                required: false
+          - name: "lang"
+            label: "Lang"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "switch"
+                label: "Switch"
+                widget: "string"
+                required: false
+              - name: "es"
+                label: "Es"
+                widget: "string"
+                required: false
+              - name: "en"
+                label: "En"
+                widget: "string"
+                required: false
+          - name: "common"
+            label: "Common"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "bookCta"
+                label: "Book Cta"
+                widget: "string"
+                required: false
+              - name: "discover"
+                label: "Discover"
+                widget: "string"
+                required: false
+              - name: "allTreatments"
+                label: "All Treatments"
+                widget: "string"
+                required: false
+              - name: "viewTreatment"
+                label: "View Treatment"
+                widget: "string"
+                required: false
+              - name: "moreInfo"
+                label: "More Info"
+                widget: "string"
+                required: false
+              - name: "back"
+                label: "Back"
+                widget: "string"
+                required: false
+              - name: "viewResults"
+                label: "View Results"
+                widget: "string"
+                required: false
+              - name: "talkToUs"
+                label: "Talk To Us"
+                widget: "string"
+                required: false
+              - name: "followUs"
+                label: "Follow Us"
+                widget: "string"
+                required: false
+          - name: "hero"
+            label: "Hero"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "titleAccent"
+                label: "Title Accent"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "text"
+                required: false
+              - name: "ctaPrimary"
+                label: "Cta Primary"
+                widget: "string"
+                required: false
+              - name: "ctaSecondary"
+                label: "Cta Secondary"
+                widget: "string"
+                required: false
+              - name: "scroll"
+                label: "Scroll"
+                widget: "string"
+                required: false
+          - name: "home"
+            label: "Home"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "introKicker"
+                label: "Intro Kicker"
+                widget: "string"
+                required: false
+              - name: "introTitle"
+                label: "Intro Title"
+                widget: "string"
+                required: false
+              - name: "introText"
+                label: "Intro Text"
+                widget: "text"
+                required: false
+              - name: "treatmentsKicker"
+                label: "Treatments Kicker"
+                widget: "string"
+                required: false
+              - name: "treatmentsTitle"
+                label: "Treatments Title"
+                widget: "string"
+                required: false
+              - name: "resultsKicker"
+                label: "Results Kicker"
+                widget: "string"
+                required: false
+              - name: "resultsTitle"
+                label: "Results Title"
+                widget: "string"
+                required: false
+              - name: "resultsSubtitle"
+                label: "Results Subtitle"
+                widget: "text"
+                required: false
+              - name: "ctaTitle"
+                label: "Cta Title"
+                widget: "string"
+                required: false
+              - name: "ctaText"
+                label: "Cta Text"
+                widget: "text"
+                required: false
+          - name: "treatments"
+            label: "Treatments"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "waMessage"
+                label: "Wa Message"
+                widget: "string"
+                required: false
+          - name: "results"
+            label: "Results"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "before"
+                label: "Before"
+                widget: "string"
+                required: false
+              - name: "after"
+                label: "After"
+                widget: "string"
+                required: false
+              - name: "hint"
+                label: "Hint"
+                widget: "string"
+                required: false
+              - name: "boxes"
+                label: "Boxes"
+                widget: "list"
+                required: false
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "caption"
+                    label: "Caption"
+                    widget: "string"
+                    required: false
+              - name: "ctaTitle"
+                label: "Cta Title"
+                widget: "string"
+                required: false
+              - name: "cta"
+                label: "Cta"
+                widget: "string"
+                required: false
+          - name: "reels"
+            label: "Reels"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "cta"
+                label: "Cta"
+                widget: "string"
+                required: false
+              - name: "unmute"
+                label: "Unmute"
+                widget: "string"
+                required: false
+              - name: "mute"
+                label: "Mute"
+                widget: "string"
+                required: false
+          - name: "team"
+            label: "Team"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+          - name: "about"
+            label: "About"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "introText"
+                label: "Intro Text"
+                widget: "text"
+                required: false
+              - name: "identity"
+                label: "Identity"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "kicker"
+                    label: "Kicker"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "box1Title"
+                    label: "Box1 Title"
+                    widget: "string"
+                    required: false
+                  - name: "box1Text"
+                    label: "Box1 Text"
+                    widget: "text"
+                    required: false
+                  - name: "box2Title"
+                    label: "Box2 Title"
+                    widget: "string"
+                    required: false
+                  - name: "box2Text"
+                    label: "Box2 Text"
+                    widget: "text"
+                    required: false
+                  - name: "box3Title"
+                    label: "Box3 Title"
+                    widget: "string"
+                    required: false
+                  - name: "box3Text"
+                    label: "Box3 Text"
+                    widget: "text"
+                    required: false
+              - name: "locationsKicker"
+                label: "Locations Kicker"
+                widget: "string"
+                required: false
+              - name: "locationsTitle"
+                label: "Locations Title"
+                widget: "string"
+                required: false
+              - name: "clinicTitle"
+                label: "Clinic Title"
+                widget: "string"
+                required: false
+              - name: "clinicDesc"
+                label: "Clinic Desc"
+                widget: "text"
+                required: false
+              - name: "labTitle"
+                label: "Lab Title"
+                widget: "string"
+                required: false
+              - name: "labDesc"
+                label: "Lab Desc"
+                widget: "text"
+                required: false
+              - name: "financeTitle"
+                label: "Finance Title"
+                widget: "string"
+                required: false
+              - name: "financeDesc"
+                label: "Finance Desc"
+                widget: "text"
+                required: false
+              - name: "financeCta"
+                label: "Finance Cta"
+                widget: "string"
+                required: false
+              - name: "financeModal"
+                label: "Finance Modal"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "subtitle"
+                    label: "Subtitle"
+                    widget: "string"
+                    required: false
+                  - name: "intro"
+                    label: "Intro"
+                    widget: "text"
+                    required: false
+                  - name: "howTitle"
+                    label: "How Title"
+                    widget: "string"
+                    required: false
+                  - name: "howSteps"
+                    label: "How Steps"
+                    widget: "list"
+                    required: false
+                  - name: "timeTitle"
+                    label: "Time Title"
+                    widget: "string"
+                    required: false
+                  - name: "timeText"
+                    label: "Time Text"
+                    widget: "text"
+                    required: false
+                  - name: "importantTitle"
+                    label: "Important Title"
+                    widget: "string"
+                    required: false
+                  - name: "importantList"
+                    label: "Important List"
+                    widget: "list"
+                    required: false
+                  - name: "footer"
+                    label: "Footer"
+                    widget: "string"
+                    required: false
+                  - name: "cta"
+                    label: "Cta"
+                    widget: "string"
+                    required: false
+          - name: "why"
+            label: "Why"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "items"
+                label: "Items"
+                widget: "list"
+                required: false
+                fields:
+                  - name: "id"
+                    label: "Id"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "string"
+                    required: false
+          - name: "contact"
+            label: "Contact"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "kicker"
+                label: "Kicker"
+                widget: "string"
+                required: false
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "subtitle"
+                label: "Subtitle"
+                widget: "string"
+                required: false
+              - name: "form"
+                label: "Form"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "firstName"
+                    label: "First Name"
+                    widget: "string"
+                    required: false
+                  - name: "lastName"
+                    label: "Last Name"
+                    widget: "string"
+                    required: false
+                  - name: "phone"
+                    label: "Phone"
+                    widget: "string"
+                    required: false
+                  - name: "email"
+                    label: "Email"
+                    widget: "string"
+                    required: false
+                  - name: "treatment"
+                    label: "Treatment"
+                    widget: "string"
+                    required: false
+                  - name: "treatmentPlaceholder"
+                    label: "Treatment Placeholder"
+                    widget: "string"
+                    required: false
+                  - name: "message"
+                    label: "Message"
+                    widget: "string"
+                    required: false
+                  - name: "messagePlaceholder"
+                    label: "Message Placeholder"
+                    widget: "string"
+                    required: false
+                  - name: "submit"
+                    label: "Submit"
+                    widget: "string"
+                    required: false
+                  - name: "submitting"
+                    label: "Submitting"
+                    widget: "string"
+                    required: false
+                  - name: "otherTreatment"
+                    label: "Other Treatment"
+                    widget: "string"
+                    required: false
+                  - name: "source"
+                    label: "Source"
+                    widget: "string"
+                    required: false
+                  - name: "sourcePlaceholder"
+                    label: "Source Placeholder"
+                    widget: "string"
+                    required: false
+                  - name: "sources"
+                    label: "Sources"
+                    widget: "object"
+                    required: false
+                    collapsed: true
+                    fields:
+                      - name: "instagram"
+                        label: "Instagram"
+                        widget: "string"
+                        required: false
+                      - name: "tiktok"
+                        label: "Tiktok"
+                        widget: "string"
+                        required: false
+                      - name: "facebook"
+                        label: "Facebook"
+                        widget: "string"
+                        required: false
+                      - name: "google"
+                        label: "Google"
+                        widget: "string"
+                        required: false
+                      - name: "friend"
+                        label: "Friend"
+                        widget: "string"
+                        required: false
+                      - name: "ads"
+                        label: "Ads"
+                        widget: "string"
+                        required: false
+                      - name: "other"
+                        label: "Other"
+                        widget: "string"
+                        required: false
+                  - name: "consent"
+                    label: "Consent"
+                    widget: "string"
+                    required: false
+                  - name: "required"
+                    label: "Required"
+                    widget: "string"
+                    required: false
+                  - name: "invalidEmail"
+                    label: "Invalid Email"
+                    widget: "string"
+                    required: false
+                  - name: "invalidPhone"
+                    label: "Invalid Phone"
+                    widget: "string"
+                    required: false
+                  - name: "consentRequired"
+                    label: "Consent Required"
+                    widget: "string"
+                    required: false
+                  - name: "successTitle"
+                    label: "Success Title"
+                    widget: "string"
+                    required: false
+                  - name: "success"
+                    label: "Success"
+                    widget: "string"
+                    required: false
+                  - name: "errorTitle"
+                    label: "Error Title"
+                    widget: "string"
+                    required: false
+                  - name: "error"
+                    label: "Error"
+                    widget: "string"
+                    required: false
+              - name: "privacy"
+                label: "Privacy"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "content"
+                    label: "Content"
+                    widget: "text"
+                    required: false
+                  - name: "accept"
+                    label: "Accept"
+                    widget: "string"
+                    required: false
+              - name: "clinic"
+                label: "Clinic"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "label"
+                    label: "Label"
+                    widget: "string"
+                    required: false
+                  - name: "addressLabel"
+                    label: "Address Label"
+                    widget: "string"
+                    required: false
+                  - name: "address"
+                    label: "Address"
+                    widget: "string"
+                    required: false
+                  - name: "area"
+                    label: "Area"
+                    widget: "string"
+                    required: false
+                  - name: "phoneLabel"
+                    label: "Phone Label"
+                    widget: "string"
+                    required: false
+                  - name: "phone"
+                    label: "Phone"
+                    widget: "string"
+                    required: false
+                  - name: "whatsappLabel"
+                    label: "Whatsapp Label"
+                    widget: "string"
+                    required: false
+                  - name: "whatsapp"
+                    label: "Whatsapp"
+                    widget: "string"
+                    required: false
+                  - name: "emailLabel"
+                    label: "Email Label"
+                    widget: "string"
+                    required: false
+                  - name: "email"
+                    label: "Email"
+                    widget: "string"
+                    required: false
+                  - name: "hoursLabel"
+                    label: "Hours Label"
+                    widget: "string"
+                    required: false
+                  - name: "hours"
+                    label: "Hours"
+                    widget: "string"
+                    required: false
+                  - name: "directions"
+                    label: "Directions"
+                    widget: "string"
+                    required: false
+              - name: "map"
+                label: "Map"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "kicker"
+                    label: "Kicker"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "directions"
+                    label: "Directions"
+                    widget: "string"
+                    required: false
+                  - name: "maps"
+                    label: "Maps"
+                    widget: "string"
+                    required: false
+                  - name: "waze"
+                    label: "Waze"
+                    widget: "string"
+                    required: false
+              - name: "reviews"
+                label: "Reviews"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "kicker"
+                    label: "Kicker"
+                    widget: "string"
+                    required: false
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "cta"
+                    label: "Cta"
+                    widget: "string"
+                    required: false
+                  - name: "empty"
+                    label: "Empty"
+                    widget: "string"
+                    required: false
+          - name: "footer"
+            label: "Footer"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "tagline"
+                label: "Tagline"
+                widget: "string"
+                required: false
+              - name: "cta"
+                label: "Cta"
+                widget: "string"
+                required: false
+              - name: "rights"
+                label: "Rights"
+                widget: "string"
+                required: false
+              - name: "privacy"
+                label: "Privacy"
+                widget: "string"
+                required: false
+              - name: "legal"
+                label: "Legal"
+                widget: "string"
+                required: false
+          - name: "seo"
+            label: "Seo"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "home"
+                label: "Home"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "treatments"
+                label: "Treatments"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "results"
+                label: "Results"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "team"
+                label: "Team"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "about"
+                label: "About"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "contact"
+                label: "Contact"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+              - name: "notFound"
+                label: "Not Found"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - name: "title"
+                    label: "Title"
+                    widget: "string"
+                    required: false
+                  - name: "description"
+                    label: "Description"
+                    widget: "text"
+                    required: false
+          - name: "notFound"
+            label: "Not Found"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "text"
+                label: "Text"
+                widget: "text"
+                required: false
+              - name: "home"
+                label: "Home"
+                widget: "string"
+                required: false
+          - name: "consent"
+            label: "Consent"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - name: "title"
+                label: "Title"
+                widget: "string"
+                required: false
+              - name: "text"
+                label: "Text"
+                widget: "text"
+                required: false
+              - name: "accept"
+                label: "Accept"
+                widget: "string"
+                required: false
+              - name: "decline"
+                label: "Decline"
+                widget: "string"
+                required: false

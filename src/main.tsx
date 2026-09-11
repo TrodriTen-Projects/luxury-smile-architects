@@ -1,5 +1,5 @@
 import { StrictMode, Suspense } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 // Self-hosted variable fonts (Fraunces full = opsz axis for display contrast).
@@ -11,13 +11,47 @@ import "@/index.css";
 import "@/lib/i18n";
 import App from "@/App";
 import { PageLoader } from "@/components/PageLoader";
+import { findPage, preloadPage } from "@/lib/routes";
+import { wasPrerendered } from "@/lib/prerendered";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Suspense fallback={<PageLoader />}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Suspense>
-  </StrictMode>,
+const container = document.getElementById("root")!;
+
+const app = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 );
+
+/**
+ * A prerendered page hydrates with no Suspense boundary anywhere in the tree.
+ * React's hydration expects the `<!--$-->` markers its own server renderer
+ * writes around each boundary, and markup serialised from a browser has none —
+ * React calls that a mismatch and re-renders the whole page on the client,
+ * throwing away the HTML we prerendered. Nothing suspends on these loads in any
+ * case: the page module is resolved below and i18n ships its bundles inline.
+ *
+ * A cold SPA load (dev server, or a path with no prerendered file) has no
+ * markup to match, so the boundary is free to exist and i18n may suspend.
+ */
+const tree = wasPrerendered ? (
+  <StrictMode>{app}</StrictMode>
+) : (
+  <StrictMode>
+    <Suspense fallback={<PageLoader />}>{app}</Suspense>
+  </StrictMode>
+);
+
+function start() {
+  if (wasPrerendered) hydrateRoot(container, tree);
+  else createRoot(container).render(tree);
+}
+
+if (wasPrerendered) {
+  // Resolve this page's module before hydrating so the first render is
+  // synchronous and reproduces the markup exactly.
+  const match = findPage(window.location.pathname);
+  if (match) void preloadPage(match.page.id).then(start, start);
+  else start();
+} else {
+  start();
+}

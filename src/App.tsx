@@ -1,26 +1,30 @@
-import { lazy } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { RootLayout } from "@/components/layout/RootLayout";
+import { RoutePage } from "@/components/RoutePage";
+import { PAGES, ERROR_PAGE, LOCALES } from "@/lib/routes";
 
-const Home = lazy(() => import("@/pages/Home"));
-const Treatments = lazy(() => import("@/pages/Treatments"));
-const Results = lazy(() => import("@/pages/Results"));
-const Team = lazy(() => import("@/pages/Team"));
-const Contact = lazy(() => import("@/pages/Contact"));
-const About = lazy(() => import("@/pages/About"));
+/** `/` is the index route; everything else is declared by its own path. */
+function routeFor(pageId: string, path: string) {
+  const key = `${pageId}-${path}`;
+  return path === "/" ? (
+    <Route key={key} index element={<RoutePage pageId={pageId} />} />
+  ) : (
+    <Route key={key} path={path.slice(1)} element={<RoutePage pageId={pageId} />} />
+  );
+}
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />}>
-        <Route index element={<Home />} />
-        <Route path="tratamientos" element={<Treatments />} />
-        <Route path="resultados" element={<Results />} />
-        <Route path="equipo" element={<Team />} />
-        <Route path="quienes-somos" element={<About />} />
-        <Route path="contacto" element={<Contact />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {PAGES.flatMap((page) => LOCALES.map((locale) => routeFor(page.id, page.paths[locale])))}
+        {/* An unknown path used to redirect to the homepage, which made every
+            typo answer 200 with the homepage — a soft 404 to a crawler. It now
+            renders the real 404 page, and Cloudflare serves dist/404.html with
+            a 404 status for those URLs. */}
+        <Route path="404" element={<RoutePage pageId={ERROR_PAGE.id} />} />
+        <Route path="*" element={<RoutePage pageId={ERROR_PAGE.id} />} />
       </Route>
     </Routes>
   );

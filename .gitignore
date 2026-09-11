@@ -34,3 +34,7 @@ Thumbs.db
 .video-backup/
 .video-optimized/
 *.bak
+
+# Bundle del CMS, vendorizado en cada build por scripts/vendor-cms.mjs.
+# La versión se fija en package.json; el archivo no se versiona (2 MB).
+public/admin/sveltia-cms.js

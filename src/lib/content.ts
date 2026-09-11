@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { PRERENDER_STATE, publishPrerenderState } from "@/lib/prerender-state";
+
 /**
  * Editable site content loaded at runtime from /content/site.json.
  * Drop images/videos into /public/media and point to them here — no rebuild
@@ -39,6 +41,37 @@ export function pick(value: Localized, lang: string): string {
   return lang.startsWith("en") ? value.en : value.es;
 }
 
+/**
+ * Structured business data, kept separate from the display strings in the
+ * locale files. The locales hold what a visitor reads ("Barrio de Salamanca,
+ * 28001 Madrid"); this holds the machine-readable fields JSON-LD needs, so the
+ * schema generator never has to take a sentence apart to find a postcode.
+ */
+export interface BusinessInfo {
+  placeQuery: string;
+  /** Canonical number, E.164. The one on Google Business Profile. */
+  phone: string;
+  /** Secondary line, published as a ContactPoint rather than the main phone. */
+  phoneSecondary: string;
+  whatsapp: string;
+  email: string;
+  address: {
+    street: string;
+    district: string;
+    postalCode: string;
+    city: string;
+    region: string;
+    /** ISO 3166-1 alpha-2. */
+    country: string;
+  };
+  geo: { latitude: number; longitude: number };
+  hours: { days: string[]; opens: string; closes: string };
+  reviewsUrl: string;
+  instagram: string;
+  rating: string | null;
+  reviewsCount: Localized | null;
+}
+
 export interface SiteContent {
   hero: { image: string; fallback: string; position: string };
   logo: { image: string | null };
@@ -47,14 +80,9 @@ export interface SiteContent {
   videos: string[];
   team: TeamMember[];
   beforeAfter: { before: string; after: string }[];
-  business: {
-    placeQuery: string;
-    whatsapp: string;
-    reviewsUrl: string;
-    instagram: string;
-    rating: string | null;
-    reviewsCount: Localized | null;
-  };
+  business: BusinessInfo;
+  /** Analytics IDs. Empty string = that tag stays off, with no console noise. */
+  tracking: { metaPixelId: string; ga4MeasurementId: string };
   reviews: Review[];
 }
 
@@ -231,13 +259,31 @@ export const DEFAULT_CONTENT: SiteContent = {
   ],
   business: {
     placeQuery: "Calle de Recoletos 20, 28001 Madrid",
+    phone: "+34689440906",
+    phoneSecondary: "+34659716995",
     whatsapp: "+34689440906",
+    email: "contacto@luxurysmilearchitects.com",
+    address: {
+      street: "Calle de Recoletos 20",
+      district: "Barrio de Salamanca",
+      postalCode: "28001",
+      city: "Madrid",
+      region: "Madrid",
+      country: "ES",
+    },
+    geo: { latitude: 40.421789, longitude: -3.689292 },
+    hours: {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "10:00",
+      closes: "20:00",
+    },
     reviewsUrl:
       "https://www.google.com/maps/search/?api=1&query=Luxury%20Smile%20Architects%20Madrid",
     instagram: "https://www.instagram.com/luxurysmilearchitectsmadrid/",
     rating: null,
     reviewsCount: null,
   },
+  tracking: { metaPixelId: "", ga4MeasurementId: "" },
   reviews: [],
 };
 
@@ -251,11 +297,14 @@ function merge(base: SiteContent, patch: Partial<SiteContent>): SiteContent {
     team: patch.team?.length ? patch.team : base.team,
     beforeAfter: patch.beforeAfter?.length ? patch.beforeAfter : base.beforeAfter,
     business: { ...base.business, ...(patch.business ?? {}) },
+    tracking: { ...base.tracking, ...(patch.tracking ?? {}) },
     reviews: patch.reviews ?? base.reviews,
   };
 }
 
-let cache: SiteContent | null = null;
+// Seeded from the block the prerenderer inlined, so the first client render
+// produces exactly the markup that was shipped (see lib/prerender-state.ts).
+let cache: SiteContent | null = (PRERENDER_STATE.content as SiteContent | undefined) ?? null;
 
 export async function loadContent(): Promise<SiteContent> {
   if (cache) return cache;
@@ -296,6 +345,7 @@ export async function loadContent(): Promise<SiteContent> {
     }
   }
   cache = content;
+  publishPrerenderState({ content });
   return cache;
 }
 
