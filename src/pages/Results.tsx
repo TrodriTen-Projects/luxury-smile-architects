@@ -5,6 +5,7 @@ import { ImageComparison } from "@/components/ui/image-comparison";
 import { SectionReveal } from "@/components/SectionReveal";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/lib/content";
+import { useLocalePath } from "@/lib/use-locale-path";
 import { useSeo } from "@/lib/seo";
 
 interface Box {
@@ -14,7 +15,8 @@ interface Box {
 
 export default function Results() {
   const { t } = useTranslation();
-  useSeo({ key: "results", path: "/resultados" });
+  const p = useLocalePath();
+  useSeo({ pageId: "results" });
   const content = useContent();
   const boxes = t("results.boxes", { returnObjects: true }) as Box[];
   const pairs = content.beforeAfter;
@@ -73,7 +75,7 @@ export default function Results() {
                 {t("results.ctaTitle")}
               </h3>
               <Button asChild size="lg">
-                <Link to="/contacto">{t("results.cta")}</Link>
+                <Link to={p("contact")}>{t("results.cta")}</Link>
               </Button>
             </div>
           </SectionReveal>

@@ -7,7 +7,8 @@ import { Footer } from "./Footer";
 import { ScrollToTop } from "./ScrollToTop";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { entryInitial, releaseEntryAnimations } from "@/lib/prerendered";
-import { applyPreferredLanguage } from "@/lib/i18n";
+import { switchLanguage } from "@/lib/i18n";
+import { localeFromPath } from "@/lib/routes";
 
 export function RootLayout() {
   const { pathname } = useLocation();
@@ -22,11 +23,14 @@ export function RootLayout() {
     if (pathname !== initialPath.current) releaseEntryAnimations();
   }, [pathname]);
 
-  // Hydration is done, so switching language can no longer desync from the
-  // markup. Honour the visitor's stored or browser preference now.
+  // The URL owns the language. Client-side navigation between /equipo and
+  // /en/team does not re-run i18n init, so the two are reconciled here.
+  // switchLanguage preloads the bundle first: a bare changeLanguage would
+  // suspend, and a prerendered page has no boundary to catch that.
+  const locale = localeFromPath(pathname);
   useEffect(() => {
-    applyPreferredLanguage();
-  }, []);
+    void switchLanguage(locale);
+  }, [locale]);
 
   return (
     <>

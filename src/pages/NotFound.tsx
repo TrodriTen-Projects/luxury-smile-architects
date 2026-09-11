@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { useSeo } from "@/lib/seo";
+import { useLocalePath } from "@/lib/use-locale-path";
 
 /**
  * Real 404 page. Until now every unknown URL was redirected to the homepage and
@@ -12,7 +13,8 @@ import { useSeo } from "@/lib/seo";
  */
 export default function NotFound() {
   const { t } = useTranslation();
-  useSeo({ key: "notFound", path: "/404", noindex: true });
+  const p = useLocalePath();
+  useSeo({ pageId: "notFound", noindex: true });
 
   return (
     <section className="section">
@@ -26,13 +28,13 @@ export default function NotFound() {
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-8">
           <Link
-            to="/"
+            to={p("home")}
             className="link-underline font-sans text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-gold"
           >
             {t("notFound.home")}
           </Link>
           <Link
-            to="/contacto"
+            to={p("contact")}
             className="link-underline font-sans text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-foreground"
           >
             {t("nav.contact")}

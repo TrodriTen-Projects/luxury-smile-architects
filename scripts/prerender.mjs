@@ -68,15 +68,20 @@ async function launchBrowser() {
 /** Assert the router's route list and the build's route list still agree. */
 async function assertRoutesInSync() {
   const source = await readFile(join(ROOT, "src", "lib", "routes.ts"), "utf8");
-  const inRouter = [...source.matchAll(/path:\s*"([^"]+)"/g)].map((m) => m[1]).sort();
-  const inBuild = [...ROUTES.map((r) => r.path), ERROR_ROUTE.path].sort();
-  const same =
-    inRouter.length === inBuild.length && inRouter.every((p, i) => p === inBuild[i]);
+  const unique = (list) => [...new Set(list)].sort();
+
+  // Router paths are declared per locale: `paths: { es: "/equipo", en: "/en/team" }`.
+  const inRouter = unique([...source.matchAll(/\b(?:es|en):\s*"(\/[^"]*)"/g)].map((m) => m[1]));
+  const inBuild = unique([...ROUTES.map((r) => r.path), ERROR_ROUTE.path]);
+
+  const same = inRouter.length === inBuild.length && inRouter.every((p, i) => p === inBuild[i]);
   if (!same) {
+    const missing = inBuild.filter((p) => !inRouter.includes(p));
+    const extra = inRouter.filter((p) => !inBuild.includes(p));
     throw new Error(
       `Las rutas del router y las del build no coinciden.\n` +
-        `  src/lib/routes.ts : ${inRouter.join(", ")}\n` +
-        `  scripts/routes.mjs: ${inBuild.join(", ")}\n` +
+        (missing.length ? `  falta en src/lib/routes.ts : ${missing.join(", ")}\n` : "") +
+        (extra.length ? `  falta en scripts/routes.mjs: ${extra.join(", ")}\n` : "") +
         `Actualiza ambas listas.`,
     );
   }
@@ -112,13 +117,8 @@ async function renderRoute(browser, origin, route) {
     // still invisible.
     window.__PRERENDER__ = true;
 
-    // i18n detection order is localStorage -> navigator -> htmlTag
-    // (src/lib/i18n.ts). Pin Spanish so the output is deterministic.
-    try {
-      window.localStorage.setItem("lsa-lang", "es");
-    } catch {
-      /* storage unavailable — the es-ES locale still wins */
-    }
+    // Nothing to pin: src/lib/i18n.ts reads the language off the path, so
+    // /equipo renders in Spanish and /en/team in English on its own.
   });
 
   const page = await context.newPage();
@@ -292,6 +292,42 @@ function validate(route, html, heading, consoleErrors) {
     if (!html.includes(`property="${tag}"`)) problems.push(`falta <meta property="${tag}">`);
   }
   if (!html.includes('name="twitter:card"')) problems.push("faltan las Twitter Cards");
+
+  // hreflang only works if every version lists all of them, itself included.
+  // A page that names only its sibling is discarded by Google, silently.
+  if (route.path !== ERROR_ROUTE.path) {
+    const alternates = [...html.matchAll(/<link[^>]+rel="alternate"[^>]+hreflang="([^"]+)"/g)].map(
+      (m) => m[1],
+    );
+    for (const expected of ["es-ES", "en", "x-default"]) {
+      if (!alternates.includes(expected)) problems.push(`falta hreflang="${expected}"`);
+    }
+    const lang = html.match(/<html[^>]+lang="([^"]+)"/)?.[1];
+    if (lang && lang.slice(0, 2) !== route.locale) {
+      problems.push(`<html lang="${lang}"> no coincide con el idioma de la ruta (${route.locale})`);
+    }
+
+    // Internal links must stay in the page's language. One hardcoded `to="/x"`
+    // drops an English visitor into the Spanish site mid-journey and tells a
+    // crawler the versions link across each other, which is what hreflang is
+    // there to prevent. The language switcher is the one legitimate exception,
+    // and it identifies itself with `hreflang`.
+    const otherLocale = route.locale === "es" ? "en" : "es";
+    const foreign = ROUTES.filter((r) => r.locale === otherLocale).map((r) => r.path);
+    // The whole tag, not just what precedes `href`: React emits `hreflang`
+    // after it, so a narrower match would miss the switcher's own marker.
+    const crossed = [...html.matchAll(/<a\b[^>]*>/g)]
+      .map((m) => m[0])
+      .filter((tag) => !tag.includes("hreflang"))
+      .map((tag) => tag.match(/\bhref="(\/[^"]*)"/)?.[1])
+      .filter((href) => href && foreign.includes(href));
+    if (crossed.length) {
+      problems.push(
+        `enlaces que cambian de idioma sin ser el selector: ${[...new Set(crossed)].join(", ")} ` +
+          `— usa useLocalePath() en vez de una ruta fija`,
+      );
+    }
+  }
 
   problems.push(...validateSchema(html));
 

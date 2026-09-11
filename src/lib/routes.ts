@@ -5,7 +5,17 @@ import type { ComponentType } from "react";
  * copy (prerender + sitemap) and `scripts/prerender.mjs` fails the build if the
  * two ever disagree, so adding a page here without adding it there is caught
  * before anything ships.
+ *
+ * Each page exists once per locale, with a translated slug. The URL — not
+ * `localStorage`, not the browser's language — decides which language a page is
+ * in: that is what makes the English version something Google can index, and it
+ * is the whole reason these routes exist.
  */
+
+export const LOCALES = ["es", "en"] as const;
+export type Locale = (typeof LOCALES)[number];
+export const DEFAULT_LOCALE: Locale = "es";
+
 /**
  * Production origin, used for canonical URLs, og:url and every `@id` in the
  * JSON-LD graph. Lives here rather than in seo.ts because schema.ts needs it
@@ -14,28 +24,78 @@ import type { ComponentType } from "react";
  */
 export const ORIGIN = "https://luxurysmilearchitects.eu";
 
-export interface AppRoute {
-  path: string;
+export interface AppPage {
+  id: string;
+  paths: Record<Locale, string>;
   load: () => Promise<{ default: ComponentType }>;
 }
 
-export const ROUTES: AppRoute[] = [
-  { path: "/", load: () => import("@/pages/Home") },
-  { path: "/tratamientos", load: () => import("@/pages/Treatments") },
-  { path: "/resultados", load: () => import("@/pages/Results") },
-  { path: "/equipo", load: () => import("@/pages/Team") },
-  { path: "/quienes-somos", load: () => import("@/pages/About") },
-  { path: "/contacto", load: () => import("@/pages/Contact") },
+export const PAGES: AppPage[] = [
+  { id: "home", paths: { es: "/", en: "/en" }, load: () => import("@/pages/Home") },
+  {
+    id: "treatments",
+    paths: { es: "/tratamientos", en: "/en/treatments" },
+    load: () => import("@/pages/Treatments"),
+  },
+  {
+    id: "results",
+    paths: { es: "/resultados", en: "/en/results" },
+    load: () => import("@/pages/Results"),
+  },
+  { id: "team", paths: { es: "/equipo", en: "/en/team" }, load: () => import("@/pages/Team") },
+  {
+    id: "about",
+    paths: { es: "/quienes-somos", en: "/en/about" },
+    load: () => import("@/pages/About"),
+  },
+  {
+    id: "contact",
+    paths: { es: "/contacto", en: "/en/contact" },
+    load: () => import("@/pages/Contact"),
+  },
 ];
 
 /**
- * The 404 page. Kept out of `ROUTES` so it never reaches the sitemap; mirrors
- * ERROR_ROUTE in scripts/routes.mjs, which writes it to `dist/404.html`.
+ * The 404 page. Outside `PAGES` so it never reaches the sitemap, and one
+ * language on purpose: Cloudflare Pages serves a single `404.html` from the
+ * root of the output for every unmatched path, whatever the prefix, so a
+ * per-locale copy would never be used.
  */
-export const ERROR_ROUTE: AppRoute = {
-  path: "/404",
+export const ERROR_PAGE: AppPage = {
+  id: "notFound",
+  paths: { es: "/404", en: "/404" },
   load: () => import("@/pages/NotFound"),
 };
+
+const ALL_PAGES = [...PAGES, ERROR_PAGE];
+
+/** Trailing slashes and casing normalised so `/en/team/` matches `/en/team`. */
+export function normalizePath(pathname: string): string {
+  const trimmed = pathname.replace(/\/+$/, "").toLowerCase();
+  return trimmed === "" ? "/" : trimmed;
+}
+
+/** The language a URL is written in. The path is the only source of truth. */
+export function localeFromPath(pathname: string): Locale {
+  const path = normalizePath(pathname);
+  return path === "/en" || path.startsWith("/en/") ? "en" : "es";
+}
+
+export function findPage(pathname: string): { page: AppPage; locale: Locale } | undefined {
+  const target = normalizePath(pathname);
+  for (const page of ALL_PAGES) {
+    for (const locale of LOCALES) {
+      if (page.paths[locale] === target) return { page, locale };
+    }
+  }
+  return undefined;
+}
+
+/** The URL of a page in a given language, for links and the language switcher. */
+export function pathFor(pageId: string, locale: Locale): string {
+  const page = ALL_PAGES.find((p) => p.id === pageId);
+  return page?.paths[locale] ?? (locale === "en" ? "/en" : "/");
+}
 
 /**
  * Pages whose module is already in hand, so they can render synchronously.
@@ -54,31 +114,21 @@ export const ERROR_ROUTE: AppRoute = {
  */
 const RESOLVED_PAGES = new Map<string, ComponentType>();
 
-/** The page component for a path, or `undefined` if its chunk is still loading. */
-export function resolvedPage(path: string): ComponentType | undefined {
-  return RESOLVED_PAGES.get(normalizePath(path));
+/** The component for a page id, or `undefined` if its chunk is still loading. */
+export function resolvedPage(pageId: string): ComponentType | undefined {
+  return RESOLVED_PAGES.get(pageId);
 }
 
-/** Load a route's module and mark it renderable without suspending. */
-export async function preloadRoute(pathname: string): Promise<void> {
-  const route = findRoute(pathname);
-  if (!route) return;
+/** Load a page's module and mark it renderable without suspending. */
+export async function preloadPage(pageId: string): Promise<void> {
+  if (RESOLVED_PAGES.has(pageId)) return;
+  const page = ALL_PAGES.find((p) => p.id === pageId);
+  if (!page) return;
   try {
-    const module = await route.load();
-    RESOLVED_PAGES.set(route.path, module.default);
+    const module = await page.load();
+    RESOLVED_PAGES.set(pageId, module.default);
   } catch {
     // Leave it unresolved; RoutePage keeps showing its placeholder and the
     // next navigation retries rather than crashing the app.
   }
-}
-
-/** Trailing slashes and casing normalised so `/equipo/` matches `/equipo`. */
-export function normalizePath(pathname: string): string {
-  const trimmed = pathname.replace(/\/+$/, "").toLowerCase();
-  return trimmed === "" ? "/" : trimmed;
-}
-
-export function findRoute(pathname: string): AppRoute | undefined {
-  const target = normalizePath(pathname);
-  return [...ROUTES, ERROR_ROUTE].find((route) => route.path === target);
 }

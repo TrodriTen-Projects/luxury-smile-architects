@@ -12,6 +12,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useContent, type TeamMember } from "@/lib/content";
+import { useLocalePath } from "@/lib/use-locale-path";
 import { useSeo } from "@/lib/seo";
 
 interface Reason {
@@ -22,7 +23,8 @@ interface Reason {
 
 export default function Team() {
   const { t, i18n } = useTranslation();
-  useSeo({ key: "team", path: "/equipo" });
+  const p = useLocalePath();
+  useSeo({ pageId: "team" });
   const content = useContent();
   const reasons = t("why.items", { returnObjects: true }) as Reason[];
   const [active, setActive] = useState<TeamMember | null>(null);
@@ -133,7 +135,7 @@ export default function Team() {
                   {tx(active.bio)}
                 </DialogDescription>
                 <Button asChild size="lg" className="mt-9">
-                  <Link to="/contacto" onClick={() => setActive(null)}>
+                  <Link to={p("contact")} onClick={() => setActive(null)}>
                     {t("common.bookCta")}
                   </Link>
                 </Button>

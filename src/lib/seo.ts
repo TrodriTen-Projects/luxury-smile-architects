@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useContent } from "@/lib/content";
-import { ORIGIN } from "@/lib/routes";
+import { ORIGIN, LOCALES, DEFAULT_LOCALE, pathFor, type Locale } from "@/lib/routes";
 import { buildGraph } from "@/lib/schema";
 
 export { ORIGIN };
@@ -24,10 +24,8 @@ export { ORIGIN };
 const DEFAULT_OG_IMAGE = "/og-default.jpg";
 
 export interface SeoInput {
-  /** Key under `seo.` in the locale files, e.g. "home" or "treatments". */
-  key: string;
-  /** Route path this page is canonical for, e.g. "/equipo". */
-  path: string;
+  /** Page id, shared by both languages. Also the key under `seo.` in the locales. */
+  pageId: string;
   /** Root-relative or absolute image; falls back to the shared social image. */
   image?: string;
   type?: "website" | "article";
@@ -60,6 +58,32 @@ function upsertLink(rel: string, href: string): void {
   element.setAttribute("href", href);
 }
 
+/** BCP 47 tags. `es-ES` is regional; `en` is not, since no country owns it. */
+const HREFLANG: Record<Locale, string> = { es: "es-ES", en: "en" };
+
+/**
+ * Declares every language this page exists in, and which one is the default.
+ *
+ * Every version must list *all* of them, itself included, or Google ignores the
+ * set. The old `og:locale:alternate="en_US"` advertised an English version that
+ * had no URL at all; now there is one, and this is what points at it.
+ */
+function upsertAlternates(pageId: string): void {
+  for (const link of document.head.querySelectorAll('link[rel="alternate"][hreflang]')) {
+    link.remove();
+  }
+  const add = (hreflang: string, path: string) => {
+    const element = document.createElement("link");
+    element.setAttribute("rel", "alternate");
+    element.setAttribute("hreflang", hreflang);
+    element.setAttribute("href", absolute(path));
+    document.head.appendChild(element);
+  };
+  for (const locale of LOCALES) add(HREFLANG[locale], pathFor(pageId, locale));
+  // Which version to serve when no declared language matches the visitor.
+  add("x-default", pathFor(pageId, DEFAULT_LOCALE));
+}
+
 const SCHEMA_ID = "__LSA_SCHEMA__";
 
 /**
@@ -80,10 +104,13 @@ function upsertSchema(graph: object): void {
   element.textContent = JSON.stringify(graph);
 }
 
-export function useSeo({ key, path, image, type = "website", noindex = false }: SeoInput): void {
+export function useSeo({ pageId, image, type = "website", noindex = false }: SeoInput): void {
   const { t, i18n } = useTranslation();
   const language = i18n.resolvedLanguage ?? "es";
   const content = useContent();
+  const locale = (language.startsWith("en") ? "en" : "es") as Locale;
+  const path = pathFor(pageId, locale);
+  const key = pageId;
 
   useEffect(() => {
     const title = t(`seo.${key}.title`);
@@ -103,7 +130,9 @@ export function useSeo({ key, path, image, type = "website", noindex = false }: 
     upsertMeta("property", "og:image", socialImage);
     upsertMeta("property", "og:image:alt", title);
     upsertMeta("property", "og:site_name", "Luxury Smile Architects");
-    upsertMeta("property", "og:locale", language === "en" ? "en_US" : "es_ES");
+    upsertMeta("property", "og:locale", locale === "en" ? "en_US" : "es_ES");
+    upsertMeta("property", "og:locale:alternate", locale === "en" ? "es_ES" : "en_US");
+    upsertAlternates(pageId);
 
     // summary_large_image is what turns a shared link into a full-width card.
     upsertMeta("name", "twitter:card", "summary_large_image");
@@ -114,5 +143,5 @@ export function useSeo({ key, path, image, type = "website", noindex = false }: 
     upsertSchema(
       buildGraph(content, { key, path, title, description, image: socialImage }, language),
     );
-  }, [t, key, path, image, type, noindex, language, content]);
+  }, [t, key, pageId, path, locale, image, type, noindex, language, content]);
 }

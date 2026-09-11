@@ -1,5 +1,5 @@
 import { pick, type SiteContent } from "@/lib/content";
-import { ORIGIN } from "@/lib/routes";
+import { ORIGIN, pathFor, type Locale } from "@/lib/routes";
 
 /**
  * JSON-LD for the whole site, built from `site.json` rather than from values
@@ -35,7 +35,13 @@ export interface SchemaPage {
   image: string;
 }
 
-/** Stable per-entity ids, so every page refers to the same thing. */
+/**
+ * Stable per-entity ids, so every page refers to the same thing.
+ *
+ * Anchored to the Spanish URLs on purpose, in both languages: an entity is one
+ * entity. Giving the English pages their own `#prato` would describe two
+ * different dentists who happen to share a name.
+ */
 const personId = (id: string) => `${ORIGIN}/equipo#${id}`;
 const procedureId = (id: string) => `${ORIGIN}/tratamientos#${id}`;
 
@@ -145,9 +151,14 @@ function procedureNodes(content: SiteContent, lang: string) {
 }
 
 function breadcrumb(page: SchemaPage, lang: string) {
-  const home = lang.startsWith("en") ? "Home" : "Inicio";
-  const items = [{ name: home, path: "/" }];
-  if (page.path !== "/") items.push({ name: page.title.split("·")[0].trim(), path: page.path });
+  const locale: Locale = lang.startsWith("en") ? "en" : "es";
+  const homePath = pathFor("home", locale);
+  const items = [{ name: locale === "en" ? "Home" : "Inicio", path: homePath }];
+  // An English breadcrumb must climb to the English homepage, not the Spanish
+  // one, or the trail crosses languages halfway up.
+  if (page.path !== homePath) {
+    items.push({ name: page.title.split("·")[0].trim(), path: page.path });
+  }
 
   return {
     "@type": "BreadcrumbList",

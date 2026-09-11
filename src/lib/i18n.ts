@@ -1,42 +1,44 @@
 import i18n, { type Resource } from "i18next";
 import { initReactI18next } from "react-i18next";
 import HttpBackend from "i18next-http-backend";
-import LanguageDetector from "i18next-browser-languagedetector";
 
 import { PRERENDER_STATE, publishPrerenderState } from "@/lib/prerender-state";
+import { DEFAULT_LOCALE, LOCALES, localeFromPath, type Locale } from "@/lib/routes";
 
-export const SUPPORTED_LANGUAGES = ["es", "en"] as const;
-export type Language = (typeof SUPPORTED_LANGUAGES)[number];
-
-const STORAGE_KEY = "lsa-lang";
+export const SUPPORTED_LANGUAGES = LOCALES;
+export type Language = Locale;
 
 /**
  * Bundles the prerenderer inlined for this page, if any. With them present
  * i18next initialises synchronously, so the first client render shows real copy
  * instead of raw keys — which is what lets it match the prerendered markup.
  *
- * `partialBundledLanguages` keeps HttpBackend in charge of every language that
- * was not inlined, so switching to the other one still lazy-loads as before.
+ * `partialBundledLanguages` keeps HttpBackend in charge of the language that
+ * was not inlined, so a client-side switch still lazy-loads it.
  */
 const preloaded = PRERENDER_STATE.translations;
 
 /**
- * A prerendered page is written in one language. If the detector picked a
- * different one for this visitor, the first render would disagree with the
- * markup and React would throw all of it away. So the prerendered language wins
- * at init, and the visitor's real preference is applied after hydration by
- * `applyPreferredLanguage` — a plain client-side update with nothing to match.
+ * The URL decides the language, and nothing else does.
+ *
+ * The browser-language detector is deliberately gone: with `/` in Spanish and
+ * `/en` in English, letting the browser override the URL would serve English
+ * copy at a Spanish URL — mismatching the prerendered markup, and telling
+ * Google that one URL has two different contents. The prerendered state carries
+ * the language the file was written in; a cold load reads it off the path.
  */
-const prerenderedLanguage = PRERENDER_STATE.lang;
+const initialLanguage: Language =
+  (PRERENDER_STATE.lang as Language | undefined) ??
+  (typeof window !== "undefined" ? localeFromPath(window.location.pathname) : DEFAULT_LOCALE);
 
 void i18n
   // Lazy-loads /locales/{{lng}}/translation.json on demand (same-origin only).
   .use(HttpBackend)
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: "es",
-    supportedLngs: SUPPORTED_LANGUAGES as unknown as string[],
+    lng: initialLanguage,
+    fallbackLng: DEFAULT_LOCALE,
+    supportedLngs: LOCALES as unknown as string[],
     nonExplicitSupportedLngs: true,
     load: "languageOnly",
     defaultNS: "translation",
@@ -48,14 +50,8 @@ void i18n
     ...(preloaded
       ? { resources: preloaded as Resource, partialBundledLanguages: true, initImmediate: false }
       : {}),
-    ...(prerenderedLanguage ? { lng: prerenderedLanguage } : {}),
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",
-    },
-    detection: {
-      order: ["localStorage", "navigator", "htmlTag"],
-      caches: ["localStorage"],
-      lookupLocalStorage: STORAGE_KEY,
     },
     interpolation: {
       // React already escapes output; this is safe.
@@ -78,19 +74,6 @@ i18n.on("languageChanged", (lng) => {
   }
 });
 
-/** Resolve what this visitor should actually see: stored choice, else browser. */
-function preferredLanguage(): Language {
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored && (SUPPORTED_LANGUAGES as readonly string[]).includes(stored.slice(0, 2))) {
-      return stored.slice(0, 2) as Language;
-    }
-  } catch {
-    /* storage blocked — fall through to the browser language */
-  }
-  return navigator.language?.toLowerCase().startsWith("en") ? "en" : "es";
-}
-
 /**
  * Switch language without ever suspending.
  *
@@ -109,18 +92,9 @@ export async function switchLanguage(lng: Language): Promise<void> {
   await i18n.changeLanguage(lng);
 }
 
-/**
- * Applied once, after hydration. Before that point the language is pinned to
- * whatever the page was prerendered in (see `prerenderedLanguage`).
- */
-export function applyPreferredLanguage(): void {
-  if (!prerenderedLanguage) return; // cold SPA load: the detector already ran
-  void switchLanguage(preferredLanguage());
-}
-
 // During the prerender pass, hand the resolved bundle back so it can be inlined.
 function publishActiveBundle() {
-  const lng = (i18n.resolvedLanguage ?? "es").slice(0, 2);
+  const lng = (i18n.resolvedLanguage ?? DEFAULT_LOCALE).slice(0, 2);
   const bundle = i18n.getResourceBundle(lng, "translation");
   if (bundle) {
     publishPrerenderState({ lang: lng, translations: { [lng]: { translation: bundle } } });

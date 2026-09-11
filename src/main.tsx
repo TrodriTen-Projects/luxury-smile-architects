@@ -11,7 +11,7 @@ import "@/index.css";
 import "@/lib/i18n";
 import App from "@/App";
 import { PageLoader } from "@/components/PageLoader";
-import { preloadRoute } from "@/lib/routes";
+import { findPage, preloadPage } from "@/lib/routes";
 import { wasPrerendered } from "@/lib/prerendered";
 
 const container = document.getElementById("root")!;
@@ -49,7 +49,9 @@ function start() {
 if (wasPrerendered) {
   // Resolve this page's module before hydrating so the first render is
   // synchronous and reproduces the markup exactly.
-  void preloadRoute(window.location.pathname).then(start, start);
+  const match = findPage(window.location.pathname);
+  if (match) void preloadPage(match.page.id).then(start, start);
+  else start();
 } else {
   start();
 }

@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
 
 import { useContent } from "@/lib/content";
+import { useLocalePath } from "@/lib/use-locale-path";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const NAV = [
-  { to: "/tratamientos", key: "nav.treatments" },
-  { to: "/resultados", key: "nav.results" },
-  { to: "/equipo", key: "nav.team" },
-  { to: "/contacto", key: "nav.contact" },
+  { page: "treatments", key: "nav.treatments" },
+  { page: "results", key: "nav.results" },
+  { page: "team", key: "nav.team" },
+  { page: "contact", key: "nav.contact" },
 ] as const;
 
 export function Footer() {
   const { t } = useTranslation();
+  const p = useLocalePath();
   const content = useContent();
   const year = new Date().getFullYear();
 
@@ -23,7 +25,7 @@ export function Footer() {
         <div className="flex flex-col gap-16 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="eyebrow mb-6">{t("footer.tagline")}</p>
-            <Link to="/contacto" className="block">
+            <Link to={p("contact")} className="block">
               <span className="display block text-[clamp(2.5rem,6vw,5rem)] text-foreground">
                 {t("footer.cta")}
               </span>
@@ -32,8 +34,8 @@ export function Footer() {
           <nav className="flex flex-col gap-3">
             {NAV.map((item) => (
               <Link
-                key={item.to}
-                to={item.to}
+                key={item.page}
+                to={p(item.page)}
                 className="link-underline font-sans text-sm uppercase tracking-[0.2em] text-muted hover:text-foreground"
               >
                 {t(item.key)}

@@ -12,11 +12,13 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useContent, pick, type Treatment } from "@/lib/content";
+import { useLocalePath } from "@/lib/use-locale-path";
 import { useSeo } from "@/lib/seo";
 
 export default function Treatments() {
   const { t, i18n } = useTranslation();
-  useSeo({ key: "treatments", path: "/tratamientos" });
+  const p = useLocalePath();
+  useSeo({ pageId: "treatments" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const items = content.treatments;
@@ -103,7 +105,7 @@ export default function Treatments() {
 
                 <div className="mt-9 flex flex-col gap-4">
                   <Button asChild size="lg">
-                    <Link to="/contacto" onClick={() => setActive(null)}>
+                    <Link to={p("contact")} onClick={() => setActive(null)}>
                       {t("common.bookCta")}
                     </Link>
                   </Button>

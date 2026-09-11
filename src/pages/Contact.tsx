@@ -56,7 +56,7 @@ const EMPTY = {
 
 export default function Contact() {
   const { t, i18n } = useTranslation();
-  useSeo({ key: "contact", path: "/contacto" });
+  useSeo({ pageId: "contact" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const treatments = content.treatments;

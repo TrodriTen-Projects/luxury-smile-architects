@@ -15,6 +15,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { useContent, pick } from "@/lib/content";
+import { useLocalePath } from "@/lib/use-locale-path";
 import { useSeo } from "@/lib/seo";
 import { entryInitial, isSuppressingEntry } from "@/lib/prerendered";
 
@@ -22,7 +23,8 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Home() {
   const { t, i18n } = useTranslation();
-  useSeo({ key: "home", path: "/" });
+  const p = useLocalePath();
+  useSeo({ pageId: "home" });
   const content = useContent();
   const lang = i18n.resolvedLanguage ?? "es";
   const treatments = content.treatments;
@@ -95,13 +97,13 @@ export default function Home() {
             </p>
             <div className="flex items-center gap-8">
               <Link
-                to="/contacto"
+                to={p("contact")}
                 className="link-underline font-sans text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-gold"
               >
                 {t("hero.ctaPrimary")}
               </Link>
               <Link
-                to="/resultados"
+                to={p("results")}
                 className="link-underline font-sans text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-foreground"
               >
                 {t("hero.ctaSecondary")}
@@ -145,7 +147,7 @@ export default function Home() {
               </p>
             </div>
             <Link
-              to="/resultados"
+              to={p("results")}
               className="link-underline hidden font-sans text-[0.72rem] uppercase tracking-[0.2em] text-gold sm:inline"
             >
               {t("common.viewResults")}
@@ -210,10 +212,10 @@ export default function Home() {
           </SectionReveal>
           <SectionReveal delay={0.12} className="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md mx-auto">
             <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link to="/contacto">{t("common.bookCta")}</Link>
+              <Link to={p("contact")}>{t("common.bookCta")}</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link to="/resultados">{t("common.viewResults")}</Link>
+              <Link to={p("results")}>{t("common.viewResults")}</Link>
             </Button>
           </SectionReveal>
         </div>
@@ -230,7 +232,7 @@ export default function Home() {
               </h2>
             </div>
             <Link
-              to="/tratamientos"
+              to={p("treatments")}
               className="link-underline hidden font-sans text-[0.72rem] uppercase tracking-[0.2em] text-gold sm:inline"
             >
               {t("common.allTreatments")}
@@ -241,7 +243,7 @@ export default function Home() {
             {treatments.map((item, i) => (
               <SectionReveal as="li" key={item.id} delay={(i % 3) * 0.04}>
                 <Link
-                  to="/tratamientos"
+                  to={p("treatments")}
                   className="group grid grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-border py-6 transition-colors last:border-b hover:bg-elevated"
                 >
                   <span className="index-num text-xl sm:text-2xl">

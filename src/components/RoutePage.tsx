@@ -1,9 +1,9 @@
 import { useEffect, useState, type ComponentType } from "react";
 
-import { preloadRoute, resolvedPage } from "@/lib/routes";
+import { preloadPage, resolvedPage } from "@/lib/routes";
 
 /**
- * Renders a route's page, loading its chunk on demand.
+ * Renders a page, loading its chunk on demand.
  *
  * This is what `<Suspense>` + `React.lazy` would normally do, written out by
  * hand because a Suspense boundary cannot be hydrated from prerendered markup:
@@ -16,24 +16,27 @@ import { preloadRoute, resolvedPage } from "@/lib/routes";
  * already resolved before hydration, so the first render is synchronous and
  * matches the markup exactly. On later navigation the chunk loads and the
  * placeholder holds the layout in the meantime, exactly as the fallback did.
+ *
+ * Keyed by page id, not by path: `/equipo` and `/en/team` are the same
+ * component in two languages and share one chunk.
  */
-export function RoutePage({ path }: { path: string }) {
-  const [Page, setPage] = useState<ComponentType | undefined>(() => resolvedPage(path));
+export function RoutePage({ pageId }: { pageId: string }) {
+  const [Page, setPage] = useState<ComponentType | undefined>(() => resolvedPage(pageId));
 
   useEffect(() => {
-    const already = resolvedPage(path);
+    const already = resolvedPage(pageId);
     if (already) {
       setPage(() => already);
       return;
     }
     let active = true;
-    void preloadRoute(path).then(() => {
-      if (active) setPage(() => resolvedPage(path));
+    void preloadPage(pageId).then(() => {
+      if (active) setPage(() => resolvedPage(pageId));
     });
     return () => {
       active = false;
     };
-  }, [path]);
+  }, [pageId]);
 
   if (!Page) return <div className="min-h-[80vh]" aria-hidden="true" />;
   return <Page />;
