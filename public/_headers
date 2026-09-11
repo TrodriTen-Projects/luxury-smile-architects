@@ -49,3 +49,10 @@
 /robots.txt
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=3600, must-revalidate
+
+# CMS. El documento /admin lo sirve una Pages Function con su propia CSP
+# (functions/admin/index.js); esto solo cachea sus assets. El bundle lleva la
+# versión fijada en package.json y se regenera en cada build.
+/admin/*
+  Cache-Control: public, max-age=3600, must-revalidate
+  X-Robots-Tag: noindex, nofollow
