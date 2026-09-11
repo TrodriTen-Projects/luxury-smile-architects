@@ -183,6 +183,67 @@ async function renderRoute(browser, origin, route) {
   return { html, consoleErrors, heading };
 }
 
+/**
+ * Check the JSON-LD actually parses and carries the fields it claims to.
+ *
+ * The graph is generated from site.json, so a bad edit there (a renamed key, a
+ * dropped address) would otherwise ship silently as a broken schema. Failing
+ * the build is cheaper than discovering it in Search Console weeks later.
+ */
+function validateSchema(html) {
+  const problems = [];
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+
+  if (blocks.length === 0) return ["sin bloque JSON-LD"];
+  if (blocks.length > 1) problems.push(`${blocks.length} bloques JSON-LD (debe haber uno)`);
+
+  let graph;
+  try {
+    graph = JSON.parse(blocks[0][1]);
+  } catch (error) {
+    return [`el JSON-LD no es JSON válido: ${error.message}`];
+  }
+
+  const nodes = graph["@graph"];
+  if (!Array.isArray(nodes)) return ["el JSON-LD no tiene un @graph"];
+
+  const typeOf = (node) => [node["@type"]].flat();
+  const clinic = nodes.find((n) => typeOf(n).includes("Dentist"));
+  if (!clinic) problems.push("el @graph no contiene el nodo Dentist");
+  else {
+    for (const field of ["name", "telephone", "address", "geo", "openingHoursSpecification"]) {
+      if (!clinic[field]) problems.push(`Dentist sin "${field}"`);
+    }
+    const address = clinic.address ?? {};
+    for (const field of ["streetAddress", "postalCode", "addressLocality", "addressCountry"]) {
+      if (!address[field]) problems.push(`PostalAddress sin "${field}"`);
+    }
+    if (clinic.priceRange) problems.push("Dentist trae priceRange, que no debe publicarse");
+  }
+
+  // Google disallows marking up reviews collected elsewhere; on a healthcare
+  // site the downside of a manual action outweighs star snippets.
+  if (nodes.some((n) => typeOf(n).some((t) => t === "Review" || t === "AggregateRating"))) {
+    problems.push("el @graph trae Review/AggregateRating, que no deben emitirse");
+  }
+
+  const people = nodes.filter((n) => typeOf(n).includes("Person"));
+  const procedures = nodes.filter((n) => typeOf(n).includes("MedicalProcedure"));
+  if (people.length === 0) problems.push("el @graph no contiene ningún Person");
+  if (procedures.length === 0) problems.push("el @graph no contiene ningún MedicalProcedure");
+
+  // Cross-references are the point of the graph: without them the entities are
+  // unrelated islands and nothing connects the team to the clinic.
+  const ids = new Set(nodes.map((n) => n["@id"]).filter(Boolean));
+  for (const person of people) {
+    if (!ids.has(person.worksFor?.["@id"])) {
+      problems.push(`Person "${person.name}" no referencia la clínica en worksFor`);
+    }
+  }
+
+  return problems;
+}
+
 /** Reject output that would publish placeholders, empty shells or broken markup. */
 function validate(route, html, heading, consoleErrors) {
   const problems = [];
@@ -217,6 +278,8 @@ function validate(route, html, heading, consoleErrors) {
     if (!html.includes(`property="${tag}"`)) problems.push(`falta <meta property="${tag}">`);
   }
   if (!html.includes('name="twitter:card"')) problems.push("faltan las Twitter Cards");
+
+  problems.push(...validateSchema(html));
 
   if (!heading) problems.push("no se encontró un encabezado con texto en <main>");
   if (!/<\/html>/i.test(html)) problems.push("el HTML serializado está truncado");

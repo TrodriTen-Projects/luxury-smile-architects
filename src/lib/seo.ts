@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useContent } from "@/lib/content";
+import { ORIGIN } from "@/lib/routes";
+import { buildGraph } from "@/lib/schema";
+
+export { ORIGIN };
+
 /**
  * Per-page document head.
  *
@@ -13,9 +19,6 @@ import { useTranslation } from "react-i18next";
  * Copy lives in the locale files under `seo.*`, not here, so it stays editable
  * as content (and, later, through the CMS) instead of requiring a code change.
  */
-
-/** Production origin. Keep in sync with ORIGIN in scripts/routes.mjs. */
-export const ORIGIN = "https://luxurysmile.es";
 
 /** Social preview image, generated at build time by scripts/gen-og-images.mjs. */
 const DEFAULT_OG_IMAGE = "/og-default.jpg";
@@ -55,9 +58,30 @@ function upsertLink(rel: string, href: string): void {
   element.setAttribute("href", href);
 }
 
+const SCHEMA_ID = "__LSA_SCHEMA__";
+
+/**
+ * A single `<script type="application/ld+json">` per page, replaced in place on
+ * navigation so two pages' graphs never coexist.
+ *
+ * `application/ld+json` is data, not executable script, so `script-src 'self'`
+ * does not apply and the strict CSP stays untouched.
+ */
+function upsertSchema(graph: object): void {
+  let element = document.getElementById(SCHEMA_ID);
+  if (!element) {
+    element = document.createElement("script");
+    element.setAttribute("type", "application/ld+json");
+    element.id = SCHEMA_ID;
+    document.head.appendChild(element);
+  }
+  element.textContent = JSON.stringify(graph);
+}
+
 export function useSeo({ key, path, image, type = "website" }: SeoInput): void {
   const { t, i18n } = useTranslation();
   const language = i18n.resolvedLanguage ?? "es";
+  const content = useContent();
 
   useEffect(() => {
     const title = t(`seo.${key}.title`);
@@ -83,5 +107,9 @@ export function useSeo({ key, path, image, type = "website" }: SeoInput): void {
     upsertMeta("name", "twitter:title", title);
     upsertMeta("name", "twitter:description", description);
     upsertMeta("name", "twitter:image", socialImage);
-  }, [t, key, path, image, type, language]);
+
+    upsertSchema(
+      buildGraph(content, { key, path, title, description, image: socialImage }, language),
+    );
+  }, [t, key, path, image, type, language, content]);
 }

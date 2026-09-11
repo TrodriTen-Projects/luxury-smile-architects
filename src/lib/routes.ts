@@ -6,6 +6,14 @@ import type { ComponentType } from "react";
  * two ever disagree, so adding a page here without adding it there is caught
  * before anything ships.
  */
+/**
+ * Production origin, used for canonical URLs, og:url and every `@id` in the
+ * JSON-LD graph. Lives here rather than in seo.ts because schema.ts needs it
+ * too and seo.ts imports schema.ts — putting it there makes the two circular.
+ * Keep in sync with ORIGIN in scripts/routes.mjs.
+ */
+export const ORIGIN = "https://luxurysmile.es";
+
 export interface AppRoute {
   path: string;
   load: () => Promise<{ default: ComponentType }>;

@@ -286,8 +286,34 @@
     "instagram": "https://www.instagram.com/luxurysmilearchitectsmadrid/",
     "rating": "5.0",
     "reviewsCount": {
-      "en": "11 reviews",
-      "es": "11 reseñas"
+      "es": "8 reseñas",
+      "en": "8 reviews"
+    },
+    "address": {
+      "street": "Calle de Recoletos 20",
+      "district": "Barrio de Salamanca",
+      "postalCode": "28001",
+      "city": "Madrid",
+      "region": "Madrid",
+      "country": "ES"
+    },
+    "geo": {
+      "latitude": 40.421789,
+      "longitude": -3.689292
+    },
+    "phone": "+34689440906",
+    "phoneSecondary": "+34659716995",
+    "email": "contacto@luxurysmilearchitects.com",
+    "hours": {
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "10:00",
+      "closes": "20:00"
     }
   },
   "reviews": [
