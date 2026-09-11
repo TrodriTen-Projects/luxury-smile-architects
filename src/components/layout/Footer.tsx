@@ -44,13 +44,29 @@ export function Footer() {
 
         <div className="my-14 hairline" />
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+        {/* NAP. Prerendering puts this block in the HTML of all seven pages, so
+            the name, address and phone are readable without running JavaScript
+            — which is what a crawler and an answer engine actually index.
+            `<address>` and `tel:` make it machine-readable rather than
+            decorative text. */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <address className="not-italic">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
               {t("contact.clinic.addressLabel")}
             </p>
             <p className="mt-3 font-sans text-sm text-foreground">{t("contact.clinic.address")}</p>
             <p className="font-sans text-sm text-muted">{t("contact.clinic.area")}</p>
+          </address>
+          <div>
+            <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">
+              {t("contact.clinic.phoneLabel")}
+            </p>
+            <a
+              href={`tel:${t("contact.clinic.phone").replace(/[^\d+]/g, "")}`}
+              className="link-underline mt-3 inline-block font-sans text-sm text-foreground"
+            >
+              {t("contact.clinic.phone")}
+            </a>
           </div>
           <div>
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-gold">

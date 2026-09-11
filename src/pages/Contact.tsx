@@ -1,10 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import PhoneInput from "react-phone-number-input";
-// Bundle the country flags so they're served from our own origin instead of the
-// library's default external CDN (purecatamphetamine.github.io), which our
-// strict `img-src 'self'` CSP blocks. Keeps the field offline-safe & CSP-clean.
-import flags from "react-phone-number-input/flags";
+// `/min` carries the smallest libphonenumber metadata that still validates
+// numbers; the default entry ships the full dataset and was most of this
+// page's weight.
+import PhoneInput from "react-phone-number-input/min";
 import "react-phone-number-input/style.css";
 import {
   MapPin,
@@ -39,6 +38,9 @@ import { useContent, pick } from "@/lib/content";
 
 type FieldErrors = Partial<Record<string, string>>;
 
+/** Country code -> flag component, as shipped by react-phone-number-input. */
+type FlagSet = Record<string, React.ComponentType<{ title?: string }>>;
+
 const EMPTY = {
   firstName: "",
   lastName: "",
@@ -72,6 +74,64 @@ export default function Contact() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [privacyOpen, setPrivacyOpen] = useState(false);
+
+  // 265 inline SVGs, one per country — the single heaviest thing on this page.
+  // Loaded after mount as its own chunk so the form is interactive first; the
+  // field simply shows country codes until they arrive. They are bundled rather
+  // than fetched from the library's default CDN because `img-src 'self'` blocks
+  // it, and relaxing the CSP for decorative flags is not a trade worth making.
+  const [flags, setFlags] = useState<FlagSet | undefined>(undefined);
+  useEffect(() => {
+    let active = true;
+    void import("react-phone-number-input/flags").then((module) => {
+      if (active) setFlags(module.default as FlagSet);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  // Always supplied, even before the flags arrive. Left to its own devices the
+  // library falls back to its CDN (purecatamphetamine.github.io), which
+  // `img-src 'self'` blocks — so the field would sit there firing blocked
+  // requests. A neutral box holds the space until the real flag lands.
+  const FlagBox = useMemo(() => {
+    function Flag({ country, countryName }: { country: string; countryName: string }) {
+      const Loaded = flags?.[country];
+      if (!Loaded) {
+        return <span className="inline-block h-3 w-4 rounded-[1px] bg-foreground/15" aria-hidden="true" />;
+      }
+      return <Loaded title={countryName} />;
+    }
+    return Flag;
+  }, [flags]);
+
+  // The Maps embed pulls ~1.3 MB of Google's own JavaScript (places, util,
+  // init_embed). `loading="lazy"` is not enough: Chrome's threshold for iframes
+  // is generous enough that it still loads on this page. Mounting the iframe
+  // only once its container is actually near the viewport keeps that megabyte
+  // off the initial load, and the map still appears on scroll as before.
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const [mapVisible, setMapVisible] = useState(false);
+  useEffect(() => {
+    const node = mapRef.current;
+    if (!node || mapVisible) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setMapVisible(true); // no observer: fall back to loading it
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setMapVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [mapVisible]);
 
   const set = (key: keyof typeof EMPTY, value: string | boolean) =>
     setValues((v) => ({ ...v, [key]: value }));
@@ -252,7 +312,7 @@ export default function Contact() {
                   <Field id="phone" label={t("contact.form.phone")} error={errors.phone}>
                     <PhoneInput
                       id="phone"
-                      flags={flags}
+                      flagComponent={FlagBox}
                       international
                       defaultCountry="ES"
                       value={values.phone}
@@ -443,15 +503,22 @@ export default function Contact() {
           </SectionReveal>
 
           <SectionReveal delay={0.1} className="mt-10">
-            <div className="overflow-hidden rounded-[3px] border border-border">
-              <iframe
-                title={t("contact.map.title")}
-                src={mapEmbedUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-[320px] w-full sm:h-[440px]"
-                style={{ border: 0, filter: "grayscale(0.2)" }}
-              />
+            <div ref={mapRef} className="overflow-hidden rounded-[3px] border border-border">
+              {mapVisible ? (
+                <iframe
+                  title={t("contact.map.title")}
+                  src={mapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-[320px] w-full sm:h-[440px]"
+                  style={{ border: 0, filter: "grayscale(0.2)" }}
+                />
+              ) : (
+                <div
+                  className="h-[320px] w-full bg-elevated sm:h-[440px]"
+                  aria-hidden="true"
+                />
+              )}
             </div>
           </SectionReveal>
         </div>
