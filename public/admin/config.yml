@@ -13,7 +13,6 @@ backend:
     deleteMedia: "contenido: elimina {{path}}"
 media_folder: "public/media"
 public_folder: "/media"
-locale: "es"
 publish_mode: "simple"
 collections:
   - name: "contenido"
@@ -22,7 +21,6 @@ collections:
       - name: "site"
         label: "Clínica, equipo y tratamientos"
         file: "public/content/site.json"
-        description: "Datos de la clínica, equipo, tratamientos, casos y reseñas. Al guardar se publica solo en unos minutos."
         fields:
           - name: "_readme"
             label: "Notas internas (no tocar)"
@@ -323,7 +321,6 @@ collections:
       - name: "locale_es"
         label: "Textos en español"
         file: "public/locales/es/translation.json"
-        description: "Todos los textos visibles de la web en español."
         fields:
           - name: "nav"
             label: "Nav"
@@ -1240,7 +1237,6 @@ collections:
       - name: "locale_en"
         label: "Textos en inglés"
         file: "public/locales/en/translation.json"
-        description: "Los mismos textos, en inglés."
         fields:
           - name: "nav"
             label: "Nav"

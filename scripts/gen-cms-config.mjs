@@ -318,7 +318,6 @@ const config = {
   // appear on the site without anyone editing a list.
   media_folder: "public/media",
   public_folder: "/media",
-  locale: "es",
   publish_mode: "simple",
   collections: [
     {
@@ -329,22 +328,18 @@ const config = {
           name: "site",
           label: "Clínica, equipo y tratamientos",
           file: "public/content/site.json",
-          description:
-            "Datos de la clínica, equipo, tratamientos, casos y reseñas. Al guardar se publica solo en unos minutos.",
           fields: siteFields,
         },
         {
           name: "locale_es",
           label: "Textos en español",
           file: "public/locales/es/translation.json",
-          description: "Todos los textos visibles de la web en español.",
           fields: fieldsFromObject(es),
         },
         {
           name: "locale_en",
           label: "Textos en inglés",
           file: "public/locales/en/translation.json",
-          description: "Los mismos textos, en inglés.",
           fields: fieldsFromObject(en),
         },
       ],
