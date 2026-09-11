@@ -93,11 +93,24 @@ jobs:
       contents: read
       deployments: write
     steps:
+      # Needed for `functions/`. Wrangler looks for the Pages Functions
+      # directory relative to the directory it is run from — NOT inside the
+      # directory being deployed. Without a checkout this job only had `dist/`,
+      # so `wrangler pages deploy dist` found no functions and shipped a site
+      # where /admin and /api/auth answered 404.
+      - uses: actions/checkout@v4
       - name: Download dist artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
+      # Fail loudly rather than deploy a site whose CMS silently 404s.
+      - name: Verify Pages Functions are present
+        run: |
+          test -f functions/admin/index.js
+          test -f functions/api/auth/index.js
+          test -f functions/api/auth/callback.js
+          echo "functions/: $(find functions -name '*.js' | wc -l) archivo(s)"
       - name: Create Cloudflare Pages Project (if not exists)
         uses: cloudflare/wrangler-action@v3
         continue-on-error: true
