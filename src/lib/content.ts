@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { PRERENDER_STATE, publishPrerenderState } from "@/lib/prerender-state";
+
 /**
  * Editable site content loaded at runtime from /content/site.json.
  * Drop images/videos into /public/media and point to them here — no rebuild
@@ -255,7 +257,9 @@ function merge(base: SiteContent, patch: Partial<SiteContent>): SiteContent {
   };
 }
 
-let cache: SiteContent | null = null;
+// Seeded from the block the prerenderer inlined, so the first client render
+// produces exactly the markup that was shipped (see lib/prerender-state.ts).
+let cache: SiteContent | null = (PRERENDER_STATE.content as SiteContent | undefined) ?? null;
 
 export async function loadContent(): Promise<SiteContent> {
   if (cache) return cache;
@@ -296,6 +300,7 @@ export async function loadContent(): Promise<SiteContent> {
     }
   }
   cache = content;
+  publishPrerenderState({ content });
   return cache;
 }
 

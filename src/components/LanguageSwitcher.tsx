@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
-import { SUPPORTED_LANGUAGES, type Language } from "@/lib/i18n";
+import { SUPPORTED_LANGUAGES, switchLanguage, type Language } from "@/lib/i18n";
 
 export function LanguageSwitcher({ className }: { className?: string }) {
   const { i18n, t } = useTranslation();
@@ -20,7 +20,9 @@ export function LanguageSwitcher({ className }: { className?: string }) {
           {i > 0 && <span className="text-border">/</span>}
           <button
             type="button"
-            onClick={() => void i18n.changeLanguage(lng)}
+            // Preloads the bundle first: a bare changeLanguage would suspend,
+            // and a prerendered page has no boundary to catch it.
+            onClick={() => void switchLanguage(lng)}
             aria-pressed={current === lng}
             className={cn(
               "rounded px-1 transition-colors",

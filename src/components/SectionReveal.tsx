@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { entryInitial } from "@/lib/prerendered";
 
 const variants: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -34,7 +35,7 @@ export function SectionReveal({
       className={cn(className)}
       variants={variants}
       custom={delay}
-      initial="hidden"
+      initial={entryInitial("hidden", "visible")}
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
     >
