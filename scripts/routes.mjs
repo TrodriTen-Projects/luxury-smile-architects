@@ -31,7 +31,7 @@ export const ROUTES = [
 export const ERROR_ROUTE = { path: "/404", output: "404.html" };
 
 /** Production origin, used for canonical URLs, og:url and the sitemap. */
-export const ORIGIN = "https://luxurysmile.es";
+export const ORIGIN = "https://luxurysmilearchitects.eu";
 
 /** `/tratamientos` -> `dist/tratamientos/index.html`; `/` -> `dist/index.html`. */
 export function outputFileFor(routePath) {

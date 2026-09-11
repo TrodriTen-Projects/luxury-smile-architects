@@ -12,7 +12,7 @@ import type { ComponentType } from "react";
  * too and seo.ts imports schema.ts — putting it there makes the two circular.
  * Keep in sync with ORIGIN in scripts/routes.mjs.
  */
-export const ORIGIN = "https://luxurysmile.es";
+export const ORIGIN = "https://luxurysmilearchitects.eu";
 
 export interface AppRoute {
   path: string;

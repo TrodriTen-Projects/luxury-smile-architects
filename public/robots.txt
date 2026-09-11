@@ -1,11 +1,11 @@
-# Luxury Smile Architects — https://luxurysmile.es
+# Luxury Smile Architects — https://luxurysmilearchitects.eu
 #
 # IMPORTANT: this file is currently NOT what the domain serves. Cloudflare's
 # managed robots.txt is switched on and replaces it, prepending `Disallow: /`
 # for GPTBot, ClaudeBot, Google-Extended, CCBot and others, plus a
 # `Content-Signal: ai-train=no`. Check with:
 #
-#   curl https://luxurysmile.es/robots.txt
+#   curl https://luxurysmilearchitects.eu/robots.txt
 #
 # Until that setting is turned off (Cloudflare dashboard -> Security ->
 # Settings -> Bot traffic -> managed robots.txt), everything below is inert.
@@ -37,4 +37,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://luxurysmile.es/sitemap.xml
+Sitemap: https://luxurysmilearchitects.eu/sitemap.xml

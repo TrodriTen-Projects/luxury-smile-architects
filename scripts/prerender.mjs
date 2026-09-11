@@ -80,7 +80,21 @@ async function assertRoutesInSync() {
         `Actualiza ambas listas.`,
     );
   }
+  // The origin is duplicated for the same reason the route list is, and a
+  // mismatch would publish canonicals and sitemap entries pointing at two
+  // different domains — the exact duplicate-content problem this is meant to
+  // solve. Three domains currently serve this site, so it matters here.
+  const routerOrigin = source.match(/ORIGIN\s*=\s*"([^"]+)"/)?.[1];
+  if (routerOrigin !== ORIGIN) {
+    throw new Error(
+      `El dominio canónico no coincide.\n` +
+        `  src/lib/routes.ts : ${routerOrigin}\n` +
+        `  scripts/routes.mjs: ${ORIGIN}`,
+    );
+  }
+
   console.log(`  rutas en sincronía (${inBuild.length}): ${inBuild.join(" ")}`);
+  console.log(`  dominio canónico: ${ORIGIN}`);
 }
 
 async function renderRoute(browser, origin, route) {
