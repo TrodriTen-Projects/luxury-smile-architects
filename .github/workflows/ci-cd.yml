@@ -105,12 +105,16 @@ jobs:
           name: dist
           path: dist
       # Fail loudly rather than deploy a site whose CMS silently 404s.
-      - name: Verify Pages Functions are present
+      - name: Verify Pages Functions are present and parse
         run: |
           test -f functions/admin/index.js
           test -f functions/api/auth/index.js
           test -f functions/api/auth/callback.js
-          echo "functions/: $(find functions -name '*.js' | wc -l) archivo(s)"
+          # Nothing else type-checks these: they are plain .js outside the Vite
+          # build, so a syntax error only surfaced when wrangler refused to
+          # bundle them — after the build had already passed.
+          for f in $(find functions -name '*.js'); do node --check "$f"; done
+          echo "functions/: $(find functions -name '*.js' | wc -l) archivo(s), sintaxis correcta"
       - name: Create Cloudflare Pages Project (if not exists)
         uses: cloudflare/wrangler-action@v3
         continue-on-error: true
