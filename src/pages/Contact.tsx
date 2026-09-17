@@ -41,6 +41,7 @@ import {
 import { buildContactSchema } from "@/lib/validation";
 import { sanitizeLine, sanitizeBlock } from "@/lib/sanitize";
 import { useContent, pick } from "@/lib/content";
+import { trackLead } from "@/lib/tracking";
 
 type FieldErrors = Partial<Record<string, string>>;
 
@@ -172,6 +173,8 @@ export default function Contact() {
 
       const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(body)}`;
       window.open(waUrl, "_blank");
+      // Conversion signal for Meta Ads and GA4; a no-op without consent.
+      trackLead();
       
       setStatus("success");
       setValues({ ...EMPTY });

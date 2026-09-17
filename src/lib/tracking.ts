@@ -33,6 +33,19 @@ function isBrowser(): boolean {
   return typeof window !== "undefined" && window.__PRERENDER__ !== true;
 }
 
+/**
+ * What has already run on this page. ConsentBanner's effect runs again whenever
+ * the content object changes, and a second `config` or `init` would count the
+ * same visit twice.
+ */
+const done = new Set<string>();
+
+function once(key: string): boolean {
+  if (done.has(key)) return false;
+  done.add(key);
+  return true;
+}
+
 export function readConsent(): ConsentChoice | null {
   if (!isBrowser()) return null;
   try {
@@ -57,12 +70,18 @@ function storeConsent(choice: ConsentChoice): void {
  * `dataLayer` bookkeeping — no request leaves the browser.
  */
 export function initConsentMode(): void {
-  if (!isBrowser()) return;
+  if (!isBrowser() || !once("consent-default")) return;
   window.dataLayer = window.dataLayer ?? [];
-  const gtag: (...args: unknown[]) => void = (...args) => {
-    window.dataLayer!.push(args);
-  };
-  window.gtag = window.gtag ?? gtag;
+  // Google's snippet as published, `arguments` included. gtag.js takes its
+  // commands from `arguments` objects on the dataLayer; the array a rest
+  // parameter produces is not one, and consent, config and events pushed that
+  // way never run.
+  window.gtag =
+    window.gtag ??
+    function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer!.push(arguments);
+    };
   window.gtag("consent", "default", {
     ad_storage: "denied",
     analytics_storage: "denied",
@@ -85,9 +104,12 @@ function loadScript(src: string): Promise<void> {
 }
 
 async function loadGa4(measurementId: string): Promise<void> {
-  await loadScript(`https://www.googletagmanager.com/gtag/js?id=${measurementId}`);
+  // Queued before gtag.js arrives, in the order Google's snippet uses, so an
+  // event fired while the script is still downloading never runs ahead of the
+  // config it belongs to.
   window.gtag?.("js", new Date());
   window.gtag?.("config", measurementId, { anonymize_ip: true });
+  await loadScript(`https://www.googletagmanager.com/gtag/js?id=${measurementId}`);
 }
 
 async function loadMetaPixel(pixelId: string): Promise<void> {
@@ -95,35 +117,46 @@ async function loadMetaPixel(pixelId: string): Promise<void> {
   // made before fbevents.js arrives. Written out here instead of inlined so
   // `script-src` stays free of 'unsafe-inline'.
   if (!window.fbq) {
-    const queue: unknown[] = [];
-    const fbq = ((...args: unknown[]) => {
-      if (fbq.callMethod) fbq.callMethod(...args);
-      else queue.push(args);
-    }) as NonNullable<Window["fbq"]>;
-    fbq.queue = queue;
+    const fbq = function () {
+      // eslint-disable-next-line prefer-rest-params
+      if (fbq.callMethod) Reflect.apply(fbq.callMethod, fbq, arguments);
+      // eslint-disable-next-line prefer-rest-params
+      else fbq.queue!.push(arguments);
+    } as NonNullable<Window["fbq"]>;
+    fbq.push = fbq;
     fbq.loaded = true;
     fbq.version = "2.0";
+    fbq.queue = [];
     window.fbq = fbq;
     window._fbq = fbq;
   }
-  await loadScript("https://connect.facebook.net/en_US/fbevents.js");
+  // Queued straight away, as the snippet does. Called after the download
+  // instead, a Lead sent in the meantime reached fbevents.js before `init` and
+  // was discarded.
   window.fbq?.("init", pixelId);
   window.fbq?.("track", "PageView");
+  await loadScript("https://connect.facebook.net/en_US/fbevents.js");
 }
 
 /** Load whatever is configured. Called only after the visitor has agreed. */
 export async function startTracking(ids: TrackingIds): Promise<void> {
   if (!isBrowser()) return;
-  window.gtag?.("consent", "update", {
-    ad_storage: "granted",
-    analytics_storage: "granted",
-    ad_user_data: "granted",
-    ad_personalization: "granted",
-  });
+  if (once("consent-update")) {
+    window.gtag?.("consent", "update", {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+    });
+  }
 
   const tasks: Promise<void>[] = [];
-  if (ids.ga4MeasurementId) tasks.push(loadGa4(ids.ga4MeasurementId));
-  if (ids.metaPixelId) tasks.push(loadMetaPixel(ids.metaPixelId));
+  if (ids.ga4MeasurementId && once(`ga4:${ids.ga4MeasurementId}`)) {
+    tasks.push(loadGa4(ids.ga4MeasurementId));
+  }
+  if (ids.metaPixelId && once(`meta:${ids.metaPixelId}`)) {
+    tasks.push(loadMetaPixel(ids.metaPixelId));
+  }
   // A blocked or failed tag must never take the page down with it.
   await Promise.allSettled(tasks);
 }
@@ -136,4 +169,20 @@ export function grantConsent(ids: TrackingIds): void {
 export function denyConsent(): void {
   storeConsent("denied");
   // Nothing to unload: no tag was ever fetched.
+}
+
+/**
+ * Conversion event for the contact form. The form hands the visitor off to
+ * WhatsApp, which is where the trail used to go cold: without it, Meta Ads had
+ * no signal to optimise for and GA4 no goal to report.
+ *
+ * Only the event name is sent: no treatment, no contact details. This is a
+ * dental clinic, and what someone asked about is health data. Nothing fires
+ * without prior consent, and nothing leaves the browser if the tags were never
+ * configured.
+ */
+export function trackLead(): void {
+  if (!isBrowser() || readConsent() !== "granted") return;
+  window.fbq?.("track", "Lead");
+  window.gtag?.("event", "generate_lead");
 }
