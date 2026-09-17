@@ -4,7 +4,7 @@
  * Serves the freshly built `dist/` with `vite preview`, drives a real browser
  * over every route in `scripts/routes.mjs`, waits for the app to finish loading
  * its runtime JSON (`/content/site.json`, `/locales/*`), inlines that state
- * for the browser, then writes the DOM to `dist/<route>/index.html`.
+ * for the browser, then writes the DOM to `dist/<route>.html`.
  *
  * Why a browser and not a Node renderer (vite-react-ssg and friends): the app
  * fetches its content and translations over HTTP at runtime. A Node renderer

@@ -38,3 +38,6 @@ Thumbs.db
 # Bundle del CMS, vendorizado en cada build por scripts/vendor-cms.mjs.
 # La versión se fija en package.json; el archivo no se versiona (2 MB).
 public/admin/sveltia-cms.js
+
+# Estado local de `wrangler pages dev`, que emula Cloudflare Pages sobre dist/.
+.wrangler/
