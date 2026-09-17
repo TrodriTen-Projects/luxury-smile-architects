@@ -60,7 +60,16 @@ export function alternatesFor(pageId) {
   return page.paths;
 }
 
-/** `/en/team` -> `dist/en/team/index.html`; `/` -> `dist/index.html`. */
+/**
+ * `/en/team` -> `dist/en/team.html`; `/` -> `dist/index.html`.
+ *
+ * Flat `.html`, not `<route>/index.html`. Cloudflare Pages serves a directory
+ * index only at the trailing-slash URL, so `tratamientos/index.html` made
+ * `/tratamientos` answer 308 -> `/tratamientos/`, and every canonical, sitemap
+ * entry, hreflang link and internal link on the site pointed at a redirect. A
+ * flat file is served at the clean URL itself, the same way `404.html` already
+ * answers `/404` with a 200.
+ */
 export function outputFileFor(routePath) {
-  return routePath === "/" ? "index.html" : `${routePath.replace(/^\//, "")}/index.html`;
+  return routePath === "/" ? "index.html" : `${routePath.replace(/^\//, "")}.html`;
 }

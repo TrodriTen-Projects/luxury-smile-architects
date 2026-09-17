@@ -59,8 +59,8 @@ const HTML = `<!doctype html>
 <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
 </head>
 <body>
-<!-- No `type="module"`: the bundle is a classic script, and Sveltia warns that
-     loading it as a module causes unexpected behaviour with its JS API. -->
+<!-- Loaded as a classic script on purpose. The bundle is not an ES module, and
+     Sveltia warns that type="module" breaks its JavaScript API. -->
 <script src="/admin/sveltia-cms.js"></script>
 </body>
 </html>`;
