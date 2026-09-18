@@ -47,7 +47,8 @@
 /og-default.jpg
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
-/sitemap.xml
+# El índice y su hijo (ver scripts/gen-sitemap.mjs).
+/sitemap*
   Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600, must-revalidate
 
