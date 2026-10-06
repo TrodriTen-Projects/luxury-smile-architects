@@ -20,11 +20,16 @@
 
 # Sin Cache-Control global a propósito: Pages fusiona las cabeceras de todas
 # las reglas que casan, no las reemplaza. Un valor aquí se colaba en cada regla
-# específica y dejaba dos max-age en la misma cabecera (/content/*, /locales/* y
-# /sitemap.xml salían con max-age=0 y max-age=3600 juntos), y ante directivas
-# duplicadas el navegador se queda con la más restrictiva: la caché no servía.
-# El HTML ya sale de Pages con public, max-age=0, must-revalidate por defecto,
-# comprobado con wrangler pages dev.
+# específica y dejaba dos max-age en la misma cabecera (/content/* y /locales/*
+# salían con max-age=0 y max-age=3600 juntos), y ante directivas duplicadas el
+# navegador se queda con la más restrictiva: la caché no servía. El HTML ya sale
+# de Pages con public, max-age=0, must-revalidate por defecto, comprobado con
+# wrangler pages dev.
+
+# El sitemap tampoco lleva regla propia: se sirve con los valores por defecto de
+# Pages (application/xml, max-age=0), que es lo que hace cualquier otro sitio
+# alojado aquí. Cuanto menos tenga de particular esa respuesta, mejor.
+
 # Fingerprinted bundles never change — cache them hard.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -46,11 +51,6 @@
 # Regenerated from the hero on every build; content-addressed by deploy.
 /og-default.jpg
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-
-# Archivo estático, escrito a mano en public/sitemap.xml.
-/sitemap.xml
-  Content-Type: application/xml; charset=utf-8
-  Cache-Control: public, max-age=3600, must-revalidate
 
 /robots.txt
   Content-Type: text/plain; charset=utf-8
