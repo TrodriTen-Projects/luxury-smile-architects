@@ -100,7 +100,7 @@ jobs:
       # where /admin and /api/auth answered 404.
       - uses: actions/checkout@v4
       - name: Download dist artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist
