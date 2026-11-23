@@ -325,14 +325,10 @@
   ],
   "business": {
     "placeQuery": "Calle de Recoletos 20, 28001 Madrid",
+    "phone": "+34689440906",
+    "phoneSecondary": "+34659716995",
     "whatsapp": "+34689440906",
-    "reviewsUrl": "https://www.google.com/maps/search/?api=1&query=Luxury%20Smile%20Architects%20Madrid",
-    "instagram": "https://www.instagram.com/luxurysmilearchitectsmadrid/",
-    "rating": "5.0",
-    "reviewsCount": {
-      "es": "8 reseñas",
-      "en": "8 reviews"
-    },
+    "email": "contacto@luxurysmilearchitects.eu",
     "address": {
       "street": "Calle de Recoletos 20",
       "district": "Barrio de Salamanca",
@@ -345,9 +341,6 @@
       "latitude": 40.421789,
       "longitude": -3.689292
     },
-    "phone": "+34689440906",
-    "phoneSecondary": "+34659716995",
-    "email": "contacto@luxurysmilearchitects.com",
     "hours": {
       "days": [
         "Monday",
@@ -358,108 +351,115 @@
       ],
       "opens": "10:00",
       "closes": "20:00"
+    },
+    "reviewsUrl": "https://www.google.com/maps/search/?api=1&query=Luxury%20Smile%20Architects%20Madrid",
+    "instagram": "https://www.instagram.com/luxurysmilearchitectsmadrid/",
+    "rating": "5.0",
+    "reviewsCount": {
+      "es": "8 reseñas",
+      "en": "8 reviews"
     }
+  },
+  "tracking": {
+    "metaPixelId": "",
+    "ga4MeasurementId": ""
   },
   "reviews": [
     {
       "author": "Angie Vargas",
       "rating": 5,
       "text": {
-        "en": "Excellent place! The patient care is top-notch, it's in a great location, and best of all, the professional expertise is evident in every treatment they perform. Highly recommended!",
-        "es": "¡Excelente lugar! La atención al paciente es de primera, está en una excelente ubicación, y lo mejor de todo, la experiencia profesional es evidente en cada tratamiento que realizan. ¡Muy recomendable!"
+        "es": "¡Excelente lugar! La atención al paciente es de primera, está en una excelente ubicación, y lo mejor de todo, la experiencia profesional es evidente en cada tratamiento que realizan. ¡Muy recomendable!",
+        "en": "Excellent place! The patient care is top-notch, it's in a great location, and best of all, the professional expertise is evident in every treatment they perform. Highly recommended!"
       },
       "date": {
-        "en": "4 months ago",
-        "es": "hace 4 meses"
+        "es": "hace 4 meses",
+        "en": "4 months ago"
       }
     },
     {
       "author": "Carlos Sánchez Martin",
       "rating": 5,
       "text": {
-        "en": "I started treatment with Dr. Escudero, and I can say that all my fear and phobia of dentists has disappeared. The assistant, Viviana, was wonderful, and Sergio's service was outstanding, always very attentive to all my questions. I recommend them 1000/1000.",
-        "es": "Comencé el tratamiento con el Dr. Escudero, y puedo decir que todo mi miedo y fobia a los dentistas ha desaparecido. La asistente, Viviana, fue maravillosa, y el servicio de Sergio fue excepcional, siempre muy atento a todas mis dudas. Los recomiendo 1000/1000."
+        "es": "Comencé el tratamiento con el Dr. Escudero, y puedo decir que todo mi miedo y fobia a los dentistas ha desaparecido. La asistente, Viviana, fue maravillosa, y el servicio de Sergio fue excepcional, siempre muy atento a todas mis dudas. Los recomiendo 1000/1000.",
+        "en": "I started treatment with Dr. Escudero, and I can say that all my fear and phobia of dentists has disappeared. The assistant, Viviana, was wonderful, and Sergio's service was outstanding, always very attentive to all my questions. I recommend them 1000/1000."
       },
       "date": {
-        "en": "3 months ago",
-        "es": "hace 3 meses"
+        "es": "hace 3 meses",
+        "en": "3 months ago"
       }
     },
     {
       "author": "Diana Rojas",
       "rating": 5,
       "text": {
-        "en": "The service was top-notch from the moment I arrived until the very end... excellent. They are a team of professionals who gave me complete confidence and provided excellent support!",
-        "es": "El servicio fue de primera desde que llegué hasta el final... excelente. ¡Son un equipo de profesionales que me dieron total confianza y brindaron un excelente apoyo!"
+        "es": "El servicio fue de primera desde que llegué hasta el final... excelente. ¡Son un equipo de profesionales que me dieron total confianza y brindaron un excelente apoyo!",
+        "en": "The service was top-notch from the moment I arrived until the very end... excellent. They are a team of professionals who gave me complete confidence and provided excellent support!"
       },
       "date": {
-        "en": "Edited 3 weeks ago",
-        "es": "Editado hace 3 semanas"
+        "es": "Editado hace 3 semanas",
+        "en": "Edited 3 weeks ago"
       }
     },
     {
       "author": "Selección R.H",
       "rating": 5,
       "text": {
-        "en": "I was delighted with my veneers, they finished my treatment in just two days. I want to thank the whole team for the speed and the treatment I received.",
-        "es": "Quede encantado con mis carillas, en solo dos días terminaron mi tratamiento, quiero agradecer a todo el equipo por la rapidez y trato recibido."
+        "es": "Quede encantado con mis carillas, en solo dos días terminaron mi tratamiento, quiero agradecer a todo el equipo por la rapidez y trato recibido.",
+        "en": "I was delighted with my veneers, they finished my treatment in just two days. I want to thank the whole team for the speed and the treatment I received."
       },
       "date": {
-        "en": "4 months ago",
-        "es": "hace 4 meses"
+        "es": "hace 4 meses",
+        "en": "4 months ago"
       }
     },
     {
       "author": "Catalin Roman",
       "rating": 5,
       "text": {
-        "en": "I've been a patient of Dr. Alejandra for a month. They have the best treatments and the service is 1000 points! The best clinic and the best doctors",
-        "es": "Me atiendo hace un mes con la Dra. Alejandra. Son los mejores tratamientos y la atención 1000 puntos! La mejor clínica y los mejores doctores"
+        "es": "Me atiendo hace un mes con la Dra. Alejandra. Son los mejores tratamientos y la atención 1000 puntos! La mejor clínica y los mejores doctores",
+        "en": "I've been a patient of Dr. Alejandra for a month. They have the best treatments and the service is 1000 points! The best clinic and the best doctors"
       },
       "date": {
-        "en": "2 months ago",
-        "es": "hace 2 meses"
+        "es": "hace 2 meses",
+        "en": "2 months ago"
       }
     },
     {
       "author": "Ludmila Maldonado",
       "rating": 5,
       "text": {
-        "en": "Going to the Luxury Clinic is a unique experience; the service and the luxury are truly the best. Thank you.",
-        "es": "Ir a Luxury Clinic es una experiencia única; el servicio y el lujo son verdaderamente los mejores. Gracias."
+        "es": "Ir a Luxury Clinic es una experiencia única; el servicio y el lujo son verdaderamente los mejores. Gracias.",
+        "en": "Going to the Luxury Clinic is a unique experience; the service and the luxury are truly the best. Thank you."
       },
       "date": {
-        "en": "5 months ago",
-        "es": "hace 5 meses"
+        "es": "hace 5 meses",
+        "en": "5 months ago"
       }
     },
     {
       "author": "Sandra Marino",
       "rating": 5,
       "text": {
-        "en": "The work they do positively impacts the community, generating real smiles and significant changes in the lives of those who receive their help. For their human quality and dedication, they are a totally recommendable place worthy of recognition.",
-        "es": "El trabajo que realizan impacta de manera positiva en la comunidad, generando sonrisas reales y cambios significativos en la vida de quienes reciben su ayuda. Por su calidad humana y dedicación, Hacen Sonrisas es un lugar totalmente recomendable y digno de reconocimiento."
+        "es": "El trabajo que realizan impacta de manera positiva en la comunidad, generando sonrisas reales y cambios significativos en la vida de quienes reciben su ayuda. Por su calidad humana y dedicación, Hacen Sonrisas es un lugar totalmente recomendable y digno de reconocimiento.",
+        "en": "The work they do positively impacts the community, generating real smiles and significant changes in the lives of those who receive their help. For their human quality and dedication, they are a totally recommendable place worthy of recognition."
       },
       "date": {
-        "en": "4 months ago",
-        "es": "hace 4 meses"
+        "es": "hace 4 meses",
+        "en": "4 months ago"
       }
     },
     {
       "author": "Claudia Alvarez",
       "rating": 5,
       "text": {
-        "en": "Spectacular",
-        "es": "Espectacular"
+        "es": "Espectacular",
+        "en": "Spectacular"
       },
       "date": {
-        "en": "3 months ago",
-        "es": "hace 3 meses"
+        "es": "hace 3 meses",
+        "en": "3 months ago"
       }
     }
-  ],
-  "tracking": {
-    "metaPixelId": "",
-    "ga4MeasurementId": ""
-  }
+  ]
 }
