@@ -10,7 +10,7 @@
  *
  *   node scripts/validate-content.mjs
  */
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -85,6 +85,35 @@ if (site) {
     const duplicated = ids.filter((id, index) => ids.indexOf(id) !== index);
     if (duplicated.length) {
       problems.push(`site.json: id de ${label} repetido: ${[...new Set(duplicated)].join(", ")}`);
+    }
+  }
+}
+
+// La galería y los reels se editan desde el panel, que sube el archivo y
+// escribe su ruta. Si una ruta señala a algo que no está en el repositorio, la
+// web publica un hueco: mejor pararlo aquí. El peso solo se avisa, porque una
+// foto grande ralentiza pero no rompe, y bloquear la publicación por eso
+// dejaría a la clínica sin poder actualizar su propia web.
+if (site) {
+  const MAXIMOS = { patients: 1.5e6, videos: 8e6 };
+  for (const [clave, etiqueta] of [["patients", "galería"], ["videos", "reels"]]) {
+    const rutas = Array.isArray(site[clave]) ? site[clave] : [];
+    for (const ruta of rutas) {
+      if (typeof ruta !== "string" || !ruta.startsWith("/media/")) {
+        problems.push(`site.json: "${clave}" tiene una ruta que no empieza por /media/: ${JSON.stringify(ruta)}`);
+        continue;
+      }
+      try {
+        const { size } = await stat(join(ROOT, "public", ruta.replace(/^\//, "")));
+        if (size > MAXIMOS[clave]) {
+          console.warn(
+            `  aviso: ${ruta} pesa ${(size / 1e6).toFixed(1)} MB; conviene comprimirlo ` +
+              `antes de publicarlo (${etiqueta}).`,
+          );
+        }
+      } catch {
+        problems.push(`site.json: "${clave}" apunta a ${ruta}, que no existe en public/`);
+      }
     }
   }
 }

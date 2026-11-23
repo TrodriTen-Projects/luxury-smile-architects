@@ -185,6 +185,47 @@ const siteFields = [
       { name: "after", label: "Después", widget: "image" },
     ],
   },
+  // Estas dos listas mandan sobre el índice automático de las carpetas (ver
+  // src/lib/content.ts): si traen algo, se publica eso. Por eso cada campo
+  // sube a su propia carpeta en vez de a la general, y por eso se dejan
+  // sembradas con lo que ya había publicado.
+  {
+    name: "patients",
+    label: "Galería de resultados",
+    label_singular: "Foto",
+    widget: "list",
+    required: false,
+    hint:
+      "Las fotos de la galería del inicio, en el orden en que se ven. " +
+      "Al sustituir una foto, sube el archivo con un nombre distinto: los medios " +
+      "se guardan una semana en el navegador de quien ya visitó la web, así que " +
+      "repetir el nombre hace que muchos sigan viendo la foto antigua durante días.",
+    field: {
+      name: "image",
+      label: "Foto",
+      widget: "image",
+      media_folder: "/public/media/patients",
+      public_folder: "/media/patients",
+    },
+  },
+  {
+    name: "videos",
+    label: "Reels",
+    label_singular: "Reel",
+    widget: "list",
+    required: false,
+    hint:
+      "Los vídeos verticales del inicio, en orden. Súbelos ya comprimidos: los " +
+      "actuales pesan entre 1 y 4 MB, y uno de 50 MB tarda una eternidad en " +
+      "cargar y puede ni llegar a subirse. Al sustituir uno, usa un nombre nuevo.",
+    field: {
+      name: "video",
+      label: "Vídeo",
+      widget: "file",
+      media_folder: "/public/media/video",
+      public_folder: "/media/video",
+    },
+  },
   {
     name: "business",
     label: "Datos de la clínica",
