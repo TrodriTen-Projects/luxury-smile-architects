@@ -54,7 +54,6 @@ const EMPTY = {
   source: "",
   message: "",
   consent: false,
-  needsFinancing: false,
   company: "",
 };
 
@@ -126,7 +125,6 @@ export default function Contact() {
       source: sanitizeLine(values.source, 60),
       message: sanitizeBlock(values.message, 2000),
       consent: values.consent,
-      needsFinancing: values.needsFinancing,
       company: sanitizeLine(values.company, 0),
     };
     if (cleaned.company) {
@@ -165,7 +163,6 @@ export default function Contact() {
         `${boldLabel("contact.form.email")} ${d.email}`,
         `${boldLabel("contact.form.treatment")} ${d.treatment}`,
         `${boldLabel("contact.form.source")} ${d.source}`,
-        d.needsFinancing ? `\n${lang === "es" ? "Financiación" : "Financing"}: ${lang === "es" ? "Sí, necesito información." : "Yes, I need information."}` : null,
         d.message ? `\n${boldLabel("contact.form.message")}\n${d.message}` : null,
       ]
         .filter((line) => line !== null)
@@ -363,20 +360,6 @@ export default function Contact() {
                 <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
                   <label htmlFor="company">Company</label>
                   <input id="company" type="text" tabIndex={-1} autoComplete="off" value={values.company} onChange={(e) => set("company", e.target.value)} />
-                </div>
-
-                <div className="flex flex-col items-start gap-1 mb-2 mt-4">
-                  <label className="flex items-center gap-3 font-sans text-sm text-foreground cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={values.needsFinancing} 
-                      onChange={(e) => set("needsFinancing", e.target.checked)}
-                      className="mt-0.5 h-4 w-4 shrink-0 accent-gold cursor-pointer" 
-                    />
-                    <span>
-                      {lang === "es" ? "Deseo recibir información sobre el plan de financiación" : "I would like to receive information about the financing plan"}
-                    </span>
-                  </label>
                 </div>
 
                 <div className="flex flex-col items-start gap-1">

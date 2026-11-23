@@ -14,7 +14,7 @@ export default function About() {
   const p = useLocalePath();
   useSeo({ pageId: "about" });
 
-  const [activeLocation, setActiveLocation] = useState<"clinic" | "lab" | "finance" | null>(null);
+  const [activeLocation, setActiveLocation] = useState<"clinic" | "lab" | null>(null);
 
   return (
     <>
@@ -149,29 +149,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Financing */}
-      <section className="border-t border-border bg-foreground px-6 py-16 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-[1400px]">
-          <SectionReveal className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-24">
-            <div>
-              <h2 className="display text-[clamp(2.4rem,5.5vw,4.5rem)] text-[hsl(var(--base))]">
-                {t("about.financeTitle")}
-              </h2>
-              <p className="mt-6 max-w-2xl text-pretty font-sans text-xl font-light leading-relaxed text-[hsl(var(--base))]/80">
-                {t("about.financeDesc")}
-              </p>
-            </div>
-            <div className="flex justify-start lg:justify-end">
-              <Button asChild variant="primary" className="bg-gold text-foreground hover:bg-gold-deep hover:text-base border-none px-6">
-                <button type="button" onClick={() => setActiveLocation("finance")}>
-                  {t("about.financeCta")}
-                </button>
-              </Button>
-            </div>
-          </SectionReveal>
-        </div>
-      </section>
-
       {/* Modals for Locations */}
       <Dialog open={activeLocation === "clinic"} onOpenChange={(open) => !open && setActiveLocation(null)}>
         <DialogContent className="max-w-md p-8">
@@ -231,63 +208,6 @@ export default function About() {
             <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
               {t("common.back")}
             </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-      <Dialog open={activeLocation === "finance"} onOpenChange={(open) => !open && setActiveLocation(null)}>
-        <DialogContent className="max-w-2xl p-8 max-h-[90vh] overflow-y-auto">
-          <DialogTitle className="text-2xl font-serif text-foreground mb-2">
-            {t("about.financeModal.title")}
-          </DialogTitle>
-          <div className="text-gold font-sans text-xs uppercase tracking-widest mb-6">
-            {t("about.financeModal.subtitle")}
-          </div>
-          
-          <DialogDescription className="text-sm font-sans text-foreground leading-relaxed mb-8">
-            {t("about.financeModal.intro")}
-          </DialogDescription>
-
-          <div className="space-y-8">
-            <div>
-              <h3 className="font-serif text-lg text-foreground mb-4">{t("about.financeModal.howTitle")}</h3>
-              <ul className="space-y-4">
-                {(t("about.financeModal.howSteps", { returnObjects: true }) as string[]).map((step, i) => (
-                  <li key={i} className="flex gap-3 items-start">
-                    <span className="font-sans text-sm text-foreground/80 leading-relaxed"><strong className="text-foreground">{i + 1}.</strong> {step}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-serif text-lg text-foreground mb-4">{t("about.financeModal.timeTitle")}</h3>
-              <p className="font-sans text-sm text-foreground/80 leading-relaxed">
-                {t("about.financeModal.timeText")}
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-serif text-lg text-foreground mb-4">{t("about.financeModal.importantTitle")}</h3>
-              <ul className="space-y-3">
-                {(t("about.financeModal.importantList", { returnObjects: true }) as string[]).map((item, i) => (
-                  <li key={i} className="flex gap-3 items-start">
-                    <span className="font-sans text-sm text-foreground/80 leading-relaxed">• {item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-10 pt-8 border-t border-border text-center">
-            <p className="font-serif text-gold text-lg italic mb-8">{t("about.financeModal.footer")}</p>
-            <div className="flex flex-col gap-3 sm:w-2/3 sm:flex-row mx-auto">
-              <Button asChild variant="primary" size="lg" className="flex-1 text-sm sm:text-base h-14">
-                <Link to={p("contact")} onClick={() => setActiveLocation(null)}>{t("about.financeModal.cta")}</Link>
-              </Button>
-              <Button variant="outline" size="lg" className="px-4 text-sm sm:text-base h-14" onClick={() => setActiveLocation(null)}>
-                {t("common.back")}
-              </Button>
-            </div>
           </div>
         </DialogContent>
       </Dialog>
