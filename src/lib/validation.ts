@@ -32,9 +32,10 @@ export function buildContactSchema(t: (key: string) => string) {
     treatment: z.string().trim().min(1, t("contact.form.required")).max(60),
     source: z.string().trim().min(1, t("contact.form.required")).max(60),
     message: z.string().trim().max(2000).optional().or(z.literal("")),
-    consent: z.literal(true, {
-      errorMap: () => ({ message: t("contact.form.consentRequired") }),
-    }),
+    // zod 4 cambió `errorMap` por `error`. Con la sintaxis anterior el mensaje
+    // caía al texto por defecto en inglés ("Invalid input: expected true") sin
+    // que TypeScript dijera nada, porque la opción sobrante se ignora.
+    consent: z.literal(true, { error: t("contact.form.consentRequired") }),
     // Honeypot — must stay empty. Bots tend to fill every field.
     company: z.string().max(0).optional().or(z.literal("")),
   });
