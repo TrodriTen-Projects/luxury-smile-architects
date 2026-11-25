@@ -44,7 +44,7 @@
     "resultsTitle": "Happy Patients",
     "resultsSubtitle": "A smile is no longer perceived as an aesthetic complement, but as a key feature of your identity, status, confidence, and security.",
     "ctaTitle": "Ready for your new smile?",
-    "ctaText": "Not just a treatment, it's a conversation where we design your smile in 3D together, you try it before we touch anything, and we sculpt it by hand. In less than two weeks, the smile from the screen will be on your face forever."
+    "ctaText": "Not just a treatment, it's a conversation where we design your smile in 3D together, you try it first, and we create it in our own laboratory. In just 3 appointments, your new smile will be ready."
   },
   "treatments": {
     "kicker": "Treatments",
@@ -100,7 +100,7 @@
   "about": {
     "kicker": "About Us",
     "title": "Smile Architects",
-    "introText": "In a market where aesthetics integrates with well-being, a smile becomes an identity asset, and luxury is expressed through experience and trust, clinical results are no longer enough to explain a patient's choice.",
+    "introText": "Your smile is part of who you are. That's why we design it with you, detail by detail.",
     "identity": {
       "kicker": "What is our identity?",
       "title": "Our Identity",
@@ -116,7 +116,7 @@
     "clinicTitle": "The Clinic",
     "clinicDesc": "Our boutique clinic in the heart of Madrid, designed to offer you an exclusive, private, and relaxing experience.",
     "labTitle": "The Laboratory",
-    "labDesc": "High-tech in-house laboratory where we design and customize each piece by hand with maximum precision."
+    "labDesc": "Our own high-tech laboratory, where we design and customise every piece with maximum precision."
   },
   "why": {
     "kicker": "Why choose us",
@@ -124,13 +124,33 @@
     "items": [
       {
         "id": "lab",
-        "title": "Our own lab",
-        "description": "We make your smile here, with no middlemen. Full control and shorter times."
+        "title": "Our own laboratory",
+        "description": "Our own laboratory, no middlemen. Full control and shorter times."
       },
       {
         "id": "dsd",
         "title": "See your smile first",
         "description": "Digital design: you preview the result before we start."
+      },
+      {
+        "id": "materials",
+        "title": "World-class porcelain",
+        "description": "We work with IPS e.max by Ivoclar, the world reference material for porcelain veneers."
+      },
+      {
+        "id": "three",
+        "title": "Your smile in 3 appointments",
+        "description": "Assessment, trial of your design and your new smile. No long waits."
+      },
+      {
+        "id": "guarantee",
+        "title": "2-year guarantee",
+        "description": "We trust our work. Your treatment comes with a 2-year guarantee."
+      },
+      {
+        "id": "travel",
+        "title": "Coming from outside Madrid?",
+        "description": "We complete your treatment in a week and a half: assessment on Wednesday, design trial on Monday and your new smile on Thursday."
       },
       {
         "id": "boutique",
