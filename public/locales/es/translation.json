@@ -44,7 +44,7 @@
     "resultsTitle": "Pacientes felices",
     "resultsSubtitle": "La sonrisa ya no se percibe como un complemento estético, sino como un rasgo clave de tu identidad, estatus, confianza y seguridad.",
     "ctaTitle": "¿Listo para tu nueva sonrisa?",
-    "ctaText": "No es solo un tratamiento, es una conversación donde juntos diseñamos tu sonrisa en 3D, la pruebas antes y la esculpimos a mano. En menos de dos semanas, tu sonrisa soñada estará en tu rostro para siempre."
+    "ctaText": "No es solo un tratamiento, es una conversación donde juntos diseñamos tu sonrisa en 3D, la pruebas antes y la creamos en nuestro laboratorio propio. En solo 3 citas, tu nueva sonrisa estará lista."
   },
   "treatments": {
     "kicker": "Tratamientos",
@@ -100,7 +100,7 @@
   "about": {
     "kicker": "Quiénes somos",
     "title": "Arquitectos de sonrisas",
-    "introText": "En un mercado donde la estética se integra en el bienestar, la sonrisa se convierte en un activo de identidad y el lujo se expresa a través de la experiencia y la confianza, los resultados clínicos dejan de ser suficientes para explicar la elección del paciente.",
+    "introText": "Tu sonrisa es parte de quién eres. Por eso la diseñamos contigo, detalle a detalle.",
     "identity": {
       "kicker": "¿Cuál es nuestra identidad?",
       "title": "Nuestra Identidad",
@@ -116,7 +116,7 @@
     "clinicTitle": "La Clínica",
     "clinicDesc": "Nuestra clínica boutique en el corazón de Madrid, diseñada para ofrecerte una experiencia exclusiva, privada y relajante.",
     "labTitle": "El Laboratorio",
-    "labDesc": "Laboratorio in-house de alta tecnología donde diseñamos y personalizamos cada pieza a mano con la máxima precisión."
+    "labDesc": "Laboratorio propio de alta tecnología donde diseñamos y personalizamos cada pieza con la máxima precisión."
   },
   "why": {
     "kicker": "Por qué elegirnos",
@@ -125,12 +125,32 @@
       {
         "id": "lab",
         "title": "Laboratorio propio",
-        "description": "Fabricamos tu sonrisa aquí, sin intermediarios. Control total y tiempos reducidos."
+        "description": "Laboratorio propio, sin intermediarios. Control total y tiempos reducidos."
       },
       {
         "id": "dsd",
         "title": "Ves tu sonrisa antes",
         "description": "Diseño digital: visualizas el resultado antes de empezar."
+      },
+      {
+        "id": "materials",
+        "title": "Porcelana de referencia mundial",
+        "description": "Trabajamos con IPS e.max de Ivoclar, material de referencia mundial en carillas de porcelana."
+      },
+      {
+        "id": "three",
+        "title": "Tu sonrisa en 3 citas",
+        "description": "Valoración, prueba de tu diseño y sonrisa nueva. Sin esperas largas."
+      },
+      {
+        "id": "guarantee",
+        "title": "Garantía de 2 años",
+        "description": "Confiamos en nuestro trabajo. Tu tratamiento tiene 2 años de garantía."
+      },
+      {
+        "id": "travel",
+        "title": "¿Vienes de fuera de Madrid?",
+        "description": "Te hacemos el tratamiento en semana y media: valoración el miércoles, prueba de tu diseño el lunes y tu sonrisa nueva el jueves."
       },
       {
         "id": "boutique",
