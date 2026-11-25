@@ -223,20 +223,37 @@
       }
     },
     {
-      "id": "ludmilla",
-      "name": "Ludmila Maldonado",
-      "photo": "/media/team/Ludmilla.jpeg",
+      "id": "elizaveta",
+      "name": "Dra. Elizaveta Zusman",
+      "photo": "/media/team/Elizaveta-Zusman.jpeg",
       "role": {
-        "es": "Directora General y Comercial",
-        "en": "General and Commercial Director"
+        "es": "Odontóloga",
+        "en": "Dentist"
       },
       "credentials": {
-        "es": "Abogada",
-        "en": "Lawyer"
+        "es": "Odontóloga con Máster en Estética Dental y Odontología Restauradora (UAX)",
+        "en": "Dentist with a Master's degree in Aesthetic and Restorative Dentistry (UAX)"
       },
       "bio": {
-        "es": "Con amplia experiencia en la gestión estratégica y operativa de clínicas odontológicas, orientada al crecimiento sostenible del negocio, la excelencia en la atención al paciente y el desarrollo de equipos de alto rendimiento. Especializada en liderazgo organizacional, planificación comercial, captación y fidelización de pacientes.",
-        "en": "With extensive experience in the strategic and operational management of dental clinics, focused on sustainable business growth, excellence in patient care, and the development of high-performance teams. Specialized in organizational leadership, commercial planning, patient acquisition, and retention."
+        "es": "8 años de experiencia en rehabilitación oral completa y odontología estética: carillas, diseño de sonrisa y prótesis sobre implantes, con flujo de trabajo digital. Atiende en español, inglés y ruso.",
+        "en": "8 years of experience in full-mouth rehabilitation and aesthetic dentistry: veneers, smile design and implant-supported prosthetics, with a fully digital workflow. Speaks Spanish, English and Russian."
+      }
+    },
+    {
+      "id": "poyi",
+      "name": "Dr. Poyi Li",
+      "photo": "/media/team/Poyi-Li.jpeg",
+      "role": {
+        "es": "Odontólogo",
+        "en": "Dentist"
+      },
+      "credentials": {
+        "es": "Odontólogo con Máster en Estética Dental y Odontología Restauradora (UAX)",
+        "en": "Dentist with a Master's degree in Aesthetic and Restorative Dentistry (UAX)"
+      },
+      "bio": {
+        "es": "Odontología general, estética y restauradora: valoraciones, limpiezas, blanqueamientos, carillas y diseño de sonrisa. Atiende en español, inglés y mandarín.",
+        "en": "General, aesthetic and restorative dentistry: assessments, cleanings, whitening, veneers and smile design. Speaks Spanish, English and Mandarin."
       }
     },
     {
@@ -254,6 +271,23 @@
       "bio": {
         "es": "Experta en tratamientos como Neuromoduladores, Bruxismo, Sonrisa Gingival, Laser Fotona, Apnea del Sueño entre muchos otros con mas de 10 años de experiencia.",
         "en": "Expert in treatments such as Neuromodulators, Bruxism, Gingival Smile, Fotona Laser, Sleep Apnea among many others with more than 10 years of experience."
+      }
+    },
+    {
+      "id": "ludmilla",
+      "name": "Ludmila Maldonado",
+      "photo": "/media/team/Ludmilla.jpeg",
+      "role": {
+        "es": "Directora General y Comercial",
+        "en": "General and Commercial Director"
+      },
+      "credentials": {
+        "es": "Abogada",
+        "en": "Lawyer"
+      },
+      "bio": {
+        "es": "Con amplia experiencia en la gestión estratégica y operativa de clínicas odontológicas, orientada al crecimiento sostenible del negocio, la excelencia en la atención al paciente y el desarrollo de equipos de alto rendimiento. Especializada en liderazgo organizacional, planificación comercial, captación y fidelización de pacientes.",
+        "en": "With extensive experience in the strategic and operational management of dental clinics, focused on sustainable business growth, excellence in patient care, and the development of high-performance teams. Specialized in organizational leadership, commercial planning, patient acquisition, and retention."
       }
     }
   ],
