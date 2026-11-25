@@ -176,16 +176,33 @@
       "name": "Dr. Martín Prato",
       "photo": "/media/team/Prato.jpeg",
       "role": {
-        "es": "Odontólogo  y especialista en Rehabilitación Oral Socio fundador de Smile Architecs Madrid",
-        "en": "Dentist and oral rehabilitation specialist, co-founder of Smile Architecs Madrid"
+        "es": "Odontólogo y especialista en Rehabilitación Oral. Socio fundador de Luxury Smile Architects Madrid",
+        "en": "Dentist and oral rehabilitation specialist, co-founder of Luxury Smile Architects Madrid"
       },
       "credentials": {
         "es": "Odontólogo y especialista en Rehabilitación Oral",
         "en": "Dentist and oral rehabilitation specialist"
       },
       "bio": {
-        "es": "Cuenta con más de 20 años de experiencia en odontología estética y rehabilitación oral. A lo largo de su trayectoria ha diseñado sonrisas para reconocidos artistas y pacientes nacionales e internacionales, consolidando sus clínicas en Bogotá, Miami, Tijuana, Mexico D.F. y en Madrid  como una referencia en estética dental a nivel global .",
-        "en": "With over 20 years of experience in aesthetic dentistry and oral rehabilitation. Throughout his career, he has designed smiles for renowned national and international artists and patients, consolidating his clinics in Bogotá, Miami, Tijuana, Mexico D.F. and in Madrid as a global reference in dental aesthetics."
+        "es": "Cuenta con más de 20 años de experiencia en odontología estética y rehabilitación oral. A lo largo de su trayectoria ha diseñado sonrisas para reconocidos artistas y pacientes nacionales e internacionales, consolidando sus clínicas en Miami, Tijuana, Ciudad de México y Madrid como una referencia en estética dental a nivel global.",
+        "en": "With over 20 years of experience in aesthetic dentistry and oral rehabilitation. Throughout his career, he has designed smiles for renowned national and international artists and patients, consolidating his clinics in Miami, Tijuana, Mexico City and Madrid as a global reference in dental aesthetics."
+      }
+    },
+    {
+      "id": "cesar",
+      "name": "Dr. César Rodríguez",
+      "photo": "/media/team/Cesar-Rodriguez.jpeg",
+      "role": {
+        "es": "Director Clínico",
+        "en": "Clinical Director"
+      },
+      "credentials": {
+        "es": "Odontólogo especialista en Periodoncia y en Prostodoncia, Oclusión y ATM",
+        "en": "Dentist specialising in Periodontics and in Prosthodontics, Occlusion and TMJ"
+      },
+      "bio": {
+        "es": "Más de 30 años de experiencia en diseño de sonrisa y rehabilitación oral. Dirige el equipo clínico de Madrid junto al Dr. Martín Prato y acompaña personalmente a cada paciente: diseño de sonrisa, carillas de porcelana, implantes y rehabilitación oral completa.",
+        "en": "Over 30 years of experience in smile design and oral rehabilitation. He leads the Madrid clinical team alongside Dr. Martín Prato and personally guides every patient: smile design, porcelain veneers, implants and full-mouth rehabilitation."
       }
     },
     {
@@ -193,8 +210,8 @@
       "name": "Dr. Álvaro José Escudero Muñoz",
       "photo": "/media/team/Alvaro.jpeg",
       "role": {
-        "es": "Director Clínico",
-        "en": "Clinical Director"
+        "es": "Odontólogo",
+        "en": "Dentist"
       },
       "credentials": {
         "es": "Odontólogo con Máster en Endodoncia y Trauma Dentoalveolar",
@@ -220,23 +237,6 @@
       "bio": {
         "es": "Con amplia experiencia en la gestión estratégica y operativa de clínicas odontológicas, orientada al crecimiento sostenible del negocio, la excelencia en la atención al paciente y el desarrollo de equipos de alto rendimiento. Especializada en liderazgo organizacional, planificación comercial, captación y fidelización de pacientes.",
         "en": "With extensive experience in the strategic and operational management of dental clinics, focused on sustainable business growth, excellence in patient care, and the development of high-performance teams. Specialized in organizational leadership, commercial planning, patient acquisition, and retention."
-      }
-    },
-    {
-      "id": "adriana",
-      "name": "Dra. Adriana Rojas",
-      "photo": "/media/team/Adriana.jpeg",
-      "role": {
-        "es": "Odontóloga",
-        "en": "Dentist"
-      },
-      "credentials": {
-        "es": "Odontóloga con Especialización en Ortodoncia y Ortopedia Maxilar",
-        "en": "Dentist with a Specialization in Orthodontics and Maxillofacial Orthopedics"
-      },
-      "bio": {
-        "es": "Con amplia experiencia en la atención integral de pacientes mediante el desarrollo de tratamientos preventivos, interceptivos y correctivos. Así mismo en ortodoncia invisible, diseño digital con Exocad y odontología estética,  rehabilitación estética, operatoria dental, prótesis adhesiva, cirugía oral, manejo de patologías perirradiculares, ortopedia maxilar y ortodoncia.",
-        "en": "With extensive experience in the comprehensive care of patients through the development of preventive, interceptive, and corrective treatments. Also in invisible orthodontics, digital design with Exocad and aesthetic dentistry, aesthetic rehabilitation, dental operative dentistry, adhesive prosthetics, oral surgery, management of periradicular pathologies, maxillofacial orthopedics, and orthodontics."
       }
     },
     {
@@ -423,30 +423,6 @@
       "date": {
         "es": "hace 2 meses",
         "en": "2 months ago"
-      }
-    },
-    {
-      "author": "Ludmila Maldonado",
-      "rating": 5,
-      "text": {
-        "es": "Ir a Luxury Clinic es una experiencia única; el servicio y el lujo son verdaderamente los mejores. Gracias.",
-        "en": "Going to the Luxury Clinic is a unique experience; the service and the luxury are truly the best. Thank you."
-      },
-      "date": {
-        "es": "hace 5 meses",
-        "en": "5 months ago"
-      }
-    },
-    {
-      "author": "Sandra Marino",
-      "rating": 5,
-      "text": {
-        "es": "El trabajo que realizan impacta de manera positiva en la comunidad, generando sonrisas reales y cambios significativos en la vida de quienes reciben su ayuda. Por su calidad humana y dedicación, Hacen Sonrisas es un lugar totalmente recomendable y digno de reconocimiento.",
-        "en": "The work they do positively impacts the community, generating real smiles and significant changes in the lives of those who receive their help. For their human quality and dedication, they are a totally recommendable place worthy of recognition."
-      },
-      "date": {
-        "es": "hace 4 meses",
-        "en": "4 months ago"
       }
     },
     {
